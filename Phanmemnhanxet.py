@@ -124,6 +124,13 @@ PHAN_PHOI_CHUONG_TRINH = {
         "Khối 3": {"Giữa học kì I": ["ý thức tự giác học tập", "tôn trọng thư từ, tài sản người khác"], "Cuối học kì I": ["biết ơn thương binh liệt sĩ", "bảo vệ nguồn nước, môi trường"], "Giữa học kì II": ["tôn trọng phụ nữ", "chăm sóc cây xanh, vật nuôi"], "Cuối học kì II": ["toàn bộ chuẩn mực hành vi đạo đức", "kỹ năng giải quyết xung đột", "trách nhiệm với cộng đồng xung quanh"]},
         "Khối 4": {"Giữa học kì I": ["trung thực trong học tập, thi cử", "thương người như thể thương thân"], "Cuối học kì I": ["tôn trọng, bảo vệ di tích lịch sử", "vượt khó trong học tập"], "Giữa học kì II": ["tôn trọng luật giao thông", "hiếu thảo với ông bà cha mẹ"], "Cuối học kì II": ["toàn bộ nội dung rèn luyện đạo đức", "ý thức bảo vệ quyền trẻ em", "trách nhiệm với lời nói và việc làm"]},
         "Khối 5": {"Giữa học kì I": ["tôn trọng sự khác biệt về văn hóa, dân tộc", "ý chí vươn lên trong cuộc sống"], "Cuối học kì I": ["biết ơn người lao động", "bảo vệ môi trường sống xung quanh"], "Giữa học kì II": ["ý thức công dân, tuân thủ pháp luật", "hợp tác và làm việc nhóm"], "Cuối học kì II": ["toàn bộ chương trình rèn luyện đạo đức", "thái độ tôn trọng bình đẳng giới", "lòng tự hào về truyền thống dân tộc"]}
+    },
+    "Hoạt động trải nghiệm": {
+        "Khối 1": {"Giữa học kì I": ["khám phá bản thân", "nội quy trường lớp"], "Cuối học kì I": ["sinh hoạt gia đình", "an toàn cho bản thân"], "Giữa học kì II": ["bảo vệ môi trường", "giúp đỡ bạn bè"], "Cuối học kì II": ["toàn bộ chương trình trải nghiệm", "ý thức tự phục vụ", "tình yêu quê hương"]},
+        "Khối 2": {"Giữa học kì I": ["tự chăm sóc bản thân", "sinh hoạt sao nhi đồng"], "Cuối học kì I": ["tìm hiểu nghề nghiệp bố mẹ", "giữ gìn vệ sinh chung"], "Giữa học kì II": ["phòng tránh rủi ro", "bảo vệ cảnh quan"], "Cuối học kì II": ["toàn bộ chương trình trải nghiệm", "kỹ năng chia sẻ yêu thương", "năng lực giao tiếp"]},
+        "Khối 3": {"Giữa học kì I": ["phát huy điểm mạnh bản thân", "truyền thống nhà trường"], "Cuối học kì I": ["lập kế hoạch cá nhân", "an toàn giao thông"], "Giữa học kì II": ["tham gia hoạt động thiện nguyện", "bảo vệ môi trường sống"], "Cuối học kì II": ["toàn bộ chương trình trải nghiệm", "kỹ năng làm việc nhóm", "tinh thần tự hào quê hương"]},
+        "Khối 4": {"Giữa học kì I": ["hoạt động cộng đồng", "tự hào về trường em"], "Cuối học kì I": ["quản lý chi tiêu", "lập thời gian biểu"], "Giữa học kì II": ["phòng tránh xâm hại", "chăm sóc cảnh quan"], "Cuối học kì II": ["toàn bộ chương trình trải nghiệm", "kỹ năng sinh tồn cơ bản", "phát huy truyền thống quê hương"]},
+        "Khối 5": {"Giữa học kì I": ["tự hoàn thiện bản thân", "xây dựng tình bạn đẹp"], "Cuối học kì I": ["tìm hiểu nghề nghiệp tương lai", "ý thức công dân"], "Giữa học kì II": ["ứng phó với thiên tai", "kỹ năng tổ chức sự kiện"], "Cuối học kì II": ["toàn bộ chương trình trải nghiệm", "năng lực tự chủ", "chuẩn bị sẵn sàng chuyển cấp"]}
     }
 }
 
@@ -139,10 +146,10 @@ def lay_mach_kien_thuc(mon, khoi, thoi_diem):
         return kho_mon["Chung"]
     return ["kiến thức cơ bản", "kỹ năng thực hành"]
 
-# --- KHO DỮ LIỆU OFFLINE: NHẬN XÉT TỔNG THỂ CUỐI NĂM + CHỐNG LẶP CẤU TRÚC ---
+# --- KHO DỮ LIỆU OFFLINE ---
 def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xung_ho="Thầy", bat_xung_ho=True, mon="", thoi_diem=""):
     xh = f"{xung_ho} " if bat_xung_ho else ""
-    is_nang_khieu = mon in ["Đạo đức", "Âm nhạc", "Mĩ thuật", "GDTC", "HĐGD"]
+    is_nang_khieu = mon in ["Đạo đức", "Âm nhạc", "Mĩ thuật", "GDTC", "HĐGD", "Hoạt động trải nghiệm"]
     is_cuoi_nam = thoi_diem == "Cuối học kì II"
     
     def cap_first(s):
@@ -154,7 +161,7 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
         kho_pcnl = {
             "T": {
                 "Ngắn gọn": [
-                    "Năng lực đặc thù các môn rất nổi trội. Tự học và giao tiếp xuất sắc. Nỗ lực, trách nhiệm và hòa đồng.",
+                    "Năng lực đặc thù các môn rất nổi trội. Tự học và giao tiếp xuất sắc. Luôn nỗ lực, trách nhiệm và hòa đồng.",
                     "Đạt kết quả xuất sắc ở các năng lực chuyên biệt. Tự chủ và sáng tạo cao. Biết quan tâm, chia sẻ và trung thực.",
                     "Thể hiện năng lực học tập rất tốt. Giao tiếp linh hoạt. Rèn luyện 5 phẩm chất đạo đức gương mẫu."
                 ],
@@ -264,7 +271,6 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
         return random.choice(bo_cau.get(phong_cach, bo_cau["Ngắn gọn"]))
         
     else: # Môn học
-        # Chống lặp ngẫu nhiên bằng cách dùng các từ thay thế cho đầu câu, TÙY BIẾN CHO CUỐI NĂM
         if is_cuoi_nam:
             list_mo_bai_T = ["", "Tổng kết năm học, nắm rất vững ", "Thực hiện xuất sắc ", "Hoàn thành xuất sắc chương trình, đặc biệt ở ", "Xuyên suốt năm học, tiếp thu cực kỳ nhạy bén "]
             list_mo_bai_Kha = ["", "Tổng kết năm học, nắm vững ", "Thực hiện tốt ", "Hoàn thành tốt chương trình, nắm vững ", "Xuyên suốt năm học, tiếp thu khá tốt "]
@@ -291,6 +297,7 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
                 elif mon == "Âm nhạc": return f"{prefix}kỹ năng {focus_kt}. Thể hiện năng khiếu âm nhạc xuất sắc. Hát đúng giai điệu, thuộc lời ca và biết kết hợp vận động."
                 elif mon == "Mĩ thuật": return f"{prefix}nội dung {focus_kt}. Năng khiếu tạo hình rất tốt. Thể hiện sự sáng tạo cao trong bố cục, màu sắc. Hoàn thành sản phẩm vô cùng đẹp mắt."
                 elif mon == "GDTC": return f"{prefix}nội dung {focus_kt}. Thể lực rất tốt, thực hiện thành thạo các động tác. Tích cực, năng nổ trong mọi hoạt động vận động."
+                elif mon == "Hoạt động trải nghiệm": return f"{prefix}nội dung {focus_kt}. Thể hiện sự tự tin, chủ động và sáng tạo trong các hoạt động phong trào. Kỹ năng sống rất xuất sắc."
                 else: return f"{prefix}nội dung {focus_kt}. Vận dụng vô cùng linh hoạt kiến thức vào thực tiễn, kĩ năng thực hành thành thạo và tư duy rất nhạy bén."
             
             elif mdd == "H_Kha":
@@ -298,41 +305,44 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
                 elif mon == "Toán": return f"{prefix}nội dung {focus_kt}. Thực hiện các phép tính khá nhanh, cẩn thận. Kĩ năng giải toán có lời văn tốt, cần chú ý nâng cao tốc độ ở bài toán khó."
                 elif mon == "Lịch sử & Địa lý": return f"{prefix}nội dung {focus_kt}. Hiểu và ghi nhớ tốt các kiến thức trọng tâm. Kĩ năng quan sát, tìm hiểu khá vững vàng, cần mạnh dạn phát biểu."
                 elif mon == "Công nghệ": return f"{prefix}nội dung {focus_kt}. Thực hiện khá tốt quy trình tạo ra các sản phẩm. Có ý thức giữ an toàn khi sử dụng dụng cụ, cần chăm chút thẩm mỹ."
-                elif mon == "Tiếng Anh": return f"{prefix}nội dung {focus_kt}. Ghi nhớ được từ vựng cơ bản và biết cách vận dụng vào giao tiếp, cần rèn luyện phát âm tự nhiên hơn."
+                elif mon == "Tiếng Anh": return f"{prefix}nội dung {focus_kt}. Ghi nhớ được từ vựng cơ bản và biết cách vận dụng vào giao tiếp, cần trau dồi cách phát âm tự nhiên hơn."
                 elif mon == "Khoa học": return f"{prefix}nội dung {focus_kt}. Thực hiện khá tốt các yêu cầu bài học, hiểu bản chất hiện tượng, cần chủ động phát biểu ý kiến hơn."
                 elif mon == "Tin học": return f"{prefix}nội dung {focus_kt}. Biết sử dụng các công cụ phần mềm cơ bản, cần rèn luyện để thao tác nhanh nhẹn và chính xác hơn."
-                elif mon == "Đạo đức": return f"{prefix}bài học {focus_kt}. Có ý thức tuân thủ nội quy, hành xử hòa nhã, cần phát huy sự tự tin khi giao tiếp."
-                elif mon == "Âm nhạc": return f"{prefix}nội dung {focus_kt}. Nắm được nhịp điệu, kỹ năng hát ở mức khá, cần mạnh dạn và tự tin hơn khi biểu diễn trước lớp."
+                elif mon == "Đạo đức": return f"{prefix}bài học {focus_kt}. Có ý thức tuân thủ nội quy, hành xử hòa nhã, cần rèn luyện sự tự tin khi giao tiếp."
+                elif mon == "Âm nhạc": return f"{prefix}nội dung {focus_kt}. Nắm được nhịp điệu, kỹ năng hát ở mức khá, cần mạnh dạn biểu diễn trước lớp."
                 elif mon == "Mĩ thuật": return f"{prefix}bài {focus_kt}. Sản phẩm có bố cục tương đối, có cố gắng trong thể hiện ý tưởng, cần chú ý để thực hiện chuẩn xác hơn."
                 elif mon == "GDTC": return f"{prefix}nội dung {focus_kt}. Nắm được kỹ thuật động tác, thái độ học tập tích cực, cần phát huy sự nhanh nhẹn hơn nữa."
+                elif mon == "Hoạt động trải nghiệm": return f"{prefix}nội dung {focus_kt}. Có ý thức tham gia các hoạt động phong trào, hòa đồng với bạn bè, cần mạnh dạn phát biểu ý kiến hơn."
                 else: return f"{prefix}nội dung {focus_kt}. Có ý thức tự giác học tập, kĩ năng thực hành và vận dụng kiến thức đạt mức khá tốt, cần phát huy."
             
             elif mdd == "H_TrungBinh":
-                if mon == "Tiếng Việt": return f"{prefix}nội dung {focus_kt}, tuy nhiên trả lời câu hỏi đọc hiểu chưa trọn vẹn. Cần chú ý rèn chữ viết cẩn thận, hạn chế lỗi chính tả."
-                elif mon == "Toán": return f"{prefix}nội dung {focus_kt} nhưng tính toán đôi khi còn nhầm lẫn do thiếu cẩn thận. Cần ôn tập kỹ hơn các công thức và các bước giải bài tập."
-                elif mon == "Lịch sử & Địa lý": return f"{prefix}nội dung {focus_kt}. Kĩ năng khai thác thông tin còn lúng túng, cần tập trung hơn trong giờ học và tăng cường ôn tập tài liệu."
-                elif mon == "Công nghệ": return f"{prefix}nội dung {focus_kt} nhưng thao tác còn chậm và lúng túng. Cần rèn luyện tính cẩn thận, tuân thủ quy trình và khéo léo hơn."
-                elif mon == "Tiếng Anh": return f"{prefix}nội dung {focus_kt}. Kĩ năng thực hành ngoại ngữ còn nhiều hạn chế, cần mạnh dạn, chủ động và tăng cường thời gian ôn luyện."
-                elif mon == "Khoa học": return f"{prefix}nội dung {focus_kt} nhưng còn lúng túng khi giải thích hiện tượng. Cần chú ý nghe giảng và học bài cũ nghiêm túc hơn."
+                if mon == "Tiếng Việt": return f"{prefix}nội dung {focus_kt}, tuy nhiên trả lời câu hỏi đọc hiểu chưa trọn vẹn. Cần nâng cao tính cẩn thận, hạn chế lỗi chính tả."
+                elif mon == "Toán": return f"{prefix}nội dung {focus_kt} nhưng tính toán đôi khi còn nhầm lẫn do thiếu cẩn thận. Cần dành thêm thời gian ôn tập kỹ hơn các công thức và các bước giải bài tập."
+                elif mon == "Lịch sử & Địa lý": return f"{prefix}nội dung {focus_kt}. Kĩ năng khai thác thông tin còn lúng túng, cần tập trung hơn trong giờ học và tích cực học hỏi."
+                elif mon == "Công nghệ": return f"{prefix}nội dung {focus_kt} nhưng thao tác còn chậm và lúng túng. Cần nâng cao tính cẩn thận, tuân thủ quy trình và rèn luyện sự khéo léo."
+                elif mon == "Tiếng Anh": return f"{prefix}nội dung {focus_kt}. Kĩ năng thực hành ngoại ngữ còn nhiều hạn chế, cần mạnh dạn, chủ động và cố gắng trau dồi mỗi ngày."
+                elif mon == "Khoa học": return f"{prefix}nội dung {focus_kt} nhưng còn lúng túng khi giải thích hiện tượng. Cần chú ý nghe giảng và học bài cũ nghiêm túc."
                 elif mon == "Tin học": return f"{prefix}lý thuyết {focus_kt} nhưng kỹ năng thực hành còn lúng túng, chậm chạp. Cần tập trung theo dõi thao tác mẫu."
-                elif mon == "Đạo đức": return f"{prefix}nội dung {focus_kt}. Đôi lúc chưa tự giác thực hiện đúng nội quy, cần rèn luyện thêm về thái độ và hành vi trong lớp."
+                elif mon == "Đạo đức": return f"{prefix}nội dung {focus_kt}. Đôi lúc chưa tự giác thực hiện đúng nội quy, cần nghiêm túc khắc phục thái độ và hành vi trong lớp."
                 elif mon == "Âm nhạc": return f"{prefix}lý thuyết nhưng thực hành {focus_kt} còn yếu. Cần chú ý lắng nghe giai điệu và rèn luyện sự tự tin khi hát."
                 elif mon == "Mĩ thuật": return f"{prefix}bài {focus_kt} nhưng sản phẩm chưa cân đối. Sản phẩm thiếu sự tinh tế, cần chú ý quan sát và cẩn thận hơn để hoàn thiện."
-                elif mon == "GDTC": return f"{prefix}nội dung {focus_kt} nhưng thao tác còn chậm, chưa dứt khoát. Cần tích cực rèn luyện thể lực và tập trung hơn."
-                else: return f"{prefix}nội dung {focus_kt}, tuy nhiên việc vận dụng kiến thức còn nhiều lúng túng. Cần tập trung chú ý nghe giảng và cẩn thận hơn khi làm bài tập."
+                elif mon == "GDTC": return f"{prefix}nội dung {focus_kt} nhưng thao tác còn chậm, chưa dứt khoát. Cần tích cực trau dồi thể lực và tập trung rèn luyện."
+                elif mon == "Hoạt động trải nghiệm": return f"{prefix}nội dung {focus_kt}. Đã tham gia cùng tập thể nhưng còn rụt rè, chưa thực sự chủ động. Cần tích cực và năng nổ hơn."
+                else: return f"{prefix}nội dung {focus_kt}, tuy nhiên việc vận dụng kiến thức còn nhiều lúng túng. Cần cố gắng khắc phục điểm này bằng việc làm bài tập đầy đủ."
                      
             else: # mdd == "C"
-                if mon == "Tiếng Việt": return f"{prefix}nội dung {focus_kt}. Kiến thức và kỹ năng đọc viết còn hạn chế, sai lỗi chính tả nhiều. Cần rèn luyện cách viết câu đúng ngữ pháp."
-                elif mon == "Toán": return f"{prefix}nội dung {focus_kt}. Kĩ năng tính toán còn yếu, thường xuyên sai sót các phép tính cơ bản. Cần tập trung khắc phục ngay các lỗ hổng kiến thức."
-                elif mon == "Lịch sử & Địa lý": return f"{prefix}nội dung {focus_kt}. Thiếu tập trung, chưa biết cách khai thác thông tin địa lý, lịch sử. Cần thay đổi thái độ học tập và tăng cường ôn luyện."
-                elif mon == "Công nghệ": return f"{prefix}nội dung {focus_kt}. Thao tác thực hành rất chậm, chưa hoàn thành sản phẩm theo yêu cầu. Cần chú ý quan sát hướng dẫn và rèn luyện thêm."
-                elif mon == "Tiếng Anh": return f"{prefix}nội dung {focus_kt}. Vốn từ vựng còn quá ít, kĩ năng giao tiếp ngoại ngữ rất yếu. Cần rèn luyện tích cực, nghiêm túc và ôn tập củng cố kiến thức mỗi ngày."
-                elif mon == "Khoa học": return f"{prefix}nội dung {focus_kt}. Khả năng ghi nhớ và vận dụng yếu, thiếu tập trung quan sát các hiện tượng, cần chấn chỉnh thái độ học tập."
-                elif mon == "Tin học": return f"{prefix}nội dung {focus_kt}. Kỹ năng thực hành rất yếu, thường xuyên mất tập trung. Cần nỗ lực rèn luyện thao tác trên máy tính."
+                if mon == "Tiếng Việt": return f"{prefix}nội dung {focus_kt}. Kiến thức và kỹ năng đọc viết còn hạn chế, sai lỗi chính tả nhiều. Cần chú ý luyện tập thường xuyên cách viết câu đúng ngữ pháp."
+                elif mon == "Toán": return f"{prefix}nội dung {focus_kt}. Kĩ năng tính toán còn yếu, thường xuyên sai sót các phép tính cơ bản. Cần nỗ lực khắc phục ngay các lỗ hổng kiến thức."
+                elif mon == "Lịch sử & Địa lý": return f"{prefix}nội dung {focus_kt}. Thiếu tập trung, chưa biết cách khai thác thông tin địa lý, lịch sử. Cần thay đổi thái độ học tập và tích cực ôn luyện."
+                elif mon == "Công nghệ": return f"{prefix}nội dung {focus_kt}. Thao tác thực hành rất chậm, chưa hoàn thành sản phẩm theo yêu cầu. Cần chú ý quan sát hướng dẫn để thực hành tốt hơn."
+                elif mon == "Tiếng Anh": return f"{prefix}nội dung {focus_kt}. Vốn từ vựng còn quá ít, kĩ năng giao tiếp ngoại ngữ rất yếu. Cần tích cực trau dồi và ôn tập củng cố kiến thức mỗi ngày."
+                elif mon == "Khoa học": return f"{prefix}nội dung {focus_kt}. Khả năng ghi nhớ và vận dụng yếu, thiếu tập trung quan sát các hiện tượng, cần chấn chỉnh ngay thái độ học tập."
+                elif mon == "Tin học": return f"{prefix}nội dung {focus_kt}. Kỹ năng thực hành rất yếu, thường xuyên mất tập trung. Cần chủ động thực hành mỗi ngày trên máy tính."
                 elif mon == "Đạo đức": return f"{prefix}nội dung {focus_kt}. Cần thay đổi thái độ, nghiêm túc tuân thủ nội quy lớp học, rèn luyện ý thức kỷ luật và tu dưỡng đạo đức thường xuyên."
                 elif mon == "Âm nhạc": return f"{prefix}kỹ năng {focus_kt}. Thái độ học tập chưa tốt, cần nghiêm túc luyện tập, tập trung hơn trong giờ và chủ động học tập tích cực hơn."
                 elif mon == "Mĩ thuật": return f"{prefix}nội dung {focus_kt}. Kỹ năng tạo hình và sử dụng màu yếu. Thái độ học tập thiếu tập trung, cần nghiêm túc trau dồi thêm."
-                elif mon == "GDTC": return f"{prefix}nội dung {focus_kt}. Thể lực còn hạn chế, thái độ học tập chưa tích cực, thiếu ý thức kỷ luật trong giờ học, cần tăng cường rèn luyện."
+                elif mon == "GDTC": return f"{prefix}nội dung {focus_kt}. Thể lực còn hạn chế, thái độ học tập chưa tích cực, thiếu ý thức kỷ luật trong giờ học, cần nỗ lực cải thiện thể chất."
+                elif mon == "Hoạt động trải nghiệm": return f"{prefix}nội dung {focus_kt}. Ít tham gia các phong trào, thái độ trải nghiệm chưa nghiêm túc. Cần phải tích cực và tự giác hơn."
                 else: return f"{prefix}nội dung {focus_kt}, kĩ năng thực hành còn rất yếu và thiếu chính xác. Cần nỗ lực rèn luyện, tự giác học bài nghiêm túc và tập trung hoàn thiện."
 
         else: 
@@ -357,7 +367,7 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
                     ]
             elif mdd == "H_Kha":
                 if is_nang_khieu:
-                    mau_ngan_gon = [f"{prefix}nội dung {focus_kt}.", f"Kỹ năng phần {focus_kt} khá vững, có tiến bộ.", f"Yêu cầu bài {focus_kt} được thực hiện tốt."]
+                    mau_ngan_gon = [f"{prefix}nội dung {focus_kt}.", f"Kỹ năng phần {focus_kt} khá vững, có tiến bộ.", f"Bài {focus_kt} được thực hiện tốt."]
                     mau_gan_gui = [cap_first(f"{xh}ghi nhận sự tiến bộ khi thực hành {focus_kt}, cần tích cực trau dồi hơn."), cap_first(f"{xh}đánh giá tốt việc nắm khá chắc kỹ năng {focus_kt}.")]
                     mau_khich_le = [f"Sự tiến bộ ở bài học {focus_kt} rất đáng ghi nhận, cần tiếp tục luyện tập.", f"Kỹ năng phần {focus_kt} khá tốt, cần nỗ lực để đạt mức xuất sắc."]
                 else:
@@ -424,10 +434,16 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
 
 # --- 2. GIAO DIỆN PREMIUM 2026 ---
 st.set_page_config(layout="wide", page_title="Đổi mới cùng thầy Thịnh", page_icon="✨")
+
+st.markdown("""
+<div style="background: linear-gradient(135deg, #1A73E8, #34A853); padding: 25px; border-radius: 12px; text-align: center; margin-bottom: 30px; box-shadow: 0 8px 16px rgba(0,0,0,0.1);">
+    <h1 style="color: white; margin: 0; font-size: 3.2rem; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; text-shadow: 2px 2px 5px rgba(0,0,0,0.3);">✨ Đổi mới cùng thầy Thịnh ✨</h1>
+    <p style="color: #e8f0fe; font-size: 1.3rem; font-style: italic; margin-top: 8px; margin-bottom: 0; font-weight: 500;">Hệ thống Nhận xét Học bạ Tự động AI - Chuẩn TT27 (Phiên bản 2026)</p>
+</div>
+""", unsafe_allow_html=True)
+
 st.markdown("""<style>
 .main { background-color: #f0f4f8; font-family: 'Inter', sans-serif; } 
-.stTitle { font-size: 2.2rem !important; color: #1e3d59; font-weight: 800; margin-bottom: 25px; border-left: 6px solid #ff6e40; padding-left: 18px; text-transform: uppercase; background: linear-gradient(90deg, #e0eaf5, transparent); border-radius: 4px; padding-top: 5px; padding-bottom: 5px;} 
-.brand-text { font-size: 0.9rem; color: #6c757d; font-style: italic; text-align: center; margin-top: 30px; font-weight: bold; letter-spacing: 1px;}
 .copy-area { background-color: #ffffff; padding: 18px; border-radius: 8px; border: 1px solid #d1d9e6; margin-top: 20px; max-height: 300px; overflow-y: auto; white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 14.5px; box-shadow: 0 4px 6px rgba(0,0,0,0.04); line-height: 1.6;}
 div[data-testid="stSidebar"] { background-color: #ffffff; box-shadow: 2px 0 12px rgba(0,0,0,0.06); }
 .stButton>button { background-color: #1A73E8; color: white; border-radius: 6px; border: none; font-weight: 600; padding: 10px 20px; transition: all 0.3s ease; }
@@ -558,19 +574,17 @@ with st.sidebar:
     
     col1, col2 = st.columns(2)
     with col1: khoi = st.selectbox("📌 Khối:", ["Khối 5", "Khối 4", "Khối 3", "Khối 2", "Khối 1"])
-    with col2: mon = st.selectbox("📚 Môn:", ["Tiếng Việt", "Toán", "Tiếng Anh", "Khoa học", "Lịch sử & Địa lý", "Đạo đức", "Âm nhạc", "Mĩ thuật", "GDTC", "Công nghệ", "Tin học"])
+    with col2: mon = st.selectbox("📚 Môn:", ["Tiếng Việt", "Toán", "Tiếng Anh", "Khoa học", "Lịch sử & Địa lý", "Đạo đức", "Âm nhạc", "Mĩ thuật", "GDTC", "Công nghệ", "Tin học", "Hoạt động trải nghiệm"])
     
     st.divider()
     st.markdown("**📂 Dữ liệu đầu vào**")
     f_hs = st.file_uploader("Tải lên danh sách (.xlsx, .csv)", type=["xlsx", "csv"], label_visibility="collapsed")
-    st.markdown('<p class="brand-text">✨ Đổi mới cùng thầy Thịnh - 2026 ✨</p>', unsafe_allow_html=True)
 
 # --- KHỞI TẠO STATE ĐỂ LƯU KẾT QUẢ COPY ---
 if "ket_qua_nhan_xet" not in st.session_state:
     st.session_state.ket_qua_nhan_xet = []
 
 # --- 5. NỘI DUNG CHÍNH ---
-st.markdown("<h1 class='stTitle'>BẢNG ĐÁNH GIÁ VÀ NHẬN XÉT HỌC SINH</h1>", unsafe_allow_html=True)
 
 if f_hs:
     df_raw, n_col, d_col, m_col, c_col, s_row, nl_col, pc_col, detailed_cols = phan_tich_file(f_hs)
@@ -677,7 +691,7 @@ if f_hs:
                 
             lenh_cam_cam_xuc = "TUYỆT ĐỐI KHÔNG DÙNG các từ ngữ cảm xúc, an ủi, hứa hẹn, nhắc đến gia đình hay ra lệnh cứng nhắc (như: 'Đừng lo lắng', 'Mong', 'Mong có sự', 'Mong rằng', 'Sẽ', 'Sẽ đồng hành', 'Tin kết quả sẽ tốt', 'Gia đình', 'Nhắc nhở', 'Yêu cầu'). CHỈ đánh giá khách quan, khoa học trực tiếp vào ưu/khuyết điểm của nội dung kiến thức môn học và dùng từ 'cần' hoặc 'nên' để đề xuất khắc phục."
             
-            is_nang_khieu = mon in ["Đạo đức", "Âm nhạc", "Mĩ thuật", "GDTC", "HĐGD"]
+            is_nang_khieu = mon in ["Đạo đức", "Âm nhạc", "Mĩ thuật", "GDTC", "HĐGD", "Hoạt động trải nghiệm"]
             if is_nang_khieu:
                 lenh_mon_dac_thu = "BẮT BUỘC NHẬN XÉT ĐẶC THÙ: Đây là môn năng khiếu/đạo đức. TUYỆT ĐỐI KHÔNG KHUYÊN 'ôn tập kiến thức', 'củng cố nền tảng', 'làm bài tập'. Hãy nhận xét về việc 'rèn luyện kỹ năng', 'thái độ', 'thực hành', 'ứng xử' và 'ý thức'."
             else:
