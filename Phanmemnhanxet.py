@@ -132,16 +132,16 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
 
     if loai_nx == "PC-NL":
         nang_luc = {
-            "T": ["năng lực đặc thù vô cùng nổi trội", "tự học và giao tiếp cực kỳ xuất sắc", "kỹ năng giải quyết vấn đề linh hoạt", "tiếp thu nhạy bén mọi kỹ năng", "sự tự chủ và tính sáng tạo rất cao"],
-            "H_Kha": ["nắm vững kiến thức đặc thù các môn", "ý thức tự học và giao tiếp khá", "kỹ năng hợp tác nhóm linh hoạt", "tự chủ trong giải quyết vấn đề khá tốt", "đạt mức khá ở các năng lực học tập"],
-            "H_TrungBinh": ["đạt yêu cầu cơ bản về năng lực các môn", "mức độ hoàn thành nội dung ở mức cơ bản", "cần chủ động hơn khi làm việc nhóm", "kỹ năng giao tiếp và tự học chưa thực sự nổi bật", "đạt mức cơ bản về các năng lực chung"],
-            "C": ["chưa hoàn thành tốt năng lực đặc thù", "kỹ năng tự học và giao tiếp còn hạn chế", "kỹ năng tiếp thu kiến thức còn chậm", "chưa chủ động trong hợp tác và giải quyết vấn đề", "mức độ tiếp thu kiến thức còn rất yếu"]
+            "T": ["có năng lực đặc thù vô cùng nổi trội", "tự học và giao tiếp cực kỳ xuất sắc", "có kỹ năng giải quyết vấn đề linh hoạt", "tiếp thu nhạy bén mọi kỹ năng", "có sự tự chủ và tính sáng tạo rất cao"],
+            "H_Kha": ["nắm vững kiến thức đặc thù các môn", "có ý thức tự học và giao tiếp khá", "có kỹ năng hợp tác nhóm linh hoạt", "tự chủ trong giải quyết vấn đề khá tốt", "đạt mức khá ở các năng lực học tập"],
+            "H_TrungBinh": ["đạt yêu cầu cơ bản về năng lực các môn", "mức độ hoàn thành nội dung ở mức cơ bản", "cần chủ động hơn khi làm việc nhóm", "chưa thực sự nổi bật về giao tiếp và tự học", "đạt mức cơ bản về các năng lực chung"],
+            "C": ["chưa hoàn thành tốt các năng lực đặc thù", "còn hạn chế trong kỹ năng tự học và giao tiếp", "tiếp thu kiến thức còn chậm", "chưa chủ động trong hợp tác và giải quyết vấn đề", "còn rất yếu trong việc rèn luyện năng lực"]
         }
         pham_chat = {
             "T": ["luôn nỗ lực, trách nhiệm và hòa đồng", "biết quan tâm, chia sẻ và trung thực", "rèn luyện 5 phẩm chất đạo đức gương mẫu", "thể hiện rõ sự chăm chỉ, kỷ luật và ngoan ngoãn", "có tinh thần yêu nước, nhân ái tuyệt vời"],
             "H_Kha": ["chăm chỉ và trung thực trong học tập", "có trách nhiệm với nhiệm vụ tập thể", "luôn tuân thủ nội quy lớp học", "biết yêu thương bạn bè và nề nếp tốt", "có ý thức rèn luyện khá tốt 5 phẩm chất"],
             "H_TrungBinh": ["biết yêu thương và tuân thủ nội quy", "chăm chỉ nhưng đôi khi thiếu tính tự giác", "biết vâng lời nhưng cần nâng cao kỷ luật cá nhân", "cần rèn luyện thêm tính trung thực và trách nhiệm", "có ý thức đạo đức tốt nhưng cần mạnh dạn hơn"],
-            "C": ["cần cố gắng khắc phục tính trách nhiệm", "cần nghiêm túc rèn luyện kỷ luật hơn nữa", "mức độ rèn luyện phẩm chất còn hạn chế", "thiếu sự chăm chỉ, chưa trung thực", "cần thay đổi ngay thái độ học tập và đạo đức"]
+            "C": ["cần cố gắng khắc phục tính trách nhiệm", "cần nghiêm túc rèn luyện kỷ luật hơn nữa", "còn hạn chế nhiều về mặt phẩm chất", "thiếu sự chăm chỉ, chưa trung thực", "cần thay đổi ngay thái độ học tập và đạo đức"]
         }
         khuyen = {
             "T": ["Là tấm gương sáng cho cả lớp.", "Cần tiếp tục phát huy mạnh mẽ nhé!", "Thái độ học tập của em cực kỳ đáng khen.", "Hãy tiếp tục duy trì năng lượng tích cực này.", "Thành quả rèn luyện của em rất xứng đáng."],
@@ -155,13 +155,13 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
         kh = random.choice(khuyen[mdd]).replace("Thầy/Cô", xh.strip() if xh else "Giáo viên")
         
         if phong_cach == "Ngắn gọn":
-            return f"{cap_first(nl)}. Phẩm chất {pc}."
+            return f"{cap_first(nl)}. Em {pc}."
         elif phong_cach == "Gần gũi":
-            return cap_first(f"{xh}rất vui khi thấy em có {nl}. Đồng thời {pc}. {kh}")
+            return cap_first(f"{xh}nhận thấy em {nl}. Về phẩm chất, em {pc}. {kh}")
         elif phong_cach == "Khích lệ":
-            return f"{cap_first(nl)}. Về phẩm chất, em {pc}. {kh}"
-        else: # Đầy đủ / Ngẫu nhiên
             return f"{cap_first(nl)}. Trong rèn luyện, em {pc}. {kh}"
+        else: # Đầy đủ / Ngẫu nhiên
+            return f"{cap_first(nl)}. Đồng thời, em {pc}. {kh}"
 
     elif loai_nx == "HĐGD":
         hdgd_thamgia = {
@@ -178,7 +178,7 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
         }
         hdgd_khuyen = {
             "T": ["Là nhân tố tích cực của lớp.", "Cần tiếp tục giữ vững tinh thần này!", "Thầy/Cô rất tự hào về sự năng nổ của em.", "Hãy lan tỏa năng lượng này cho các bạn.", "Kỹ năng hoạt động cực kỳ xuất sắc."],
-            "H_Kha": ["Cần chủ động và tự tin phát biểu hơn.", "Tiếp tục phát huy sự nhiệt tình này nhé.", "Hãy mạnh dạn dẫn dắt nhóm trong tương lai.", "Chỉ cần tự tự tin hơn chút là rất tuyệt vời.", "Sự cố gắng của em rất đáng khen."],
+            "H_Kha": ["Cần chủ động và tự tin phát biểu hơn.", "Tiếp tục phát huy sự nhiệt tình này nhé.", "Hãy mạnh dạn dẫn dắt nhóm trong tương lai.", "Chỉ cần tự tin hơn chút là rất tuyệt vời.", "Sự cố gắng của em rất đáng khen."],
             "H_TrungBinh": ["Cần tự tin thể hiện bản thân nhiều hơn nữa.", "Hãy tích cực giao tiếp với bạn bè xung quanh.", "Cần năng nổ hơn trong phong trào chung.", "Đừng ngại ngùng, hãy chủ động tham gia nhé.", "Thầy/Cô mong em sẽ mạnh dạn hơn ở kì sau."],
             "C": ["Cần tham gia phong trào tích cực hơn để rèn kỹ năng.", "Yêu cầu em nghiêm túc và chủ động hơn.", "Cần thay đổi thái độ khi sinh hoạt tập thể.", "Hãy mở lòng và hòa đồng cùng các bạn.", "Cần rèn luyện tính kỷ luật và sự tự giác."]
         }
@@ -221,7 +221,7 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
                 "C": ["kỹ năng tính toán rất yếu, thường xuyên sai sót", "chưa biết cách thiết lập phép tính giải toán lời văn", "mất căn bản các công thức trọng tâm", "không tập trung khi làm bài tập tính toán", "hổng kiến thức toán học rất nhiều"]
             },
             "Tiếng Anh": {
-                "T": ["phát âm chuẩn xác, phản xạ giao tiếp trôi chảy", "nắm vô cùng chắc từ vựng và ngữ pháp", "nghe hiểu và đọc hiểu tiếng Anh xuất sắc", "tự tin thuyết trình bằng ngoại ngữ"],
+                "T": ["phát âm chuẩn xác, phản xạ giao tiếp trôi chảy", "nắm vô cùng chắc từ vựng và ngữ pháp", "nghe hiểu và đọc hiểu tiếng Anh xuất sắc", "tự tự tin thuyết trình bằng ngoại ngữ"],
                 "H_Kha": ["ghi nhớ tốt từ vựng cơ bản", "vận dụng được mẫu câu vào giao tiếp khá tốt", "kỹ năng nghe và đọc ở mức khá", "phát âm tương đối rõ ràng"],
                 "H_TrungBinh": ["vốn từ vựng còn hạn chế", "kỹ năng giao tiếp và phát âm chưa tự nhiên", "cần trau dồi thêm ngữ pháp cơ bản", "khả năng nghe hiểu chưa cao"],
                 "C": ["phát âm yếu, chưa phản xạ được khi giao tiếp", "lỗ hổng từ vựng lớn, chưa nắm được cấu trúc câu", "rất chậm trong việc tiếp thu ngoại ngữ", "ngại giao tiếp và không nhớ từ mới"]
@@ -706,7 +706,7 @@ if f_hs:
                 tab_place.dataframe(df_view, use_container_width=True, height=450, column_config=config)
                 bar.progress((idx + 1) / len(df_view))
                 status.text(f"✔ Đang hoàn thiện: {ten_hs}")
-                time.sleep(1.0 if api_key else 0.01)
+                time.sleep(1.5 if api_key else 0.01)
 
             st.balloons()
             status.success(f"✅ Hoàn thành xuất sắc bộ học bạ môn {mon}!")
