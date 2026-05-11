@@ -460,8 +460,8 @@ def check_col_has_data(df, col_idx, start_row, check_type="level"):
         if check_type == "level" and val in ['T', 'Đ', 'C', 'HTT', 'HT', 'CHT', 'H']: return True
     return False
 
-# --- 3. HÀM PHÂN TÍCH FILE ---
-def phan_tich_file(file):
+# --- 3. HÀM PHÂN TÍCH FILE THÔNG MINH (NHẬN DIỆN HỌC KÌ) ---
+def phan_tich_file(file, thoi_diem):
     try:
         file_bytes = io.BytesIO(file.getvalue())
         df = pd.read_excel(file_bytes, header=None) if not file.name.endswith('.csv') else pd.read_csv(file_bytes, header=None)
@@ -486,18 +486,49 @@ def phan_tich_file(file):
         if not found_student:
             s_row = min(h_row + 4, len(df))
                 
-        diem_cands, muc_cands = [], []
+        diem_cands, muc_cands, c_cands = [], [], []
         nl_col, pc_col = -1, -1
         detailed_cands = {k: [] for k in KEYS_15_PCNL}
         
         for j in range(n_col + 1, len(df.columns)):
-            header_area = " ".join([str(df.iloc[r, j]).lower() for r in range(h_row, s_row)])
-            if "điểm" in header_area: diem_cands.append(j)
-            if "mức" in header_area or "đạt được" in header_area: muc_cands.append(j)
+            header_area = " ".join([str(df.iloc[r, j]).lower() for r in range(max(0, h_row - 2), s_row)])
+            header_clean = header_area.replace(" ", "").replace("_", "").replace("-", "")
+            
+            # --- TÍNH NĂNG MỚI: BỘ LỌC CỘT THEO THỜI ĐIỂM CHỌN ---
+            is_ghk1 = any(kw in header_clean for kw in ['ghk1', 'gk1', 'giữahk1', 'giữakì1', 'giữakỳ1', 'gki', 'giữakỳi', 'giữakìi']) or ('ghki' in header_clean and 'ghkii' not in header_clean)
+            is_chk1 = any(kw in header_clean for kw in ['chk1', 'ck1', 'cuốihk1', 'cuốikì1', 'cuốikỳ1', 'hk1', 'cki', 'cuốikỳi', 'cuốikìi']) or ('chki' in header_clean and 'chkii' not in header_clean) or ('hki' in header_clean and 'hkii' not in header_clean)
+            is_ghk2 = any(kw in header_clean for kw in ['ghkii', 'ghk2', 'gk2', 'giữahk2', 'giữakì2', 'giữakỳ2', 'gkii', 'giữakỳii', 'giữakìii'])
+            is_chk2 = any(kw in header_clean for kw in ['chkii', 'chk2', 'ck2', 'cuốihk2', 'cuốikì2', 'cuốikỳ2', 'hkii', 'hk2', 'cuốinăm', 'cn', 'ckii', 'cuốikỳii', 'cuốikìii'])
+
+            is_my_term = False
+            is_other_term = False
+
+            if thoi_diem == "Giữa học kì I":
+                is_my_term = is_ghk1
+                is_other_term = is_chk1 or is_ghk2 or is_chk2
+            elif thoi_diem == "Cuối học kì I":
+                is_my_term = is_chk1
+                is_other_term = is_ghk1 or is_ghk2 or is_chk2
+            elif thoi_diem == "Giữa học kì II":
+                is_my_term = is_ghk2
+                is_other_term = is_ghk1 or is_chk1 or is_chk2
+            elif thoi_diem == "Cuối học kì II":
+                is_my_term = is_chk2
+                is_other_term = is_ghk1 or is_chk1 or is_ghk2
+                
+            # Cốt lõi: Nếu cột này chứa tiêu đề của kì học KHÁC (mà không phải kì mình đang chọn), bỏ qua ngay lập tức!
+            if is_other_term and not is_my_term:
+                continue
+            # --------------------------------------------------------
+            
+            if "điểm" in header_area or "đg" in header_area: diem_cands.append(j)
+            if "mức" in header_area or "đạt được" in header_area or "ghk" in header_area or "chk" in header_area or "đánh giá" in header_area or "kết quả" in header_area: muc_cands.append(j)
+            if "nhận xét" in header_area or "lời phê" in header_area or "nx" in header_area: c_cands.append(j)
+            
             if "năng lực" in header_area and ("chung" in header_area or "đặc thù" in header_area) and nl_col == -1: nl_col = j
             if "phẩm chất" in header_area and pc_col == -1: pc_col = j
             
-            for r in range(h_row, s_row):
+            for r in range(max(0, h_row - 1), s_row):
                 cell_val = str(df.iloc[r, j]).strip().lower().replace(" ", "")
                 if cell_val in detailed_cands:
                     detailed_cands[cell_val].append(j)
@@ -523,6 +554,22 @@ def phan_tich_file(file):
         if diem_col == -1 or muc_col == -1:
             if s_row < len(df):
                 for j in range(n_col + 1, len(df.columns)):
+                    header_area = " ".join([str(df.iloc[r, j]).lower() for r in range(max(0, h_row - 2), s_row)])
+                    header_clean = header_area.replace(" ", "").replace("_", "").replace("-", "")
+                    
+                    is_ghk1 = any(kw in header_clean for kw in ['ghk1', 'gk1', 'giữahk1', 'giữakì1', 'giữakỳ1', 'gki']) or ('ghki' in header_clean and 'ghkii' not in header_clean)
+                    is_chk1 = any(kw in header_clean for kw in ['chk1', 'ck1', 'cuốihk1', 'cuốikì1', 'cuốikỳ1', 'hk1', 'cki']) or ('chki' in header_clean and 'chkii' not in header_clean) or ('hki' in header_clean and 'hkii' not in header_clean)
+                    is_ghk2 = any(kw in header_clean for kw in ['ghkii', 'ghk2', 'gk2', 'giữahk2', 'giữakì2', 'giữakỳ2', 'gkii'])
+                    is_chk2 = any(kw in header_clean for kw in ['chkii', 'chk2', 'ck2', 'cuốihk2', 'cuốikì2', 'cuốikỳ2', 'hkii', 'hk2', 'cuốinăm', 'cn', 'ckii'])
+                    
+                    is_other_term = False
+                    if thoi_diem == "Giữa học kì I": is_other_term = is_chk1 or is_ghk2 or is_chk2
+                    elif thoi_diem == "Cuối học kì I": is_other_term = is_ghk1 or is_ghk2 or is_chk2
+                    elif thoi_diem == "Giữa học kì II": is_other_term = is_ghk1 or is_chk1 or is_chk2
+                    elif thoi_diem == "Cuối học kì II": is_other_term = is_ghk1 or is_chk1 or is_ghk2
+                    
+                    if is_other_term: continue
+                    
                     cell_val = str(df.iloc[s_row, j]).strip().upper()
                     if diem_col == -1 and (cell_val.replace('.','',1).isdigit()): diem_col = j
                     elif muc_col == -1 and cell_val in ['T', 'Đ', 'C', 'HTT', 'HT', 'CHT', 'H']: muc_col = j
@@ -536,14 +583,9 @@ def phan_tich_file(file):
         
         ref_max = max(ref_cols) if ref_cols else -1
         
-        c_cands = []
-        for j in range(len(df.columns)):
-            header_all = " ".join([str(df.iloc[r, j]).lower() for r in range(h_row, s_row)])
-            if "nhận xét" in header_all or "lời phê" in header_all: 
-                c_cands.append(j)
-                
         c_col = -1
         if c_cands:
+            # Chọn cột nhận xét nằm SAU cột điểm/mức của học kì tương ứng
             valid_c = [c for c in c_cands if c > ref_max]
             if valid_c:
                 c_col = valid_c[0]
@@ -587,7 +629,9 @@ if "ket_qua_nhan_xet" not in st.session_state:
 # --- 5. NỘI DUNG CHÍNH ---
 
 if f_hs:
-    df_raw, n_col, d_col, m_col, c_col, s_row, nl_col, pc_col, detailed_cols = phan_tich_file(f_hs)
+    # --- TRUYỀN 'thoi_diem' VÀO HÀM PHÂN TÍCH FILE ---
+    df_raw, n_col, d_col, m_col, c_col, s_row, nl_col, pc_col, detailed_cols = phan_tich_file(f_hs, thoi_diem)
+    
     if df_raw is not None:
         data_list = []
         mapping_indices = []
