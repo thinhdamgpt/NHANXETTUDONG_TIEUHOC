@@ -460,7 +460,7 @@ def check_col_has_data(df, col_idx, start_row, check_type="level"):
         if check_type == "level" and val in ['T', 'Đ', 'C', 'HTT', 'HT', 'CHT', 'H']: return True
     return False
 
-# --- 3. HÀM PHÂN TÍCH FILE THÔNG MINH (NHẬN DIỆN HỌC KÌ CHUẨN XÁC) ---
+# --- 3. HÀM PHÂN TÍCH FILE THÔNG MINH (TRÍ NHỚ NGỮ CẢNH HỌC KÌ) ---
 def phan_tich_file(file, thoi_diem):
     try:
         file_bytes = io.BytesIO(file.getvalue())
@@ -487,41 +487,47 @@ def phan_tich_file(file, thoi_diem):
             s_row = min(h_row + 4, len(df))
                 
         diem_cands, muc_cands, c_cands = [], [], []
+        explicit_diem_cands, explicit_muc_cands = [], []
         nl_col, pc_col = -1, -1
         detailed_cands = {k: [] for k in KEYS_15_PCNL}
         
+        current_term_context = None # Trí nhớ lưu trữ học kì hiện tại để xử lý gộp ô (Merge Cells)
+        
         for j in range(n_col + 1, len(df.columns)):
-            header_area = " ".join([str(df.iloc[r, j]).lower() for r in range(max(0, h_row - 2), s_row)])
+            # Mở rộng vùng quét lên trên 4 dòng để không bỏ sót tiêu đề lớn của Học kì bị gộp ô
+            header_area = " ".join([str(df.iloc[r, j]).lower() for r in range(max(0, h_row - 4), s_row)])
             header_clean = header_area.replace(" ", "").replace("_", "").replace("-", "")
             
-            # --- CẬP NHẬT TỪ KHÓA ĐẦY ĐỦ ĐỂ BẮT CHUẨN CÁC KÌ (Ví dụ: "giữahọckỳii") ---
-            is_ghk1 = any(kw in header_clean for kw in ['ghk1', 'gk1', 'giữahk1', 'giữahọckì1', 'giữahọckỳ1', 'giữakì1', 'giữakỳ1', 'gki', 'giữakỳi', 'giữakìi', 'giữahọckỳi', 'giữahọckìi']) or ('ghki' in header_clean and 'ghkii' not in header_clean)
-            is_chk1 = any(kw in header_clean for kw in ['chk1', 'ck1', 'cuốihk1', 'cuốihọckì1', 'cuốihọckỳ1', 'cuốikì1', 'cuốikỳ1', 'hk1', 'cki', 'cuốikỳi', 'cuốikìi', 'cuốihọckỳi', 'cuốihọckìi']) or ('chki' in header_clean and 'chkii' not in header_clean) or ('hki' in header_clean and 'hkii' not in header_clean)
-            is_ghk2 = any(kw in header_clean for kw in ['ghkii', 'ghk2', 'gk2', 'giữahk2', 'giữahọckì2', 'giữahọckỳ2', 'giữakì2', 'giữakỳ2', 'gkii', 'giữakỳii', 'giữakìii', 'giữahọckỳii', 'giữahọckìii'])
-            is_chk2 = any(kw in header_clean for kw in ['chkii', 'chk2', 'ck2', 'cuốihk2', 'cuốihọckì2', 'cuốihọckỳ2', 'cuốikì2', 'cuốikỳ2', 'hkii', 'hk2', 'cuốinăm', 'cn', 'ckii', 'cuốikỳii', 'cuốikìii', 'cuốihọckỳii', 'cuốihọckìii'])
+            # 1. NHẬN DIỆN VÀ GHI NHỚ HỌC KÌ VÀO CONTEXT
+            if any(kw in header_clean for kw in ['ghk1', 'gk1', 'giữahk1', 'giữahọckì1', 'giữahọckỳ1', 'giữakì1', 'giữakỳ1', 'gki', 'giữakỳi', 'giữakìi', 'giữahọckỳi', 'giữahọckìi']) or ('ghki' in header_clean and 'ghkii' not in header_clean):
+                current_term_context = "Giữa học kì I"
+            elif any(kw in header_clean for kw in ['chk1', 'ck1', 'cuốihk1', 'cuốihọckì1', 'cuốihọckỳ1', 'cuốikì1', 'cuốikỳ1', 'hk1', 'cki', 'cuốikỳi', 'cuốikìi', 'cuốihọckỳi', 'cuốihọckìi']) or ('chki' in header_clean and 'chkii' not in header_clean) or ('hki' in header_clean and 'hkii' not in header_clean):
+                current_term_context = "Cuối học kì I"
+            elif any(kw in header_clean for kw in ['ghkii', 'ghk2', 'gk2', 'giữahk2', 'giữahọckì2', 'giữahọckỳ2', 'giữakì2', 'giữakỳ2', 'gkii', 'giữakỳii', 'giữakìii', 'giữahọckỳii', 'giữahọckìii']):
+                current_term_context = "Giữa học kì II"
+            elif any(kw in header_clean for kw in ['chkii', 'chk2', 'ck2', 'cuốihk2', 'cuốihọckì2', 'cuốihọckỳ2', 'cuốikì2', 'cuốikỳ2', 'hkii', 'hk2', 'cuốinăm', 'cn', 'ckii', 'cuốikỳii', 'cuốikìii', 'cuốihọckỳii', 'cuốihọckìii']):
+                current_term_context = "Cuối học kì II"
 
-            is_my_term = False
-            is_other_term = False
+            is_my_term = (current_term_context == thoi_diem)
+            is_other_term = (current_term_context is not None and current_term_context != thoi_diem)
 
-            if thoi_diem == "Giữa học kì I":
-                is_my_term = is_ghk1
-                is_other_term = is_chk1 or is_ghk2 or is_chk2
-            elif thoi_diem == "Cuối học kì I":
-                is_my_term = is_chk1
-                is_other_term = is_ghk1 or is_ghk2 or is_chk2
-            elif thoi_diem == "Giữa học kì II":
-                is_my_term = is_ghk2
-                is_other_term = is_ghk1 or is_chk1 or is_chk2
-            elif thoi_diem == "Cuối học kì II":
-                is_my_term = is_chk2
-                is_other_term = is_ghk1 or is_chk1 or is_ghk2
-                
-            if is_other_term and not is_my_term:
+            # 2. KHÓA CHẶT: Bỏ qua hoàn toàn nếu cột này thuộc về kì khác (Không đưa vào list ứng viên)
+            if is_other_term:
                 continue
             
-            if "điểm" in header_area or "đg" in header_area: diem_cands.append(j)
-            if "mức" in header_area or "đạt được" in header_area or "ghk" in header_area or "chk" in header_area or "đánh giá" in header_area or "kết quả" in header_area: muc_cands.append(j)
-            if "nhận xét" in header_area or "lời phê" in header_area or "nx" in header_area: c_cands.append(j)
+            # 3. PHÂN LOẠI CỘT CHO KÌ HIỆN TẠI
+            is_diem = "điểm" in header_area or "đg" in header_area
+            is_muc = "mức" in header_area or "đạt được" in header_area or "ghk" in header_area or "chk" in header_area or "đánh giá" in header_area or "kết quả" in header_area
+            is_nx = "nhận xét" in header_area or "lời phê" in header_area or "nx" in header_area
+            
+            if is_diem: 
+                diem_cands.append(j)
+                if is_my_term: explicit_diem_cands.append(j)
+            if is_muc: 
+                muc_cands.append(j)
+                if is_my_term: explicit_muc_cands.append(j)
+            if is_nx: 
+                c_cands.append(j)
             
             if "năng lực" in header_area and ("chung" in header_area or "đặc thù" in header_area) and nl_col == -1: nl_col = j
             if "phẩm chất" in header_area and pc_col == -1: pc_col = j
@@ -531,12 +537,20 @@ def phan_tich_file(file, thoi_diem):
                 if cell_val in detailed_cands:
                     detailed_cands[cell_val].append(j)
                     
+        # --- CHỐT CỘT ĐIỂM/MỨC CHÍNH XÁC ---
         diem_col, muc_col = -1, -1
-        if diem_cands:
+        
+        # Nếu đã tìm thấy đích danh cột của kì này -> Chốt luôn, KHÔNG cần test xem có dữ liệu không.
+        if explicit_diem_cands:
+            diem_col = explicit_diem_cands[-1]
+        elif diem_cands:
             diem_col = diem_cands[-1]
             for j in reversed(diem_cands):
                 if check_col_has_data(df, j, s_row, "score"): diem_col = j; break
-        if muc_cands:
+                
+        if explicit_muc_cands:
+            muc_col = explicit_muc_cands[-1]
+        elif muc_cands:
             muc_col = muc_cands[-1]
             for j in reversed(muc_cands):
                 if check_col_has_data(df, j, s_row, "level"): muc_col = j; break
@@ -549,23 +563,24 @@ def phan_tich_file(file, thoi_diem):
                     if check_col_has_data(df, j, s_row, "level"): chosen_j = j; break
                 detailed_cols[k] = chosen_j
             
+        # Fallback phụ: Nếu file quá "kín" không lộ tiêu đề
         if diem_col == -1 or muc_col == -1:
             if s_row < len(df):
+                current_term_context = None
                 for j in range(n_col + 1, len(df.columns)):
-                    header_area = " ".join([str(df.iloc[r, j]).lower() for r in range(max(0, h_row - 2), s_row)])
+                    header_area = " ".join([str(df.iloc[r, j]).lower() for r in range(max(0, h_row - 4), s_row)])
                     header_clean = header_area.replace(" ", "").replace("_", "").replace("-", "")
                     
-                    is_ghk1 = any(kw in header_clean for kw in ['ghk1', 'gk1', 'giữahk1', 'giữahọckì1', 'giữahọckỳ1', 'giữakì1', 'giữakỳ1', 'gki', 'giữakỳi', 'giữakìi', 'giữahọckỳi', 'giữahọckìi']) or ('ghki' in header_clean and 'ghkii' not in header_clean)
-                    is_chk1 = any(kw in header_clean for kw in ['chk1', 'ck1', 'cuốihk1', 'cuốihọckì1', 'cuốihọckỳ1', 'cuốikì1', 'cuốikỳ1', 'hk1', 'cki', 'cuốikỳi', 'cuốikìi', 'cuốihọckỳi', 'cuốihọckìi']) or ('chki' in header_clean and 'chkii' not in header_clean) or ('hki' in header_clean and 'hkii' not in header_clean)
-                    is_ghk2 = any(kw in header_clean for kw in ['ghkii', 'ghk2', 'gk2', 'giữahk2', 'giữahọckì2', 'giữahọckỳ2', 'giữakì2', 'giữakỳ2', 'gkii', 'giữakỳii', 'giữakìii', 'giữahọckỳii', 'giữahọckìii'])
-                    is_chk2 = any(kw in header_clean for kw in ['chkii', 'chk2', 'ck2', 'cuốihk2', 'cuốihọckì2', 'cuốihọckỳ2', 'cuốikì2', 'cuốikỳ2', 'hkii', 'hk2', 'cuốinăm', 'cn', 'ckii', 'cuốikỳii', 'cuốikìii', 'cuốihọckỳii', 'cuốihọckìii'])
+                    if any(kw in header_clean for kw in ['ghk1', 'gk1', 'giữahk1', 'giữahọckì1', 'giữahọckỳ1', 'giữakì1', 'giữakỳ1', 'gki', 'giữakỳi', 'giữakìi', 'giữahọckỳi', 'giữahọckìi']) or ('ghki' in header_clean and 'ghkii' not in header_clean):
+                        current_term_context = "Giữa học kì I"
+                    elif any(kw in header_clean for kw in ['chk1', 'ck1', 'cuốihk1', 'cuốihọckì1', 'cuốihọckỳ1', 'cuốikì1', 'cuốikỳ1', 'hk1', 'cki', 'cuốikỳi', 'cuốikìi', 'cuốihọckỳi', 'cuốihọckìi']) or ('chki' in header_clean and 'chkii' not in header_clean) or ('hki' in header_clean and 'hkii' not in header_clean):
+                        current_term_context = "Cuối học kì I"
+                    elif any(kw in header_clean for kw in ['ghkii', 'ghk2', 'gk2', 'giữahk2', 'giữahọckì2', 'giữahọckỳ2', 'giữakì2', 'giữakỳ2', 'gkii', 'giữakỳii', 'giữakìii', 'giữahọckỳii', 'giữahọckìii']):
+                        current_term_context = "Giữa học kì II"
+                    elif any(kw in header_clean for kw in ['chkii', 'chk2', 'ck2', 'cuốihk2', 'cuốihọckì2', 'cuốihọckỳ2', 'cuốikì2', 'cuốikỳ2', 'hkii', 'hk2', 'cuốinăm', 'cn', 'ckii', 'cuốikỳii', 'cuốikìii', 'cuốihọckỳii', 'cuốihọckìii']):
+                        current_term_context = "Cuối học kì II"
                     
-                    is_other_term = False
-                    if thoi_diem == "Giữa học kì I": is_other_term = is_chk1 or is_ghk2 or is_chk2
-                    elif thoi_diem == "Cuối học kì I": is_other_term = is_ghk1 or is_ghk2 or is_chk2
-                    elif thoi_diem == "Giữa học kì II": is_other_term = is_ghk1 or is_chk1 or is_chk2
-                    elif thoi_diem == "Cuối học kì II": is_other_term = is_ghk1 or is_chk1 or is_ghk2
-                    
+                    is_other_term = (current_term_context is not None and current_term_context != thoi_diem)
                     if is_other_term: continue
                     
                     cell_val = str(df.iloc[s_row, j]).strip().upper()
@@ -583,7 +598,6 @@ def phan_tich_file(file, thoi_diem):
         
         c_col = -1
         if c_cands:
-            # Chọn cột nhận xét nằm SAU cột điểm/mức của học kì tương ứng
             valid_c = [c for c in c_cands if c > ref_max]
             if valid_c:
                 c_col = valid_c[0]
@@ -868,7 +882,7 @@ if f_hs:
                 tab_place.dataframe(df_view, use_container_width=True, height=450, column_config=config)
                 bar.progress((idx + 1) / len(df_view))
                 status.text(f"✔ Đang hoàn thiện: {ten_hs}")
-                time.sleep(1.0 if api_key else 0.01)
+                time.sleep(1.5 if api_key else 0.01)
 
             st.balloons()
             status.success(f"✅ Hoàn thành xuất sắc bộ học bạ môn {mon}!")
