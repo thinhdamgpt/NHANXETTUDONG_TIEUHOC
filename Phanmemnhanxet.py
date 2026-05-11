@@ -297,7 +297,7 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
                 elif mon == "Âm nhạc": return f"{prefix}kỹ năng {focus_kt}. Thể hiện năng khiếu âm nhạc xuất sắc. Hát đúng giai điệu, thuộc lời ca và biết kết hợp vận động."
                 elif mon == "Mĩ thuật": return f"{prefix}nội dung {focus_kt}. Năng khiếu tạo hình rất tốt. Thể hiện sự sáng tạo cao trong bố cục, màu sắc. Hoàn thành sản phẩm vô cùng đẹp mắt."
                 elif mon == "GDTC": return f"{prefix}nội dung {focus_kt}. Thể lực rất tốt, thực hiện thành thạo các động tác. Tích cực, năng nổ trong mọi hoạt động vận động."
-                elif mon == "Hoạt động trải nghiệm": return f"{prefix}nội dung {focus_kt}. Thể hiện sự tự tự tin, chủ động và sáng tạo trong các hoạt động phong trào. Kỹ năng sống rất xuất sắc."
+                elif mon == "Hoạt động trải nghiệm": return f"{prefix}nội dung {focus_kt}. Thể hiện sự tự tin, chủ động và sáng tạo trong các hoạt động phong trào. Kỹ năng sống rất xuất sắc."
                 else: return f"{prefix}nội dung {focus_kt}. Vận dụng vô cùng linh hoạt kiến thức vào thực tiễn, kĩ năng thực hành thành thạo và tư duy rất nhạy bén."
             
             elif mdd == "H_Kha":
@@ -460,7 +460,7 @@ def check_col_has_data(df, col_idx, start_row, check_type="level"):
         if check_type == "level" and val in ['T', 'Đ', 'C', 'HTT', 'HT', 'CHT', 'H']: return True
     return False
 
-# --- 3. HÀM PHÂN TÍCH FILE THÔNG MINH (NHẬN DIỆN HỌC KÌ) ---
+# --- 3. HÀM PHÂN TÍCH FILE THÔNG MINH (NHẬN DIỆN HỌC KÌ CHUẨN XÁC) ---
 def phan_tich_file(file, thoi_diem):
     try:
         file_bytes = io.BytesIO(file.getvalue())
@@ -494,11 +494,11 @@ def phan_tich_file(file, thoi_diem):
             header_area = " ".join([str(df.iloc[r, j]).lower() for r in range(max(0, h_row - 2), s_row)])
             header_clean = header_area.replace(" ", "").replace("_", "").replace("-", "")
             
-            # --- TÍNH NĂNG MỚI: BỘ LỌC CỘT THEO THỜI ĐIỂM CHỌN ---
-            is_ghk1 = any(kw in header_clean for kw in ['ghk1', 'gk1', 'giữahk1', 'giữakì1', 'giữakỳ1', 'gki', 'giữakỳi', 'giữakìi']) or ('ghki' in header_clean and 'ghkii' not in header_clean)
-            is_chk1 = any(kw in header_clean for kw in ['chk1', 'ck1', 'cuốihk1', 'cuốikì1', 'cuốikỳ1', 'hk1', 'cki', 'cuốikỳi', 'cuốikìi']) or ('chki' in header_clean and 'chkii' not in header_clean) or ('hki' in header_clean and 'hkii' not in header_clean)
-            is_ghk2 = any(kw in header_clean for kw in ['ghkii', 'ghk2', 'gk2', 'giữahk2', 'giữakì2', 'giữakỳ2', 'gkii', 'giữakỳii', 'giữakìii'])
-            is_chk2 = any(kw in header_clean for kw in ['chkii', 'chk2', 'ck2', 'cuốihk2', 'cuốikì2', 'cuốikỳ2', 'hkii', 'hk2', 'cuốinăm', 'cn', 'ckii', 'cuốikỳii', 'cuốikìii'])
+            # --- CẬP NHẬT TỪ KHÓA ĐẦY ĐỦ ĐỂ BẮT CHUẨN CÁC KÌ (Ví dụ: "giữahọckỳii") ---
+            is_ghk1 = any(kw in header_clean for kw in ['ghk1', 'gk1', 'giữahk1', 'giữahọckì1', 'giữahọckỳ1', 'giữakì1', 'giữakỳ1', 'gki', 'giữakỳi', 'giữakìi', 'giữahọckỳi', 'giữahọckìi']) or ('ghki' in header_clean and 'ghkii' not in header_clean)
+            is_chk1 = any(kw in header_clean for kw in ['chk1', 'ck1', 'cuốihk1', 'cuốihọckì1', 'cuốihọckỳ1', 'cuốikì1', 'cuốikỳ1', 'hk1', 'cki', 'cuốikỳi', 'cuốikìi', 'cuốihọckỳi', 'cuốihọckìi']) or ('chki' in header_clean and 'chkii' not in header_clean) or ('hki' in header_clean and 'hkii' not in header_clean)
+            is_ghk2 = any(kw in header_clean for kw in ['ghkii', 'ghk2', 'gk2', 'giữahk2', 'giữahọckì2', 'giữahọckỳ2', 'giữakì2', 'giữakỳ2', 'gkii', 'giữakỳii', 'giữakìii', 'giữahọckỳii', 'giữahọckìii'])
+            is_chk2 = any(kw in header_clean for kw in ['chkii', 'chk2', 'ck2', 'cuốihk2', 'cuốihọckì2', 'cuốihọckỳ2', 'cuốikì2', 'cuốikỳ2', 'hkii', 'hk2', 'cuốinăm', 'cn', 'ckii', 'cuốikỳii', 'cuốikìii', 'cuốihọckỳii', 'cuốihọckìii'])
 
             is_my_term = False
             is_other_term = False
@@ -516,10 +516,8 @@ def phan_tich_file(file, thoi_diem):
                 is_my_term = is_chk2
                 is_other_term = is_ghk1 or is_chk1 or is_ghk2
                 
-            # Cốt lõi: Nếu cột này chứa tiêu đề của kì học KHÁC (mà không phải kì mình đang chọn), bỏ qua ngay lập tức!
             if is_other_term and not is_my_term:
                 continue
-            # --------------------------------------------------------
             
             if "điểm" in header_area or "đg" in header_area: diem_cands.append(j)
             if "mức" in header_area or "đạt được" in header_area or "ghk" in header_area or "chk" in header_area or "đánh giá" in header_area or "kết quả" in header_area: muc_cands.append(j)
@@ -557,10 +555,10 @@ def phan_tich_file(file, thoi_diem):
                     header_area = " ".join([str(df.iloc[r, j]).lower() for r in range(max(0, h_row - 2), s_row)])
                     header_clean = header_area.replace(" ", "").replace("_", "").replace("-", "")
                     
-                    is_ghk1 = any(kw in header_clean for kw in ['ghk1', 'gk1', 'giữahk1', 'giữakì1', 'giữakỳ1', 'gki']) or ('ghki' in header_clean and 'ghkii' not in header_clean)
-                    is_chk1 = any(kw in header_clean for kw in ['chk1', 'ck1', 'cuốihk1', 'cuốikì1', 'cuốikỳ1', 'hk1', 'cki']) or ('chki' in header_clean and 'chkii' not in header_clean) or ('hki' in header_clean and 'hkii' not in header_clean)
-                    is_ghk2 = any(kw in header_clean for kw in ['ghkii', 'ghk2', 'gk2', 'giữahk2', 'giữakì2', 'giữakỳ2', 'gkii'])
-                    is_chk2 = any(kw in header_clean for kw in ['chkii', 'chk2', 'ck2', 'cuốihk2', 'cuốikì2', 'cuốikỳ2', 'hkii', 'hk2', 'cuốinăm', 'cn', 'ckii'])
+                    is_ghk1 = any(kw in header_clean for kw in ['ghk1', 'gk1', 'giữahk1', 'giữahọckì1', 'giữahọckỳ1', 'giữakì1', 'giữakỳ1', 'gki', 'giữakỳi', 'giữakìi', 'giữahọckỳi', 'giữahọckìi']) or ('ghki' in header_clean and 'ghkii' not in header_clean)
+                    is_chk1 = any(kw in header_clean for kw in ['chk1', 'ck1', 'cuốihk1', 'cuốihọckì1', 'cuốihọckỳ1', 'cuốikì1', 'cuốikỳ1', 'hk1', 'cki', 'cuốikỳi', 'cuốikìi', 'cuốihọckỳi', 'cuốihọckìi']) or ('chki' in header_clean and 'chkii' not in header_clean) or ('hki' in header_clean and 'hkii' not in header_clean)
+                    is_ghk2 = any(kw in header_clean for kw in ['ghkii', 'ghk2', 'gk2', 'giữahk2', 'giữahọckì2', 'giữahọckỳ2', 'giữakì2', 'giữakỳ2', 'gkii', 'giữakỳii', 'giữakìii', 'giữahọckỳii', 'giữahọckìii'])
+                    is_chk2 = any(kw in header_clean for kw in ['chkii', 'chk2', 'ck2', 'cuốihk2', 'cuốihọckì2', 'cuốihọckỳ2', 'cuốikì2', 'cuốikỳ2', 'hkii', 'hk2', 'cuốinăm', 'cn', 'ckii', 'cuốikỳii', 'cuốikìii', 'cuốihọckỳii', 'cuốihọckìii'])
                     
                     is_other_term = False
                     if thoi_diem == "Giữa học kì I": is_other_term = is_chk1 or is_ghk2 or is_chk2
@@ -629,7 +627,6 @@ if "ket_qua_nhan_xet" not in st.session_state:
 # --- 5. NỘI DUNG CHÍNH ---
 
 if f_hs:
-    # --- TRUYỀN 'thoi_diem' VÀO HÀM PHÂN TÍCH FILE ---
     df_raw, n_col, d_col, m_col, c_col, s_row, nl_col, pc_col, detailed_cols = phan_tich_file(f_hs, thoi_diem)
     
     if df_raw is not None:
@@ -646,18 +643,24 @@ if f_hs:
                         nl_vals = [str(df_raw.iloc[i, detailed_cols[f"nl{k}"]]).strip().upper() for k in range(1, 11)]
                         pc_vals = [str(df_raw.iloc[i, detailed_cols[f"pc{k}"]]).strip().upper() for k in range(1, 6)]
                         
-                        nl_vals = [v if v not in ['NAN', 'NONE', ''] else 'Đ' for v in nl_vals]
-                        pc_vals = [v if v not in ['NAN', 'NONE', ''] else 'Đ' for v in pc_vals]
+                        # Không tự động gán 'Đ' nếu trống hoàn toàn, để trống luôn cho chuyên nghiệp
+                        if all(v in ['NAN', 'NONE', ''] for v in nl_vals + pc_vals):
+                            nl_vals = [''] * 10
+                            pc_vals = [''] * 5
+                        else:
+                            nl_vals = [v if v not in ['NAN', 'NONE', ''] else 'Đ' for v in nl_vals]
+                            pc_vals = [v if v not in ['NAN', 'NONE', ''] else 'Đ' for v in pc_vals]
                         
                         row_data = {"Họ và tên": ten}
                         for k in range(1, 11): row_data[f"NL{k}"] = nl_vals[k-1]
                         for k in range(1, 6): row_data[f"PC{k}"] = pc_vals[k-1]
-                        
                         row_data["Nhận xét"] = ""
                         data_list.append(row_data)
                     else:
-                        nl_v = str(df_raw.iloc[i, nl_col]).strip().upper() if nl_col != -1 else "Đ"
-                        pc_v = str(df_raw.iloc[i, pc_col]).strip().upper() if pc_col != -1 else "Đ"
+                        nl_v = str(df_raw.iloc[i, nl_col]).strip().upper() if nl_col != -1 else ""
+                        pc_v = str(df_raw.iloc[i, pc_col]).strip().upper() if pc_col != -1 else ""
+                        if nl_v in ['NAN', 'NONE']: nl_v = ""
+                        if pc_v in ['NAN', 'NONE']: pc_v = ""
                         data_list.append({"Họ và tên": ten, "Năng lực": nl_v, "Phẩm chất": pc_v, "Nhận xét": ""})
                 else:
                     v_diem = str(df_raw.iloc[i, d_col]).strip() if d_col != -1 else ""
@@ -774,70 +777,89 @@ if f_hs:
                 huong_mo_dau = random.choice(mang_cau_truc_mo_bai)
                 lenh_chong_lap = f"CHỐNG LẶP CẤU TRÚC (QUAN TRỌNG NHẤT): Bắt buộc {huong_mo_dau}. TUYỆT ĐỐI KHÔNG DÙNG CHUNG 1 KIỂU MỞ CÂU CHO TẤT CẢ. Không được luôn luôn bắt đầu bằng đại từ xưng hô, hãy linh hoạt đưa đại từ (nếu có) vào giữa hoặc cuối câu để câu văn tự nhiên. CHỐNG LẶP CÂU CHỐT: TUYỆT ĐỐI KHÔNG lặp đi lặp lại cụm từ 'cần rèn luyện thêm' ở cuối các câu nhận xét. Hãy thay thế bằng đa dạng các lời khuyên chuyên môn khác (Ví dụ: cần chú ý ôn tập kỹ lưỡng, cần nỗ lực khắc phục lỗ hổng kiến thức, nên dành thêm thời gian thực hành, cần nghiêm túc trau dồi mỗi ngày...)."
 
-                d_val = str(row.get("Điểm", "")).strip()
-                m_val = str(row.get("Mức", "")).strip()
-                if d_val.upper() in ['NAN', 'NONE']: d_val = ""
-                if m_val.upper() in ['NAN', 'NONE']: m_val = ""
+                # KIỂM TRA HỌC SINH CÓ DỮ LIỆU ĐỂ NHẬN XÉT KHÔNG
+                is_empty_row = False
                 
-                mdd = "H_TrungBinh"
-                if d_val.replace('.', '', 1).isdigit():
-                    diem_so = float(d_val)
-                    if diem_so >= 9: mdd = "T"
-                    elif diem_so >= 7: mdd = "H_Kha"
-                    elif diem_so >= 5: mdd = "H_TrungBinh"
-                    else: mdd = "C"
-                elif m_val.replace('.', '', 1).isdigit():
-                    diem_so = float(m_val)
-                    if diem_so >= 9: mdd = "T"
-                    elif diem_so >= 7: mdd = "H_Kha"
-                    elif diem_so >= 5: mdd = "H_TrungBinh"
-                    else: mdd = "C"
-                else:
-                    chk_val = m_val if m_val != "" else d_val
-                    chk_val = chk_val.upper()
-                    if chk_val in ["T", "HTT", "TỐT", "A", "A+"]: mdd = "T"
-                    elif chk_val in ["K", "KHÁ", "B", "B+"]: mdd = "H_Kha"
-                    elif chk_val in ["Đ", "HT", "ĐẠT"]: mdd = "H_TrungBinh"
-                    elif chk_val in ["C", "CHT", "CHƯA ĐẠT", "D", "E"]: mdd = "C"
-
                 if loai_nx == "PC-NL":
                     if has_detailed_pcnl:
-                        nl_str_detail = f"Tự học:{row.get('NL1', 'Đ')}, G.Tiếp:{row.get('NL2', 'Đ')}, GQVĐ:{row.get('NL3', 'Đ')}, N.Ngữ:{row.get('NL4', 'Đ')}, Toán:{row.get('NL5', 'Đ')}, KH:{row.get('NL6', 'Đ')}, CN:{row.get('NL7', 'Đ')}, Tin:{row.get('NL8', 'Đ')}, T.Mỹ:{row.get('NL9', 'Đ')}, T.Chất:{row.get('NL10', 'Đ')}"
-                        pc_str_detail = f"Yêu nước:{row.get('PC1', 'Đ')}, Nhân ái:{row.get('PC2', 'Đ')}, Chăm chỉ:{row.get('PC3', 'Đ')}, Trung thực:{row.get('PC4', 'Đ')}, Trách nhiệm:{row.get('PC5', 'Đ')}"
-                        
-                        if api_key:
-                            try:
-                                prompt = f"Mã:{salt}. Đóng vai chuyên gia giáo dục. Nhận xét theo TT27 thời điểm {thoi_diem}. Chi tiết: {nl_str_detail}. {pc_str_detail}. YÊU CẦU PHONG CÁCH: {style_prompt}. BẮT BUỘC NHẬN XÉT ĐỦ 3 PHẦN THEO THỨ TỰ: 1. Năng lực đặc thù -> 2. Năng lực chung -> 3. Phẩm chất. {lenh_xung_ho} {lenh_cam_cam_xuc} Nếu có C bắt buộc bắt đầu 'Chưa hoàn thành...'. Khen điểm T (Tốt), nhắc nhở khắc phục điểm C (Cần cố gắng).\n{lenh_do_dai}\n{lenh_chong_lap}\nLưu ý: Viết thành một đoạn văn trôi chảy, không gạch đầu dòng."
-                                res = model.generate_content(prompt); nx_text = res.text.strip()
-                            except: nx_text = ""
-                        if not nx_text:
-                            nx_text = sinh_nhan_xet_offline("PC-NL", mdd, "", style_key, xung_ho, bat_xung_ho, mon, thoi_diem)
+                        raw_nls = [str(row.get(f"NL{k}", "")).strip() for k in range(1, 11)]
+                        raw_pcs = [str(row.get(f"PC{k}", "")).strip() for k in range(1, 6)]
+                        if all(v == "" for v in raw_nls + raw_pcs): is_empty_row = True
                     else:
-                        nl_s = str(row.get("Năng lực", "Đ")).upper()
-                        pc_s = str(row.get("Phẩm chất", "Đ")).upper()
-                        
+                        raw_nl = str(row.get("Năng lực", "")).strip()
+                        raw_pc = str(row.get("Phẩm chất", "")).strip()
+                        if raw_nl == "" and raw_pc == "": is_empty_row = True
+                else:
+                    d_val = str(row.get("Điểm", "")).strip()
+                    m_val = str(row.get("Mức", "")).strip()
+                    if d_val == "" and m_val == "": is_empty_row = True
+
+                # Nếu học sinh chưa được nhập điểm -> Để trống nhận xét
+                if is_empty_row:
+                    nx_text = ""
+                else:
+                    # Nếu có dữ liệu thì tiến hành sinh nhận xét
+                    d_val = str(row.get("Điểm", "")).strip()
+                    m_val = str(row.get("Mức", "")).strip()
+                    mdd = "H_TrungBinh"
+                    if d_val.replace('.', '', 1).isdigit():
+                        diem_so = float(d_val)
+                        if diem_so >= 9: mdd = "T"
+                        elif diem_so >= 7: mdd = "H_Kha"
+                        elif diem_so >= 5: mdd = "H_TrungBinh"
+                        else: mdd = "C"
+                    elif m_val.replace('.', '', 1).isdigit():
+                        diem_so = float(m_val)
+                        if diem_so >= 9: mdd = "T"
+                        elif diem_so >= 7: mdd = "H_Kha"
+                        elif diem_so >= 5: mdd = "H_TrungBinh"
+                        else: mdd = "C"
+                    else:
+                        chk_val = m_val if m_val != "" else d_val
+                        chk_val = chk_val.upper()
+                        if chk_val in ["T", "HTT", "TỐT", "A", "A+"]: mdd = "T"
+                        elif chk_val in ["K", "KHÁ", "B", "B+"]: mdd = "H_Kha"
+                        elif chk_val in ["Đ", "HT", "ĐẠT"]: mdd = "H_TrungBinh"
+                        elif chk_val in ["C", "CHT", "CHƯA ĐẠT", "D", "E"]: mdd = "C"
+
+                    if loai_nx == "PC-NL":
+                        if has_detailed_pcnl:
+                            nl_str_detail = f"Tự học:{row.get('NL1', 'Đ')}, G.Tiếp:{row.get('NL2', 'Đ')}, GQVĐ:{row.get('NL3', 'Đ')}, N.Ngữ:{row.get('NL4', 'Đ')}, Toán:{row.get('NL5', 'Đ')}, KH:{row.get('NL6', 'Đ')}, CN:{row.get('NL7', 'Đ')}, Tin:{row.get('NL8', 'Đ')}, T.Mỹ:{row.get('NL9', 'Đ')}, T.Chất:{row.get('NL10', 'Đ')}"
+                            pc_str_detail = f"Yêu nước:{row.get('PC1', 'Đ')}, Nhân ái:{row.get('PC2', 'Đ')}, Chăm chỉ:{row.get('PC3', 'Đ')}, Trung thực:{row.get('PC4', 'Đ')}, Trách nhiệm:{row.get('PC5', 'Đ')}"
+                            
+                            if api_key:
+                                try:
+                                    prompt = f"Mã:{salt}. Đóng vai chuyên gia giáo dục. Nhận xét theo TT27 thời điểm {thoi_diem}. Chi tiết: {nl_str_detail}. {pc_str_detail}. YÊU CẦU PHONG CÁCH: {style_prompt}. BẮT BUỘC NHẬN XÉT ĐỦ 3 PHẦN THEO THỨ TỰ: 1. Năng lực đặc thù -> 2. Năng lực chung -> 3. Phẩm chất. {lenh_xung_ho} {lenh_cam_cam_xuc} Nếu có C bắt buộc bắt đầu 'Chưa hoàn thành...'. Khen điểm T (Tốt), nhắc nhở khắc phục điểm C (Cần cố gắng).\n{lenh_do_dai}\n{lenh_chong_lap}\nLưu ý: Viết thành một đoạn văn trôi chảy, không gạch đầu dòng."
+                                    res = model.generate_content(prompt); nx_text = res.text.strip()
+                                except: nx_text = ""
+                            if not nx_text:
+                                nx_text = sinh_nhan_xet_offline("PC-NL", mdd, "", style_key, xung_ho, bat_xung_ho, mon, thoi_diem)
+                        else:
+                            nl_s = str(row.get("Năng lực", "Đ")).upper()
+                            pc_s = str(row.get("Phẩm chất", "Đ")).upper()
+                            
+                            if api_key:
+                                try:
+                                    prompt = f"Mã:{salt}. Đóng vai giáo viên/chuyên gia. Viết 1 nhận xét học bạ Năng lực({nl_s}) và Phẩm chất({pc_s}) theo TT27 vào {thoi_diem}.\nPHONG CÁCH: {style_prompt}.\nBẮT BUỘC 3 PHẦN: Đặc thù -> Chung -> Phẩm chất.\n{lenh_xung_ho}\n{lenh_cam_cam_xuc}\nNếu có C bắt buộc bắt đầu 'Chưa hoàn thành...'.\n{lenh_do_dai}\n{lenh_chong_lap}\nLưu ý: Viết thành đoạn văn trôi chảy."
+                                    res = model.generate_content(prompt); nx_text = res.text.strip()
+                                except: nx_text = ""
+                                
+                            if not nx_text:
+                                nx_text = sinh_nhan_xet_offline("PC-NL", mdd, "", style_key, xung_ho, bat_xung_ho, mon, thoi_diem)
+                    else:
+                        mach_kt_list = lay_mach_kien_thuc(mon, khoi, thoi_diem)
+                        focus_kt = random.choice(mach_kt_list)
+
                         if api_key:
                             try:
-                                prompt = f"Mã:{salt}. Đóng vai giáo viên/chuyên gia. Viết 1 nhận xét học bạ Năng lực({nl_s}) và Phẩm chất({pc_s}) theo TT27 vào {thoi_diem}.\nPHONG CÁCH: {style_prompt}.\nBẮT BUỘC 3 PHẦN: Đặc thù -> Chung -> Phẩm chất.\n{lenh_xung_ho}\n{lenh_cam_cam_xuc}\nNếu có C bắt buộc bắt đầu 'Chưa hoàn thành...'.\n{lenh_do_dai}\n{lenh_chong_lap}\nLưu ý: Viết thành đoạn văn trôi chảy."
+                                k_q = f"Điểm: {d_val} " if d_val else ""
+                                k_q += f"Mức: {m_val}" if m_val else ""
+                                prompt = f"Mã:{salt}. Đóng vai chuyên gia giáo dục. Viết 1 nhận xét học bạ môn {mon} lớp {khoi.split(' ')[1]} vào {thoi_diem}.\nKết quả: {k_q.strip()}.\nMẠCH KIẾN THỨC BẮT BUỘC (Chỉ nhận xét kiến thức này, tuyệt đối không bịa thêm kiến thức của học kì khác): '{focus_kt}'.\nPHONG CÁCH: {style_prompt}.\n{lenh_xung_ho}\n{lenh_cam_cam_xuc}\n{lenh_mon_dac_thu}\nNếu <5 hoặc C bắt buộc bắt đầu 'Chưa hoàn thành...'.\n{lenh_do_dai}\n{lenh_chong_lap}\nDiễn đạt mạch lạc, tự nhiên như giáo viên tiểu học thực thụ."
                                 res = model.generate_content(prompt); nx_text = res.text.strip()
                             except: nx_text = ""
-                            
+                        
                         if not nx_text:
-                            nx_text = sinh_nhan_xet_offline("PC-NL", mdd, "", style_key, xung_ho, bat_xung_ho, mon, thoi_diem)
-                else:
-                    mach_kt_list = lay_mach_kien_thuc(mon, khoi, thoi_diem)
-                    focus_kt = random.choice(mach_kt_list)
-
-                    if api_key:
-                        try:
-                            k_q = f"Điểm: {d_val} " if d_val else ""
-                            k_q += f"Mức: {m_val}" if m_val else ""
-                            prompt = f"Mã:{salt}. Đóng vai chuyên gia giáo dục. Viết 1 nhận xét học bạ môn {mon} lớp {khoi.split(' ')[1]} vào {thoi_diem}.\nKết quả: {k_q.strip()}.\nMẠCH KIẾN THỨC BẮT BUỘC (Chỉ nhận xét kiến thức này, tuyệt đối không bịa thêm kiến thức của học kì khác): '{focus_kt}'.\nPHONG CÁCH: {style_prompt}.\n{lenh_xung_ho}\n{lenh_cam_cam_xuc}\n{lenh_mon_dac_thu}\nNếu <5 hoặc C bắt buộc bắt đầu 'Chưa hoàn thành...'.\n{lenh_do_dai}\n{lenh_chong_lap}\nDiễn đạt mạch lạc, tự nhiên như giáo viên tiểu học thực thụ."
-                            res = model.generate_content(prompt); nx_text = res.text.strip()
-                        except: nx_text = ""
-                    
-                    if not nx_text:
-                        nx_text = sinh_nhan_xet_offline("Môn học", mdd, focus_kt, style_key, xung_ho, bat_xung_ho, mon, thoi_diem)
+                            nx_text = sinh_nhan_xet_offline("Môn học", mdd, focus_kt, style_key, xung_ho, bat_xung_ho, mon, thoi_diem)
 
                 df_view.at[idx, "Nhận xét"] = nx_text
                 df_raw.iloc[real_idx, c_col] = nx_text
