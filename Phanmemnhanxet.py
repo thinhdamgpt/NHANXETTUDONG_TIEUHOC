@@ -297,7 +297,7 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
                 elif mon == "Âm nhạc": return f"{prefix}kỹ năng {focus_kt}. Thể hiện năng khiếu âm nhạc xuất sắc. Hát đúng giai điệu, thuộc lời ca và biết kết hợp vận động."
                 elif mon == "Mĩ thuật": return f"{prefix}nội dung {focus_kt}. Năng khiếu tạo hình rất tốt. Thể hiện sự sáng tạo cao trong bố cục, màu sắc. Hoàn thành sản phẩm vô cùng đẹp mắt."
                 elif mon == "GDTC": return f"{prefix}nội dung {focus_kt}. Thể lực rất tốt, thực hiện thành thạo các động tác. Tích cực, năng nổ trong mọi hoạt động vận động."
-                elif mon == "Hoạt động trải nghiệm": return f"{prefix}nội dung {focus_kt}. Thể hiện sự tự tin, chủ động và sáng tạo trong các hoạt động phong trào. Kỹ năng sống rất xuất sắc."
+                elif mon == "Hoạt động trải nghiệm": return f"{prefix}nội dung {focus_kt}. Thể hiện sự tự tự tin, chủ động và sáng tạo trong các hoạt động phong trào. Kỹ năng sống rất xuất sắc."
                 else: return f"{prefix}nội dung {focus_kt}. Vận dụng vô cùng linh hoạt kiến thức vào thực tiễn, kĩ năng thực hành thành thạo và tư duy rất nhạy bén."
             
             elif mdd == "H_Kha":
@@ -846,7 +846,7 @@ if f_hs:
                 tab_place.dataframe(df_view, use_container_width=True, height=450, column_config=config)
                 bar.progress((idx + 1) / len(df_view))
                 status.text(f"✔ Đang hoàn thiện: {ten_hs}")
-                time.sleep(0.5 if api_key else 0.01)
+                time.sleep(1.0 if api_key else 0.01)
 
             st.balloons()
             status.success(f"✅ Hoàn thành xuất sắc bộ học bạ môn {mon}!")
@@ -854,8 +854,8 @@ if f_hs:
             if st.session_state.ket_qua_nhan_xet:
                 st.markdown("### 📋 KẾT QUẢ COPY NHANH (DÁN TRỰC TIẾP VÀO EXCEL)")
                 copy_text = "\n".join(st.session_state.ket_qua_nhan_xet)
-                st.markdown(f'<div class="copy-area">{copy_text}</div>', unsafe_allow_html=True)
-                st.info("💡 Mẹo: Bôi đen vùng văn bản trên, ấn Ctrl+C. Sau đó mở file Excel chính của thầy và ấn Ctrl+V vào ô đầu tiên của cột Nhận xét.")
+                st.text_area("Bấm chuột vào khung dưới đây, ấn Ctrl+A để chọn tất cả, rồi ấn Ctrl+C để Copy:", value=copy_text, height=350)
+                st.warning("🚨 **LỖI DÁN 1 DÒNG DÀI NGOẰNG VÀ CÁCH KHẮC PHỤC:**\nNguyên nhân là do thầy/cô đã click đúp (nhấn chuột 2 lần) vào ô Excel khiến con trỏ nhấp nháy bên trong ô.\n\n👉 **CÁCH LÀM ĐÚNG:** Chỉ **CLICK CHUỘT 1 LẦN DUY NHẤT** vào ô đầu tiên (sao cho ô đó hiện viền màu xanh, TUYỆT ĐỐI KHÔNG có con trỏ nháy nháy bên trong). Sau đó ấn **Ctrl + V**, Excel sẽ tự động rải đều mỗi em 1 dòng!")
 
             out = io.BytesIO()
             with pd.ExcelWriter(out, engine='openpyxl') as writer:
