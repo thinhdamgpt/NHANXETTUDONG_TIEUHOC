@@ -257,7 +257,7 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
              "H_TrungBinh": {
                  "Ngắn gọn": ["Có tham gia các hoạt động giáo dục, cần mạnh dạn và tự tin hơn.", "Mức độ hoàn thành nội dung trải nghiệm cơ bản."],
                  "Gần gũi": [cap_first(f"{xh}lưu ý cần mạnh dạn tham gia tích cực hơn trong các hoạt động phong trào.")],
-                 "Khích lệ": [f"Cần tự tin thể hiện bản thân trong các hoạt động trải nghiệm nhiều hơn nữa."],
+                 "Khích lệ": [f"Cần tự tự tin thể hiện bản thân trong các hoạt động trải nghiệm nhiều hơn nữa."],
                  "Đầy đủ": ["Đạt mức cơ bản trong các tiết hoạt động giáo dục. Đã tham gia cùng tập thể nhưng còn rụt rè, chưa mạnh dạn và thiếu tính sáng tạo. Cần tích cực và năng nổ hơn trong phong trào chung."]
              },
              "C": {
@@ -457,7 +457,7 @@ def check_col_has_data(df, col_idx, start_row, check_type="level"):
         val = str(df.iloc[r, col_idx]).strip().upper()
         if val in ['NAN', 'NONE', '']: continue
         if check_type == "score" and val.replace('.','',1).isdigit(): return True
-        if check_type == "level" and val in ['T', 'Đ', 'C', 'HTT', 'HT', 'CHT', 'H']: return True
+        if check_type == "level" and val in ['T', 'Đ', 'C', 'HTT', 'HT', 'CHT', 'H', 'K']: return True
     return False
 
 # --- 3. HÀM PHÂN TÍCH FILE THÔNG MINH (TRÍ NHỚ NGỮ CẢNH HỌC KÌ) ---
@@ -517,17 +517,20 @@ def phan_tich_file(file, thoi_diem):
             
             # 3. PHÂN LOẠI CỘT CHO KÌ HIỆN TẠI
             is_diem = "điểm" in header_area or "đg" in header_area
-            is_muc = "mức" in header_area or "đạt được" in header_area or "ghk" in header_area or "chk" in header_area or "đánh giá" in header_area or "kết quả" in header_area
+            is_muc = "mức" in header_area or "đạt được" in header_area or "đánh giá" in header_area or "kết quả" in header_area
             is_nx = "nhận xét" in header_area or "lời phê" in header_area or "nx" in header_area
             
-            if is_diem: 
-                diem_cands.append(j)
-                if is_my_term: explicit_diem_cands.append(j)
-            if is_muc: 
-                muc_cands.append(j)
-                if is_my_term: explicit_muc_cands.append(j)
-            if is_nx: 
+            # Tránh cột Nhận Xét bị hiểu nhầm thành cột Điểm/Mức
+            if is_nx and not is_muc and not is_diem:
                 c_cands.append(j)
+            else:
+                if is_nx: c_cands.append(j)
+                if is_diem: 
+                    diem_cands.append(j)
+                    if is_my_term: explicit_diem_cands.append(j)
+                if is_muc: 
+                    muc_cands.append(j)
+                    if is_my_term: explicit_muc_cands.append(j)
             
             if "năng lực" in header_area and ("chung" in header_area or "đặc thù" in header_area) and nl_col == -1: nl_col = j
             if "phẩm chất" in header_area and pc_col == -1: pc_col = j
@@ -540,20 +543,30 @@ def phan_tich_file(file, thoi_diem):
         # --- CHỐT CỘT ĐIỂM/MỨC CHÍNH XÁC ---
         diem_col, muc_col = -1, -1
         
-        # Nếu đã tìm thấy đích danh cột của kì này -> Chốt luôn, KHÔNG cần test xem có dữ liệu không.
+        def get_best_col(cands, check_type):
+            if not cands: return -1
+            best_col = cands[-1]
+            for j in reversed(cands):
+                if check_col_has_data(df, j, s_row, check_type): 
+                    return j
+            return best_col
+
         if explicit_diem_cands:
-            diem_col = explicit_diem_cands[-1]
+            diem_col = get_best_col(explicit_diem_cands, "score")
         elif diem_cands:
-            diem_col = diem_cands[-1]
-            for j in reversed(diem_cands):
-                if check_col_has_data(df, j, s_row, "score"): diem_col = j; break
+            diem_col = get_best_col(diem_cands, "score")
                 
         if explicit_muc_cands:
-            muc_col = explicit_muc_cands[-1]
+            muc_col = get_best_col(explicit_muc_cands, "level")
         elif muc_cands:
-            muc_col = muc_cands[-1]
-            for j in reversed(muc_cands):
-                if check_col_has_data(df, j, s_row, "level"): muc_col = j; break
+            muc_col = get_best_col(muc_cands, "level")
+            
+        # Giải quyết xung đột nếu Mức và Điểm cùng trỏ vào 1 cột do từ khóa trùng lặp
+        if diem_col == muc_col and diem_col != -1:
+            if check_col_has_data(df, diem_col, s_row, "score"):
+                muc_col = -1
+            else:
+                diem_col = -1
                 
         detailed_cols = {}
         for k, j_list in detailed_cands.items():
@@ -585,7 +598,7 @@ def phan_tich_file(file, thoi_diem):
                     
                     cell_val = str(df.iloc[s_row, j]).strip().upper()
                     if diem_col == -1 and (cell_val.replace('.','',1).isdigit()): diem_col = j
-                    elif muc_col == -1 and cell_val in ['T', 'Đ', 'C', 'HTT', 'HT', 'CHT', 'H']: muc_col = j
+                    elif muc_col == -1 and cell_val in ['T', 'Đ', 'C', 'HTT', 'HT', 'CHT', 'H', 'K']: muc_col = j
                 
         # --- ĐỒNG BỘ CỘT NHẬN XÉT VỚI KHỐI DỮ LIỆU ĐƯỢC CHỌN ---
         ref_cols = []
@@ -882,7 +895,7 @@ if f_hs:
                 tab_place.dataframe(df_view, use_container_width=True, height=450, column_config=config)
                 bar.progress((idx + 1) / len(df_view))
                 status.text(f"✔ Đang hoàn thiện: {ten_hs}")
-                time.sleep(1.5 if api_key else 0.01)
+                time.sleep(1.0 if api_key else 0.01)
 
             st.balloons()
             status.success(f"✅ Hoàn thành xuất sắc bộ học bạ môn {mon}!")
