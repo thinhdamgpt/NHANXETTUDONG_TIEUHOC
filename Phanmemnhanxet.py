@@ -9,68 +9,18 @@ import uuid
 # --- 1. MA TRẬN PHÂN PHỐI CHƯƠNG TRÌNH GDPT 2018 ĐƯỢC CHIA CHI TIẾT THEO KỲ HỌC ---
 PHAN_PHOI_CHUONG_TRINH = {
     "Tiếng Việt": {
-        "Khối 1": {
-            "Giữa học kì I": ["âm và chữ cái", "đọc và ghép các vần", "cầm bút và viết nét cơ bản"],
-            "Cuối học kì I": ["đọc trơn từ và câu ngắn", "viết đúng các vần khó", "nghe hiểu và trả lời câu hỏi"],
-            "Giữa học kì II": ["đọc trơn đoạn văn ngắn", "tô chữ hoa và viết đúng ô ly", "đọc thành tiếng rõ ràng"],
-            "Cuối học kì II": ["kiến thức toàn chương trình Tiếng Việt", "kỹ năng đọc hiểu văn bản", "năng lực viết chính tả và kể chuyện"]
-        },
-        "Khối 2": {
-            "Giữa học kì I": ["đọc ngắt nghỉ đúng dấu câu", "từ chỉ sự vật, hoạt động", "nghe viết chính tả"],
-            "Cuối học kì I": ["viết đoạn văn ngắn 4-5 câu", "mở rộng vốn từ theo chủ điểm", "kể chuyện theo tranh"],
-            "Giữa học kì II": ["đọc hiểu và trả lời câu hỏi chi tiết", "từ chỉ đặc điểm", "viết câu chuẩn ngữ pháp"],
-            "Cuối học kì II": ["kiến thức toàn chương trình Tiếng Việt", "năng lực đọc hiểu và tóm tắt", "kỹ năng viết đoạn văn miêu tả"]
-        },
-        "Khối 3": {
-            "Giữa học kì I": ["đọc diễn cảm", "nhận biết hình ảnh so sánh", "viết đoạn văn tả sự vật"],
-            "Cuối học kì I": ["viết thư hoặc đoạn văn kể chuyện", "từ ngữ về cộng đồng, quê hương", "đọc hiểu văn bản truyện"],
-            "Giữa học kì II": ["nhận biết hình ảnh nhân hóa", "đọc hiểu văn bản thông tin", "mở rộng vốn từ sáng tạo"],
-            "Cuối học kì II": ["kiến thức toàn chương trình Tiếng Việt", "năng lực đọc hiểu đa dạng văn bản", "kỹ năng viết văn miêu tả chi tiết"]
-        },
-        "Khối 4": {
-            "Giữa học kì I": ["đọc hiểu văn bản sâu", "nhận biết danh từ, động từ", "viết bài văn kể chuyện", "cấu tạo của tiếng"],
-            "Cuối học kì I": ["viết bài văn miêu tả đồ vật", "hiểu và vận dụng biện pháp tu từ", "đọc diễn cảm bài thơ", "nhận biết câu hỏi, câu kể"],
-            "Giữa học kì II": ["đọc diễn cảm và tóm tắt bài", "nhận biết tính từ, câu khiến", "viết bài văn miêu tả cây cối", "xác định chủ ngữ, vị ngữ"],
-            "Cuối học kì II": ["kiến thức toàn chương trình Tiếng Việt", "năng lực đọc diễn cảm và cảm thụ", "kỹ năng viết bài văn hoàn chỉnh"]
-        },
-        "Khối 5": {
-            "Giữa học kì I": ["đọc diễn cảm văn bản dài", "từ đồng nghĩa, từ trái nghĩa", "viết bài văn tả cảnh", "từ nhiều nghĩa"],
-            "Cuối học kì I": ["sử dụng đại từ, quan hệ từ", "viết đơn từ", "đọc hiểu văn bản đa phương thức", "viết văn tả người"],
-            "Giữa học kì II": ["hiểu ý nghĩa biện pháp nghệ thuật", "câu ghép và cách nối các vế câu", "viết bài văn tả đồ vật"],
-            "Cuối học kì II": ["kiến thức toàn chương trình Tiếng Việt", "năng lực cảm thụ văn học", "kỹ năng tổng kết vốn từ và liên kết câu"]
-        }
+        "Khối 1": {"Giữa học kì I": ["âm và chữ cái", "đọc và ghép các vần", "cầm bút và viết nét cơ bản"], "Cuối học kì I": ["đọc trơn từ và câu ngắn", "viết đúng các vần khó", "nghe hiểu và trả lời câu hỏi"], "Giữa học kì II": ["đọc trơn đoạn văn ngắn", "tô chữ hoa và viết đúng ô ly", "đọc thành tiếng rõ ràng"], "Cuối học kì II": ["kiến thức toàn chương trình Tiếng Việt", "kỹ năng đọc hiểu văn bản", "năng lực viết chính tả và kể chuyện"]},
+        "Khối 2": {"Giữa học kì I": ["đọc ngắt nghỉ đúng dấu câu", "từ chỉ sự vật, hoạt động", "nghe viết chính tả"], "Cuối học kì I": ["viết đoạn văn ngắn 4-5 câu", "mở rộng vốn từ theo chủ điểm", "kể chuyện theo tranh"], "Giữa học kì II": ["đọc hiểu và trả lời câu hỏi chi tiết", "từ chỉ đặc điểm", "viết câu chuẩn ngữ pháp"], "Cuối học kì II": ["kiến thức toàn chương trình Tiếng Việt", "năng lực đọc hiểu và tóm tắt", "kỹ năng viết đoạn văn miêu tả"]},
+        "Khối 3": {"Giữa học kì I": ["đọc diễn cảm", "nhận biết hình ảnh so sánh", "viết đoạn văn tả sự vật"], "Cuối học kì I": ["viết thư hoặc đoạn văn kể chuyện", "từ ngữ về cộng đồng, quê hương", "đọc hiểu văn bản truyện"], "Giữa học kì II": ["nhận biết hình ảnh nhân hóa", "đọc hiểu văn bản thông tin", "mở rộng vốn từ sáng tạo"], "Cuối học kì II": ["kiến thức toàn chương trình Tiếng Việt", "năng lực đọc hiểu đa dạng văn bản", "kỹ năng viết văn miêu tả chi tiết"]},
+        "Khối 4": {"Giữa học kì I": ["đọc hiểu văn bản sâu", "nhận biết danh từ, động từ", "viết bài văn kể chuyện", "cấu tạo của tiếng"], "Cuối học kì I": ["viết bài văn miêu tả đồ vật", "hiểu và vận dụng biện pháp tu từ", "đọc diễn cảm bài thơ", "nhận biết câu hỏi, câu kể"], "Giữa học kì II": ["đọc diễn cảm và tóm tắt bài", "nhận biết tính từ, câu khiến", "viết bài văn miêu tả cây cối", "xác định chủ ngữ, vị ngữ"], "Cuối học kì II": ["kiến thức toàn chương trình Tiếng Việt", "năng lực đọc diễn cảm và cảm thụ", "kỹ năng viết bài văn hoàn chỉnh"]},
+        "Khối 5": {"Giữa học kì I": ["đọc diễn cảm văn bản dài", "từ đồng nghĩa, từ trái nghĩa", "viết bài văn tả cảnh", "từ nhiều nghĩa"], "Cuối học kì I": ["sử dụng đại từ, quan hệ từ", "viết đơn từ", "đọc hiểu văn bản đa phương thức", "viết văn tả người"], "Giữa học kì II": ["hiểu ý nghĩa biện pháp nghệ thuật", "câu ghép và cách nối các vế câu", "viết bài văn tả đồ vật"], "Cuối học kì II": ["kiến thức toàn chương trình Tiếng Việt", "năng lực cảm thụ văn học", "kỹ năng tổng kết vốn từ và liên kết câu"]}
     },
     "Toán": {
-        "Khối 1": {
-            "Giữa học kì I": ["các số đến 10", "so sánh số phạm vi 10", "đếm và cấu tạo số"],
-            "Cuối học kì I": ["phép cộng, trừ trong phạm vi 10", "nhận biết hình vuông, tròn, tam giác", "giải bài toán cơ bản"],
-            "Giữa học kì II": ["các số đến 100", "phép cộng trừ không nhớ phạm vi 100", "đo độ dài bằng gang tay, bước chân"],
-            "Cuối học kì II": ["kiến thức toàn chương trình Toán học", "kỹ năng thực hiện phép tính cơ bản", "năng lực giải toán có lời văn"]
-        },
-        "Khối 2": {
-            "Giữa học kì I": ["phép cộng có nhớ phạm vi 100", "bài toán nhiều hơn, ít hơn", "đơn vị đo độ dài cm, dm"],
-            "Cuối học kì I": ["phép trừ có nhớ phạm vi 100", "đơn vị đo khối lượng kg, dung tích l", "xem lịch, xem đồng hồ"],
-            "Giữa học kì II": ["bảng nhân, chia 2 và 5", "nhận biết khối trụ, khối cầu", "giải toán có lời văn"],
-            "Cuối học kì II": ["kiến thức toàn chương trình Toán học", "kỹ năng tính toán phạm vi 1000", "năng lực vận dụng đại lượng đo lường"]
-        },
-        "Khối 3": {
-            "Giữa học kì I": ["bảng nhân chia 6-9", "nhân chia số có hai chữ số", "giải toán bằng một phép tính"],
-            "Cuối học kì I": ["số trong phạm vi 10.000", "tính giá trị biểu thức", "nhận biết góc vuông, không vuông"],
-            "Giữa học kì II": ["số trong phạm vi 100.000", "tính chu vi, diện tích hình chữ nhật, hình vuông", "thống kê số liệu"],
-            "Cuối học kì II": ["kiến thức toàn chương trình Toán học", "kỹ năng thực hiện 4 phép tính", "năng lực giải toán bằng hai phép tính"]
-        },
-        "Khối 4": {
-            "Giữa học kì I": ["số có nhiều chữ số", "các phép toán với số tự nhiên", "tìm số trung bình cộng"],
-            "Cuối học kì I": ["tính chất giao hoán, kết hợp", "góc và hai đường thẳng song song, vuông góc", "chia cho số có 2 chữ số"],
-            "Giữa học kì II": ["phân số và tính chất cơ bản", "rút gọn và quy đồng phân số", "phép cộng, trừ phân số"],
-            "Cuối học kì II": ["kiến thức toàn chương trình Toán học", "kỹ năng giải toán phân số", "năng lực tư duy logic và tính toán tổng hợp"]
-        },
-        "Khối 5": {
-            "Giữa học kì I": ["khái niệm số thập phân", "phép cộng, trừ số thập phân", "giải toán về số thập phân"],
-            "Cuối học kì I": ["phép nhân, chia số thập phân", "tỉ số phần trăm", "giải toán tỉ số phần trăm"],
-            "Giữa học kì II": ["diện tích hình tam giác, hình thang", "diện tích xung quanh và toàn phần", "hình hộp chữ nhật, hình lập phương"],
-            "Cuối học kì II": ["kiến thức toàn chương trình Toán học", "năng lực giải toán chuyển động, thể tích", "kỹ năng tính toán số thập phân tổng hợp"]
-        }
+        "Khối 1": {"Giữa học kì I": ["các số đến 10", "so sánh số phạm vi 10", "đếm và cấu tạo số"], "Cuối học kì I": ["phép cộng, trừ trong phạm vi 10", "nhận biết hình vuông, tròn, tam giác", "giải bài toán cơ bản"], "Giữa học kì II": ["các số đến 100", "phép cộng trừ không nhớ phạm vi 100", "đo độ dài bằng gang tay, bước chân"], "Cuối học kì II": ["kiến thức toàn chương trình Toán học", "kỹ năng thực hiện phép tính cơ bản", "năng lực giải toán có lời văn"]},
+        "Khối 2": {"Giữa học kì I": ["phép cộng có nhớ phạm vi 100", "bài toán nhiều hơn, ít hơn", "đơn vị đo độ dài cm, dm"], "Cuối học kì I": ["phép trừ có nhớ phạm vi 100", "đơn vị đo khối lượng kg, dung tích l", "xem lịch, xem đồng hồ"], "Giữa học kì II": ["bảng nhân, chia 2 và 5", "nhận biết khối trụ, khối cầu", "giải toán có lời văn"], "Cuối học kì II": ["kiến thức toàn chương trình Toán học", "kỹ năng tính toán phạm vi 1000", "năng lực vận dụng đại lượng đo lường"]},
+        "Khối 3": {"Giữa học kì I": ["bảng nhân chia 6-9", "nhân chia số có hai chữ số", "giải toán bằng một phép tính"], "Cuối học kì I": ["số trong phạm vi 10.000", "tính giá trị biểu thức", "nhận biết góc vuông, không vuông"], "Giữa học kì II": ["số trong phạm vi 100.000", "tính chu vi, diện tích hình chữ nhật, hình vuông", "thống kê số liệu"], "Cuối học kì II": ["kiến thức toàn chương trình Toán học", "kỹ năng thực hiện 4 phép tính", "năng lực giải toán bằng hai phép tính"]},
+        "Khối 4": {"Giữa học kì I": ["số có nhiều chữ số", "các phép toán với số tự nhiên", "tìm số trung bình cộng"], "Cuối học kì I": ["tính chất giao hoán, kết hợp", "góc và hai đường thẳng song song, vuông góc", "chia cho số có 2 chữ số"], "Giữa học kì II": ["phân số và tính chất cơ bản", "rút gọn và quy đồng phân số", "phép cộng, trừ phân số"], "Cuối học kì II": ["kiến thức toàn chương trình Toán học", "kỹ năng giải toán phân số", "năng lực tư duy logic và tính toán tổng hợp"]},
+        "Khối 5": {"Giữa học kì I": ["khái niệm số thập phân", "phép cộng, trừ số thập phân", "giải toán về số thập phân"], "Cuối học kì I": ["phép nhân, chia số thập phân", "tỉ số phần trăm", "giải toán tỉ số phần trăm"], "Giữa học kì II": ["diện tích hình tam giác, hình thang", "diện tích xung quanh và toàn phần", "hình hộp chữ nhật, hình lập phương"], "Cuối học kì II": ["kiến thức toàn chương trình Toán học", "năng lực giải toán chuyển động, thể tích", "kỹ năng tính toán số thập phân tổng hợp"]}
     },
     "Tiếng Anh": {
         "Khối 1": {"Giữa học kì I": ["từ vựng chữ cái cơ bản", "nghe hiểu chào hỏi"], "Cuối học kì I": ["phát âm chữ cái", "từ vựng màu sắc, số đếm"], "Giữa học kì II": ["từ vựng chủ đề gia đình, đồ vật"], "Cuối học kì II": ["kiến thức toàn chương trình Tiếng Anh", "năng lực nghe hiểu cơ bản", "kỹ năng phát âm từ vựng quen thuộc"]},
@@ -288,9 +238,15 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
 st.set_page_config(layout="wide", page_title="Đổi mới cùng thầy Thịnh", page_icon="✨")
 
 st.markdown("""
-<div style="background: linear-gradient(135deg, #1A73E8, #34A853); padding: 20px 25px; border-radius: 12px; text-align: left; margin-bottom: 30px; box-shadow: 0 8px 16px rgba(0,0,0,0.1);">
-    <h1 style="color: white; margin: 0; font-size: 2.2rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">✨ Đổi mới cùng thầy Thịnh ✨</h1>
-    <p style="color: #e8f0fe; font-size: 1.15rem; font-style: italic; margin-top: 5px; margin-bottom: 0; font-weight: 500;">Hệ thống Nhận xét Học bạ Tự động AI - Chuẩn TT27 (Phiên bản 2026)</p>
+<div style="display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #1A73E8, #34A853); padding: 15px 25px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); flex-wrap: wrap; gap: 15px;">
+    <div style="text-align: left; min-width: 300px;">
+        <h1 style="color: white; margin: 0; font-size: 2rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">✨ Đổi mới cùng thầy Thịnh ✨</h1>
+        <p style="color: #e8f0fe; font-size: 1.1rem; font-style: italic; margin-top: 5px; margin-bottom: 0; font-weight: 500;">Hệ thống Nhận xét Học bạ Tự động AI - Chuẩn TT27</p>
+    </div>
+    <div style="text-align: right; border-left: 2px solid rgba(255,255,255,0.3); padding-left: 20px; flex: 1; min-width: 300px;">
+        <p style="font-size: 1rem; font-style: italic; color: white; margin: 0; line-height: 1.4;">"Học tập là hạt giống của kiến thức,<br>kiến thức là hạt giống của hạnh phúc."</p>
+        <p style="font-size: 0.85rem; font-weight: 700; color: #e8f0fe; margin: 5px 0 0 0;">– Ngạn ngữ Gruzia –</p>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -301,8 +257,6 @@ div[data-testid="stSidebar"] { background-color: #ffffff; box-shadow: 2px 0 12px
 .stButton>button { background-color: #1A73E8; color: white; border-radius: 6px; border: none; font-weight: 600; padding: 10px 20px; transition: all 0.3s ease; }
 .stButton>button:hover { background-color: #1557b0; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(26,115,232,0.3); }
 </style>""", unsafe_allow_html=True)
-
-KEYS_15_PCNL = [f"nl{i}" for i in range(1, 11)] + [f"pc{i}" for i in range(1, 6)]
 
 def check_col_has_data(df, col_idx, start_row, check_type="level"):
     for r in range(start_row, min(start_row + 3, len(df))):
@@ -340,39 +294,34 @@ def phan_tich_file(file, thoi_diem):
                 
         diem_cands, muc_cands, c_cands = [], [], []
         explicit_diem_cands, explicit_muc_cands = [], []
-        nl_col, pc_col = -1, -1
-        detailed_cands = {k: [] for k in KEYS_15_PCNL}
+        nl_cands, pc_cands = [], []
+        explicit_nl_cands, explicit_pc_cands = [], []
         
-        current_term_context = None # Trí nhớ lưu trữ học kì hiện tại để xử lý gộp ô (Merge Cells)
+        current_term_context = None 
         
         for j in range(n_col + 1, len(df.columns)):
-            # Mở rộng vùng quét lên trên 4 dòng để không bỏ sót tiêu đề lớn của Học kì bị gộp ô
             header_area = " ".join([str(df.iloc[r, j]).lower() for r in range(max(0, h_row - 4), s_row)])
             header_clean = header_area.replace(" ", "").replace("_", "").replace("-", "")
             
-            # 1. NHẬN DIỆN VÀ GHI NHỚ HỌC KÌ VÀO CONTEXT
-            if any(kw in header_clean for kw in ['ghk1', 'gk1', 'giữahk1', 'giữahọckì1', 'giữahọckỳ1', 'giữakì1', 'giữakỳ1', 'gki', 'giữakỳi', 'giữakìi', 'giữahọckỳi', 'giữahọckìi']) or ('ghki' in header_clean and 'ghkii' not in header_clean):
+            if any(kw in header_clean for kw in ['ghk1', 'gk1', 'giữahk1', 'giữahki', 'giữahọckì1', 'giữahọckỳ1', 'giữakì1', 'giữakỳ1', 'gki', 'giữakỳi', 'giữakìi', 'giữahọckỳi', 'giữahọckìi']) or ('ghki' in header_clean and 'ghkii' not in header_clean):
                 current_term_context = "Giữa học kì I"
-            elif any(kw in header_clean for kw in ['chk1', 'ck1', 'cuốihk1', 'cuốihọckì1', 'cuốihọckỳ1', 'cuốikì1', 'cuốikỳ1', 'hk1', 'cki', 'cuốikỳi', 'cuốikìi', 'cuốihọckỳi', 'cuốihọckìi']) or ('chki' in header_clean and 'chkii' not in header_clean) or ('hki' in header_clean and 'hkii' not in header_clean):
+            elif any(kw in header_clean for kw in ['chk1', 'ck1', 'cuốihk1', 'cuốihki', 'cuốihọckì1', 'cuốihọckỳ1', 'cuốikì1', 'cuốikỳ1', 'hk1', 'cki', 'cuốikỳi', 'cuốikìi', 'cuốihọckỳi', 'cuốihọckìi']) or ('chki' in header_clean and 'chkii' not in header_clean) or ('hki' in header_clean and 'hkii' not in header_clean):
                 current_term_context = "Cuối học kì I"
-            elif any(kw in header_clean for kw in ['ghkii', 'ghk2', 'gk2', 'giữahk2', 'giữahọckì2', 'giữahọckỳ2', 'giữakì2', 'giữakỳ2', 'gkii', 'giữakỳii', 'giữakìii', 'giữahọckỳii', 'giữahọckìii']):
+            elif any(kw in header_clean for kw in ['ghkii', 'ghk2', 'gk2', 'giữahk2', 'giữahkii', 'giữahọckì2', 'giữahọckỳ2', 'giữakì2', 'giữakỳ2', 'gkii', 'giữakỳii', 'giữakìii', 'giữahọckỳii', 'giữahọckìii']):
                 current_term_context = "Giữa học kì II"
-            elif any(kw in header_clean for kw in ['chkii', 'chk2', 'ck2', 'cuốihk2', 'cuốihọckì2', 'cuốihọckỳ2', 'cuốikì2', 'cuốikỳ2', 'hkii', 'hk2', 'cuốinăm', 'cn', 'ckii', 'cuốikỳii', 'cuốikìii', 'cuốihọckỳii', 'cuốihọckìii']):
+            elif any(kw in header_clean for kw in ['chkii', 'chk2', 'ck2', 'cuốihk2', 'cuốihkii', 'cuốihọckì2', 'cuốihọckỳ2', 'cuốikì2', 'cuốikỳ2', 'hkii', 'hk2', 'cuốinăm', 'cn', 'ckii', 'cuốikỳii', 'cuốikìii', 'cuốihọckỳii', 'cuốihọckìii']):
                 current_term_context = "Cuối học kì II"
 
             is_my_term = (current_term_context == thoi_diem)
             is_other_term = (current_term_context is not None and current_term_context != thoi_diem)
 
-            # 2. KHÓA CHẶT: Bỏ qua hoàn toàn nếu cột này thuộc về kì khác (Không đưa vào list ứng viên)
             if is_other_term:
                 continue
             
-            # 3. PHÂN LOẠI CỘT CHO KÌ HIỆN TẠI
             is_diem = "điểm" in header_area or "đg" in header_area
             is_muc = "mức" in header_area or "đạt được" in header_area or "đánh giá" in header_area or "kết quả" in header_area
             is_nx = "nhận xét" in header_area or "lời phê" in header_area or "nx" in header_area
             
-            # Tránh cột Nhận Xét bị hiểu nhầm thành cột Điểm/Mức
             if is_nx and not is_muc and not is_diem:
                 c_cands.append(j)
             else:
@@ -384,16 +333,18 @@ def phan_tich_file(file, thoi_diem):
                     muc_cands.append(j)
                     if is_my_term: explicit_muc_cands.append(j)
             
-            if "năng lực" in header_area and ("chung" in header_area or "đặc thù" in header_area) and nl_col == -1: nl_col = j
-            if "phẩm chất" in header_area and pc_col == -1: pc_col = j
+            is_nl = "năng lực" in header_area
+            is_pc = "phẩm chất" in header_area
             
-            for r in range(max(0, h_row - 1), s_row):
-                cell_val = str(df.iloc[r, j]).strip().lower().replace(" ", "")
-                if cell_val in detailed_cands:
-                    detailed_cands[cell_val].append(j)
+            if is_nl:
+                nl_cands.append(j)
+                if is_my_term: explicit_nl_cands.append(j)
+            if is_pc:
+                pc_cands.append(j)
+                if is_my_term: explicit_pc_cands.append(j)
                     
-        # --- CHỐT CỘT ĐIỂM/MỨC CHÍNH XÁC ---
         diem_col, muc_col = -1, -1
+        nl_col, pc_col = -1, -1
         
         def get_best_col(cands, check_type):
             if not cands: return -1
@@ -403,32 +354,22 @@ def phan_tich_file(file, thoi_diem):
                     return j
             return best_col
 
-        if explicit_diem_cands:
-            diem_col = get_best_col(explicit_diem_cands, "score")
-        elif diem_cands:
-            diem_col = get_best_col(diem_cands, "score")
+        if explicit_diem_cands: diem_col = get_best_col(explicit_diem_cands, "score")
+        elif diem_cands: diem_col = get_best_col(diem_cands, "score")
                 
-        if explicit_muc_cands:
-            muc_col = get_best_col(explicit_muc_cands, "level")
-        elif muc_cands:
-            muc_col = get_best_col(muc_cands, "level")
+        if explicit_muc_cands: muc_col = get_best_col(explicit_muc_cands, "level")
+        elif muc_cands: muc_col = get_best_col(muc_cands, "level")
             
-        # Giải quyết xung đột nếu Mức và Điểm cùng trỏ vào 1 cột do từ khóa trùng lặp
         if diem_col == muc_col and diem_col != -1:
-            if check_col_has_data(df, diem_col, s_row, "score"):
-                muc_col = -1
-            else:
-                diem_col = -1
-                
-        detailed_cols = {}
-        for k, j_list in detailed_cands.items():
-            if j_list:
-                chosen_j = j_list[-1]
-                for j in reversed(j_list):
-                    if check_col_has_data(df, j, s_row, "level"): chosen_j = j; break
-                detailed_cols[k] = chosen_j
+            if check_col_has_data(df, diem_col, s_row, "score"): muc_col = -1
+            else: diem_col = -1
             
-        # Fallback phụ: Nếu file quá "kín" không lộ tiêu đề
+        if explicit_nl_cands: nl_col = get_best_col(explicit_nl_cands, "level")
+        elif nl_cands: nl_col = get_best_col(nl_cands, "level")
+            
+        if explicit_pc_cands: pc_col = get_best_col(explicit_pc_cands, "level")
+        elif pc_cands: pc_col = get_best_col(pc_cands, "level")
+            
         if diem_col == -1 or muc_col == -1:
             if s_row < len(df):
                 current_term_context = None
@@ -436,13 +377,13 @@ def phan_tich_file(file, thoi_diem):
                     header_area = " ".join([str(df.iloc[r, j]).lower() for r in range(max(0, h_row - 4), s_row)])
                     header_clean = header_area.replace(" ", "").replace("_", "").replace("-", "")
                     
-                    if any(kw in header_clean for kw in ['ghk1', 'gk1', 'giữahk1', 'giữahọckì1', 'giữahọckỳ1', 'giữakì1', 'giữakỳ1', 'gki', 'giữakỳi', 'giữakìi', 'giữahọckỳi', 'giữahọckìi']) or ('ghki' in header_clean and 'ghkii' not in header_clean):
+                    if any(kw in header_clean for kw in ['ghk1', 'gk1', 'giữahk1', 'giữahki', 'giữahọckì1', 'giữahọckỳ1', 'giữakì1', 'giữakỳ1', 'gki', 'giữakỳi', 'giữakìi', 'giữahọckỳi', 'giữahọckìi']) or ('ghki' in header_clean and 'ghkii' not in header_clean):
                         current_term_context = "Giữa học kì I"
-                    elif any(kw in header_clean for kw in ['chk1', 'ck1', 'cuốihk1', 'cuốihọckì1', 'cuốihọckỳ1', 'cuốikì1', 'cuốikỳ1', 'hk1', 'cki', 'cuốikỳi', 'cuốikìi', 'cuốihọckỳi', 'cuốihọckìi']) or ('chki' in header_clean and 'chkii' not in header_clean) or ('hki' in header_clean and 'hkii' not in header_clean):
+                    elif any(kw in header_clean for kw in ['chk1', 'ck1', 'cuốihk1', 'cuốihki', 'cuốihọckì1', 'cuốihọckỳ1', 'cuốikì1', 'cuốikỳ1', 'hk1', 'cki', 'cuốikỳi', 'cuốikìi', 'cuốihọckỳi', 'cuốihọckìi']) or ('chki' in header_clean and 'chkii' not in header_clean) or ('hki' in header_clean and 'hkii' not in header_clean):
                         current_term_context = "Cuối học kì I"
-                    elif any(kw in header_clean for kw in ['ghkii', 'ghk2', 'gk2', 'giữahk2', 'giữahọckì2', 'giữahọckỳ2', 'giữakì2', 'giữakỳ2', 'gkii', 'giữakỳii', 'giữakìii', 'giữahọckỳii', 'giữahọckìii']):
+                    elif any(kw in header_clean for kw in ['ghkii', 'ghk2', 'gk2', 'giữahk2', 'giữahkii', 'giữahọckì2', 'giữahọckỳ2', 'giữakì2', 'giữakỳ2', 'gkii', 'giữakỳii', 'giữakìii', 'giữahọckỳii', 'giữahọckìii']):
                         current_term_context = "Giữa học kì II"
-                    elif any(kw in header_clean for kw in ['chkii', 'chk2', 'ck2', 'cuốihk2', 'cuốihọckì2', 'cuốihọckỳ2', 'cuốikì2', 'cuốikỳ2', 'hkii', 'hk2', 'cuốinăm', 'cn', 'ckii', 'cuốikỳii', 'cuốikìii', 'cuốihọckỳii', 'cuốihọckìii']):
+                    elif any(kw in header_clean for kw in ['chkii', 'chk2', 'ck2', 'cuốihk2', 'cuốihkii', 'cuốihọckì2', 'cuốihọckỳ2', 'cuốikì2', 'cuốikỳ2', 'hkii', 'hk2', 'cuốinăm', 'cn', 'ckii', 'cuốikỳii', 'cuốikìii', 'cuốihọckỳii', 'cuốihọckìii']):
                         current_term_context = "Cuối học kì II"
                     
                     is_other_term = (current_term_context is not None and current_term_context != thoi_diem)
@@ -452,40 +393,30 @@ def phan_tich_file(file, thoi_diem):
                     if diem_col == -1 and (cell_val.replace('.','',1).isdigit()): diem_col = j
                     elif muc_col == -1 and cell_val in ['T', 'Đ', 'C', 'HTT', 'HT', 'CHT', 'H', 'K']: muc_col = j
                 
-        # --- ĐỒNG BỘ CỘT NHẬN XÉT VỚI KHỐI DỮ LIỆU ĐƯỢC CHỌN ---
         ref_cols = []
         if diem_col != -1: ref_cols.append(diem_col)
         if muc_col != -1: ref_cols.append(muc_col)
-        for val in detailed_cols.values():
-            if val != -1: ref_cols.append(val)
+        if nl_col != -1: ref_cols.append(nl_col)
+        if pc_col != -1: ref_cols.append(pc_col)
         
         ref_max = max(ref_cols) if ref_cols else -1
         
         c_col = -1
         if c_cands:
             valid_c = [c for c in c_cands if c > ref_max]
-            if valid_c:
-                c_col = valid_c[0]
-            else:
-                c_col = c_cands[-1]
+            if valid_c: c_col = valid_c[0]
+            else: c_col = c_cands[-1]
                 
         if c_col == -1: 
             c_col = len(df.columns)
             df[c_col] = ""
             df.iloc[h_row, c_col] = "Nhận xét"
         
-        return df, n_col, diem_col, muc_col, c_col, s_row, nl_col, pc_col, detailed_cols
-    except: return None, None, None, None, None, None, None, None, None
+        return df, n_col, diem_col, muc_col, c_col, s_row, nl_col, pc_col
+    except: return None, None, None, None, None, None, None, None
 
 # --- 4. SIDEBAR CẤU HÌNH ---
 with st.sidebar:
-    st.markdown("""
-    <div style="padding: 15px; background: linear-gradient(135deg, #f6f8fb, #e9f0f7); border-left: 4px solid #1A73E8; border-radius: 6px; margin-bottom: 25px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-        <p style="font-size: 0.95rem; font-style: italic; color: #444; margin: 0; line-height: 1.5;">"Học tập là hạt giống của kiến thức,<br>kiến thức là hạt giống của hạnh phúc."</p>
-        <p style="font-size: 0.85rem; font-weight: 700; color: #1A73E8; margin: 8px 0 0 0; text-align: right;">– Ngạn ngữ Gruzia –</p>
-    </div>
-    """, unsafe_allow_html=True)
-    
     st.markdown("### 🖥️ HỆ THỐNG ĐIỀU KHIỂN")
     api_key = st.text_input("🔑 API Key Gemini (Bỏ trống chạy Offline)", type="password")
     
@@ -513,41 +444,21 @@ if "ket_qua_nhan_xet" not in st.session_state:
 # --- 5. NỘI DUNG CHÍNH ---
 
 if f_hs:
-    df_raw, n_col, d_col, m_col, c_col, s_row, nl_col, pc_col, detailed_cols = phan_tich_file(f_hs, thoi_diem)
+    df_raw, n_col, d_col, m_col, c_col, s_row, nl_col, pc_col = phan_tich_file(f_hs, thoi_diem)
     
     if df_raw is not None:
         data_list = []
         mapping_indices = []
-        
-        has_detailed_pcnl = all(k in detailed_cols for k in KEYS_15_PCNL)
 
         for i in range(s_row, len(df_raw)):
             ten = str(df_raw.iloc[i, n_col]).strip()
             if ten.lower() not in ['nan', 'none', '']:
                 if loai_nx == "PC-NL":
-                    if has_detailed_pcnl:
-                        nl_vals = [str(df_raw.iloc[i, detailed_cols[f"nl{k}"]]).strip().upper() for k in range(1, 11)]
-                        pc_vals = [str(df_raw.iloc[i, detailed_cols[f"pc{k}"]]).strip().upper() for k in range(1, 6)]
-                        
-                        # Không tự động gán 'Đ' nếu trống hoàn toàn, để trống luôn cho chuyên nghiệp
-                        if all(v in ['NAN', 'NONE', ''] for v in nl_vals + pc_vals):
-                            nl_vals = [''] * 10
-                            pc_vals = [''] * 5
-                        else:
-                            nl_vals = [v if v not in ['NAN', 'NONE', ''] else 'Đ' for v in nl_vals]
-                            pc_vals = [v if v not in ['NAN', 'NONE', ''] else 'Đ' for v in pc_vals]
-                        
-                        row_data = {"Họ và tên": ten}
-                        for k in range(1, 11): row_data[f"NL{k}"] = nl_vals[k-1]
-                        for k in range(1, 6): row_data[f"PC{k}"] = pc_vals[k-1]
-                        row_data["Nhận xét"] = ""
-                        data_list.append(row_data)
-                    else:
-                        nl_v = str(df_raw.iloc[i, nl_col]).strip().upper() if nl_col != -1 else ""
-                        pc_v = str(df_raw.iloc[i, pc_col]).strip().upper() if pc_col != -1 else ""
-                        if nl_v in ['NAN', 'NONE']: nl_v = ""
-                        if pc_v in ['NAN', 'NONE']: pc_v = ""
-                        data_list.append({"Họ và tên": ten, "Năng lực": nl_v, "Phẩm chất": pc_v, "Nhận xét": ""})
+                    nl_v = str(df_raw.iloc[i, nl_col]).strip().upper() if nl_col != -1 else ""
+                    pc_v = str(df_raw.iloc[i, pc_col]).strip().upper() if pc_col != -1 else ""
+                    if nl_v in ['NAN', 'NONE']: nl_v = ""
+                    if pc_v in ['NAN', 'NONE']: pc_v = ""
+                    data_list.append({"Họ và tên": ten, "Năng lực": nl_v, "Phẩm chất": pc_v, "Nhận xét": ""})
                 else:
                     v_diem = str(df_raw.iloc[i, d_col]).strip() if d_col != -1 else ""
                     v_muc = str(df_raw.iloc[i, m_col]).strip().upper() if m_col != -1 else ""
@@ -558,11 +469,7 @@ if f_hs:
         
         if not data_list:
             if loai_nx == "PC-NL":
-                if has_detailed_pcnl:
-                    cols = ["Họ và tên"] + [f"NL{i}" for i in range(1,11)] + [f"PC{i}" for i in range(1,6)] + ["Nhận xét"]
-                    df_view = pd.DataFrame(columns=cols)
-                else:
-                    df_view = pd.DataFrame(columns=["Họ và tên", "Năng lực", "Phẩm chất", "Nhận xét"])
+                df_view = pd.DataFrame(columns=["Họ và tên", "Năng lực", "Phẩm chất", "Nhận xét"])
             else:
                 df_view = pd.DataFrame(columns=["Họ và tên", "Điểm", "Mức", "Nhận xét"])
         else:
@@ -576,27 +483,8 @@ if f_hs:
         }
         
         if loai_nx == "PC-NL":
-            if has_detailed_pcnl:
-                config.update({
-                    "NL1": st.column_config.Column("T.Học", width="small"),
-                    "NL2": st.column_config.Column("G.Tiếp", width="small"),
-                    "NL3": st.column_config.Column("GQVĐ", width="small"),
-                    "NL4": st.column_config.Column("N.Ngữ", width="small"),
-                    "NL5": st.column_config.Column("Toán", width="small"),
-                    "NL6": st.column_config.Column("K.Học", width="small"),
-                    "NL7": st.column_config.Column("C.Nghệ", width="small"),
-                    "NL8": st.column_config.Column("Tin", width="small"),
-                    "NL9": st.column_config.Column("T.Mỹ", width="small"),
-                    "NL10": st.column_config.Column("T.Chất", width="small"),
-                    "PC1": st.column_config.Column("Y.Nước", width="small"),
-                    "PC2": st.column_config.Column("N.Ái", width="small"),
-                    "PC3": st.column_config.Column("C.Chỉ", width="small"),
-                    "PC4": st.column_config.Column("T.Thực", width="small"),
-                    "PC5": st.column_config.Column("T.Nhiệm", width="small")
-                })
-            else:
-                config["Năng lực"] = st.column_config.Column(width="small")
-                config["Phẩm chất"] = st.column_config.Column(width="small")
+            config["Năng lực"] = st.column_config.Column(width="small")
+            config["Phẩm chất"] = st.column_config.Column(width="small")
         else: 
             config["Điểm"] = st.column_config.Column(width="small")
             config["Mức"] = st.column_config.Column(width="small")
@@ -663,75 +551,64 @@ if f_hs:
                 huong_mo_dau = random.choice(mang_cau_truc_mo_bai)
                 lenh_chong_lap = f"CHỐNG LẶP CẤU TRÚC (QUAN TRỌNG NHẤT): Bắt buộc {huong_mo_dau}. TUYỆT ĐỐI KHÔNG DÙNG CHUNG 1 KIỂU MỞ CÂU CHO TẤT CẢ. Không được luôn luôn bắt đầu bằng đại từ xưng hô, hãy linh hoạt đưa đại từ (nếu có) vào giữa hoặc cuối câu để câu văn tự nhiên. CHỐNG LẶP CÂU CHỐT: TUYỆT ĐỐI KHÔNG lặp đi lặp lại cụm từ 'cần rèn luyện thêm' ở cuối các câu nhận xét. Hãy thay thế bằng đa dạng các lời khuyên chuyên môn khác (Ví dụ: cần chú ý ôn tập kỹ lưỡng, cần nỗ lực khắc phục lỗ hổng kiến thức, nên dành thêm thời gian thực hành, cần nghiêm túc trau dồi mỗi ngày...)."
 
-                # KIỂM TRA HỌC SINH CÓ DỮ LIỆU ĐỂ NHẬN XÉT KHÔNG
+                # KIỂM TRA HỌC SINH CÓ DỮ LIỆU ĐỂ NHẬN XÉT KHÔNG VÀ TÍNH TOÁN MỨC ĐẠT ĐƯỢC
                 is_empty_row = False
+                mdd = "H_TrungBinh"
                 
                 if loai_nx == "PC-NL":
-                    if has_detailed_pcnl:
-                        raw_nls = [str(row.get(f"NL{k}", "")).strip() for k in range(1, 11)]
-                        raw_pcs = [str(row.get(f"PC{k}", "")).strip() for k in range(1, 6)]
-                        if all(v == "" for v in raw_nls + raw_pcs): is_empty_row = True
+                    raw_nl = str(row.get("Năng lực", "")).strip()
+                    raw_pc = str(row.get("Phẩm chất", "")).strip()
+                    if raw_nl == "" and raw_pc == "": 
+                        is_empty_row = True
                     else:
-                        raw_nl = str(row.get("Năng lực", "")).strip()
-                        raw_pc = str(row.get("Phẩm chất", "")).strip()
-                        if raw_nl == "" and raw_pc == "": is_empty_row = True
-                else:
-                    d_val = str(row.get("Điểm", "")).strip()
-                    m_val = str(row.get("Mức", "")).strip()
-                    if d_val == "" and m_val == "": is_empty_row = True
-
-                # Nếu học sinh chưa được nhập điểm -> Để trống nhận xét
-                if is_empty_row:
-                    nx_text = ""
-                else:
-                    # Nếu có dữ liệu thì tiến hành sinh nhận xét
-                    d_val = str(row.get("Điểm", "")).strip()
-                    m_val = str(row.get("Mức", "")).strip()
-                    mdd = "H_TrungBinh"
-                    if d_val.replace('.', '', 1).isdigit():
-                        diem_so = float(d_val)
-                        if diem_so >= 9: mdd = "T"
-                        elif diem_so >= 7: mdd = "H_Kha"
-                        elif diem_so >= 5: mdd = "H_TrungBinh"
-                        else: mdd = "C"
-                    elif m_val.replace('.', '', 1).isdigit():
-                        diem_so = float(m_val)
-                        if diem_so >= 9: mdd = "T"
-                        elif diem_so >= 7: mdd = "H_Kha"
-                        elif diem_so >= 5: mdd = "H_TrungBinh"
-                        else: mdd = "C"
-                    else:
-                        chk_val = m_val if m_val != "" else d_val
+                        chk_val = raw_nl if raw_nl != "" else raw_pc
                         chk_val = chk_val.upper()
                         if chk_val in ["T", "HTT", "TỐT", "A", "A+"]: mdd = "T"
                         elif chk_val in ["K", "KHÁ", "B", "B+"]: mdd = "H_Kha"
                         elif chk_val in ["Đ", "HT", "ĐẠT"]: mdd = "H_TrungBinh"
                         elif chk_val in ["C", "CHT", "CHƯA ĐẠT", "D", "E"]: mdd = "C"
-
-                    if loai_nx == "PC-NL":
-                        if has_detailed_pcnl:
-                            nl_str_detail = f"Tự học:{row.get('NL1', 'Đ')}, G.Tiếp:{row.get('NL2', 'Đ')}, GQVĐ:{row.get('NL3', 'Đ')}, N.Ngữ:{row.get('NL4', 'Đ')}, Toán:{row.get('NL5', 'Đ')}, KH:{row.get('NL6', 'Đ')}, CN:{row.get('NL7', 'Đ')}, Tin:{row.get('NL8', 'Đ')}, T.Mỹ:{row.get('NL9', 'Đ')}, T.Chất:{row.get('NL10', 'Đ')}"
-                            pc_str_detail = f"Yêu nước:{row.get('PC1', 'Đ')}, Nhân ái:{row.get('PC2', 'Đ')}, Chăm chỉ:{row.get('PC3', 'Đ')}, Trung thực:{row.get('PC4', 'Đ')}, Trách nhiệm:{row.get('PC5', 'Đ')}"
-                            
-                            if api_key:
-                                try:
-                                    prompt = f"Mã:{salt}. Đóng vai chuyên gia giáo dục. Nhận xét theo TT27 thời điểm {thoi_diem}. Chi tiết: {nl_str_detail}. {pc_str_detail}. YÊU CẦU PHONG CÁCH: {style_prompt}. BẮT BUỘC NHẬN XÉT ĐỦ 3 PHẦN THEO THỨ TỰ: 1. Năng lực đặc thù -> 2. Năng lực chung -> 3. Phẩm chất. {lenh_xung_ho} {lenh_cam_cam_xuc} Nếu có C bắt buộc bắt đầu 'Chưa hoàn thành...'. Khen điểm T (Tốt), nhắc nhở khắc phục điểm C (Cần cố gắng).\n{lenh_do_dai}\n{lenh_chong_lap}\nLưu ý: Viết thành một đoạn văn trôi chảy, không gạch đầu dòng."
-                                    res = model.generate_content(prompt); nx_text = res.text.strip()
-                                except: nx_text = ""
-                            if not nx_text:
-                                nx_text = sinh_nhan_xet_offline("PC-NL", mdd, "", style_key, xung_ho, bat_xung_ho, mon, thoi_diem)
+                else:
+                    d_val = str(row.get("Điểm", "")).strip()
+                    m_val = str(row.get("Mức", "")).strip()
+                    if d_val == "" and m_val == "": 
+                        is_empty_row = True
+                    else:
+                        if d_val.replace('.', '', 1).isdigit():
+                            diem_so = float(d_val)
+                            if diem_so >= 9: mdd = "T"
+                            elif diem_so >= 7: mdd = "H_Kha"
+                            elif diem_so >= 5: mdd = "H_TrungBinh"
+                            else: mdd = "C"
+                        elif m_val.replace('.', '', 1).isdigit():
+                            diem_so = float(m_val)
+                            if diem_so >= 9: mdd = "T"
+                            elif diem_so >= 7: mdd = "H_Kha"
+                            elif diem_so >= 5: mdd = "H_TrungBinh"
+                            else: mdd = "C"
                         else:
-                            nl_s = str(row.get("Năng lực", "Đ")).upper()
-                            pc_s = str(row.get("Phẩm chất", "Đ")).upper()
+                            chk_val = m_val if m_val != "" else d_val
+                            chk_val = chk_val.upper()
+                            if chk_val in ["T", "HTT", "TỐT", "A", "A+"]: mdd = "T"
+                            elif chk_val in ["K", "KHÁ", "B", "B+"]: mdd = "H_Kha"
+                            elif chk_val in ["Đ", "HT", "ĐẠT"]: mdd = "H_TrungBinh"
+                            elif chk_val in ["C", "CHT", "CHƯA ĐẠT", "D", "E"]: mdd = "C"
+
+                # Nếu học sinh chưa được nhập điểm -> Để trống nhận xét
+                if is_empty_row:
+                    nx_text = ""
+                else:
+                    if loai_nx == "PC-NL":
+                        nl_s = str(row.get("Năng lực", "Đ")).upper()
+                        pc_s = str(row.get("Phẩm chất", "Đ")).upper()
+                        
+                        if api_key:
+                            try:
+                                prompt = f"Mã:{salt}. Đóng vai giáo viên/chuyên gia. Viết 1 nhận xét học bạ Năng lực({nl_s}) và Phẩm chất({pc_s}) theo TT27 vào {thoi_diem}.\nPHONG CÁCH: {style_prompt}.\nBẮT BUỘC 3 PHẦN: Đặc thù -> Chung -> Phẩm chất.\n{lenh_xung_ho}\n{lenh_cam_cam_xuc}\nNếu có C bắt buộc bắt đầu 'Chưa hoàn thành...'.\n{lenh_do_dai}\n{lenh_chong_lap}\nLưu ý: Viết thành đoạn văn trôi chảy."
+                                res = model.generate_content(prompt); nx_text = res.text.strip()
+                            except: nx_text = ""
                             
-                            if api_key:
-                                try:
-                                    prompt = f"Mã:{salt}. Đóng vai giáo viên/chuyên gia. Viết 1 nhận xét học bạ Năng lực({nl_s}) và Phẩm chất({pc_s}) theo TT27 vào {thoi_diem}.\nPHONG CÁCH: {style_prompt}.\nBẮT BUỘC 3 PHẦN: Đặc thù -> Chung -> Phẩm chất.\n{lenh_xung_ho}\n{lenh_cam_cam_xuc}\nNếu có C bắt buộc bắt đầu 'Chưa hoàn thành...'.\n{lenh_do_dai}\n{lenh_chong_lap}\nLưu ý: Viết thành đoạn văn trôi chảy."
-                                    res = model.generate_content(prompt); nx_text = res.text.strip()
-                                except: nx_text = ""
-                                
-                            if not nx_text:
-                                nx_text = sinh_nhan_xet_offline("PC-NL", mdd, "", style_key, xung_ho, bat_xung_ho, mon, thoi_diem)
+                        if not nx_text:
+                            nx_text = sinh_nhan_xet_offline("PC-NL", mdd, "", style_key, xung_ho, bat_xung_ho, mon, thoi_diem)
                     else:
                         mach_kt_list = lay_mach_kien_thuc(mon, khoi, thoi_diem)
                         focus_kt = random.choice(mach_kt_list)
