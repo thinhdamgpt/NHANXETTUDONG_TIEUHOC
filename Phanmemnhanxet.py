@@ -154,14 +154,18 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
         pc = random.choice(pham_chat[mdd])
         kh = random.choice(khuyen[mdd]).replace("Thầy/Cô", xh.strip() if xh else "Giáo viên")
         
+        # BỔ SUNG KHO TỪ NỐI ĐA DẠNG CHỐNG LẶP CHO PHẦN PHẨM CHẤT
+        tu_noi = ["Bên cạnh đó,", "Ngoài ra,", "Đồng thời,", "Về phẩm chất,", "Trong rèn luyện,", "Mặt khác,", "Song song đó,", "Cùng với đó,", "Về mặt đạo đức,", "Đặc biệt,"]
+        tn = random.choice(tu_noi)
+        
         if phong_cach == "Ngắn gọn":
             return f"{cap_first(nl)}. Em {pc}."
         elif phong_cach == "Gần gũi":
-            return cap_first(f"{xh}nhận thấy em {nl}. Về phẩm chất, em {pc}. {kh}")
+            return cap_first(f"{xh}nhận thấy em {nl}. {tn} em {pc}. {kh}")
         elif phong_cach == "Khích lệ":
-            return f"{cap_first(nl)}. Trong rèn luyện, em {pc}. {kh}"
+            return f"{cap_first(nl)}. {tn} em {pc}. {kh}"
         else: # Đầy đủ / Ngẫu nhiên
-            return f"{cap_first(nl)}. Đồng thời, em {pc}. {kh}"
+            return f"{cap_first(nl)}. {tn} em {pc}. {kh}"
 
     elif loai_nx == "HĐGD":
         hdgd_thamgia = {
@@ -706,7 +710,7 @@ if f_hs:
                 tab_place.dataframe(df_view, use_container_width=True, height=450, column_config=config)
                 bar.progress((idx + 1) / len(df_view))
                 status.text(f"✔ Đang hoàn thiện: {ten_hs}")
-                time.sleep(1.0 if api_key else 0.01)
+                time.sleep(1.5 if api_key else 0.01)
 
             st.balloons()
             status.success(f"✅ Hoàn thành xuất sắc bộ học bạ môn {mon}!")
