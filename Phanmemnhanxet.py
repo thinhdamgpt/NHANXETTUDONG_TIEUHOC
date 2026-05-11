@@ -146,10 +146,9 @@ def lay_mach_kien_thuc(mon, khoi, thoi_diem):
         return kho_mon["Chung"]
     return ["kiến thức cơ bản", "kỹ năng thực hành"]
 
-# --- KHO DỮ LIỆU OFFLINE ---
+# --- HỆ THỐNG GHÉP CÂU TỔ HỢP OFFLINE (TẠO HÀNG TRĂM BIẾN THỂ VÔ HẠN) ---
 def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xung_ho="Thầy", bat_xung_ho=True, mon="", thoi_diem=""):
     xh = f"{xung_ho} " if bat_xung_ho else ""
-    is_nang_khieu = mon in ["Đạo đức", "Âm nhạc", "Mĩ thuật", "GDTC", "HĐGD", "Hoạt động trải nghiệm"]
     is_cuoi_nam = thoi_diem == "Cuối học kì II"
     
     def cap_first(s):
@@ -158,287 +157,140 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
         return s[0].upper() + s[1:] if s else ""
 
     if loai_nx == "PC-NL":
-        kho_pcnl = {
-            "T": {
-                "Ngắn gọn": [
-                    "Năng lực đặc thù các môn rất nổi trội. Tự học và giao tiếp xuất sắc. Luôn nỗ lực, trách nhiệm và hòa đồng.",
-                    "Đạt kết quả xuất sắc ở các năng lực chuyên biệt. Tự chủ và sáng tạo cao. Biết quan tâm, chia sẻ và trung thực.",
-                    "Thể hiện năng lực học tập rất tốt. Giao tiếp linh hoạt. Rèn luyện 5 phẩm chất đạo đức gương mẫu."
-                ],
-                "Gần gũi": [
-                    cap_first(f"{xh}đánh giá cao năng lực các môn học. Kỹ năng giao tiếp và tự học đạt mức xuất sắc. Chăm chỉ, ngoan ngoãn."),
-                    cap_first(f"{xh}ghi nhận sự phát triển toàn diện ở các năng lực. Hợp tác nhóm linh hoạt. Yêu thương bạn bè, nề nếp tốt.")
-                ],
-                "Khích lệ": [
-                    f"Cần tiếp tục phát huy năng lực học tập xuất sắc! Kỹ năng tự chủ và giao tiếp rất vững vàng. Cần duy trì tinh thần trách nhiệm.",
-                    f"Kết quả rèn luyện năng lực rất xuất sắc. Khả năng giải quyết vấn đề linh hoạt. Cần giữ vững thái độ học tập tích cực."
-                ],
-                "Đầy đủ": [
-                    "Năng lực đặc thù các môn vô cùng nổi trội. Kỹ năng tự học và giải quyết vấn đề xuất sắc. Giao tiếp tự tin, linh hoạt. Thể hiện rõ tinh thần yêu nước, nhân ái, trung thực và biết chia sẻ với bạn bè.", 
-                    "Sự tiến bộ ở các năng lực cốt lõi được thể hiện rõ rệt. Năng lực tự chủ và tính sáng tạo rất cao. Thể hiện trọn vẹn 5 phẩm chất đạo đức tốt đẹp, là tấm gương sáng về sự chăm chỉ và tinh thần trách nhiệm."
-                ]
-            },
-            "H_Kha": {
-                 "Ngắn gọn": [
-                     "Nắm vững kiến thức đặc thù các môn. Ý thức tự học và giao tiếp khá. Chăm chỉ và trung thực trong học tập.",
-                     "Thực hiện khá tốt các năng lực bộ môn. Kỹ năng hợp tác nhóm linh hoạt. Có trách nhiệm với nhiệm vụ.",
-                     "Đạt mức khá ở các năng lực học tập. Tự chủ trong giải quyết vấn đề. Luôn tuân thủ nội quy lớp học."
-                 ],
-                 "Gần gũi": [
-                     cap_first(f"{xh}đánh giá tốt mức độ tiếp thu bài. Giao tiếp và làm việc nhóm khá linh hoạt. Hòa đồng, yêu thương bạn bè."),
-                     f"Khả năng học tập các môn khá chắc chắn. Ý thức tự học có tiến bộ rõ rệt. {cap_first(xh + 'ghi nhận sự rèn luyện nghiêm túc mỗi ngày.')}"
-                 ],
-                 "Khích lệ": [
-                     f"Đã nắm chắc năng lực các môn, cần phát huy mạnh mẽ hơn! Kỹ năng giải quyết vấn đề khá tốt. Ghi nhận sự nỗ lực bền bỉ.",
-                     f"Sự tiến bộ ở các môn rất đáng ghi nhận. Kỹ năng giao tiếp đang tự tin hơn. Cần tiếp tục tập trung rèn luyện."
-                 ],
-                 "Đầy đủ": [
-                     "Phát huy khá tốt các năng lực chuyên biệt. Kỹ năng tự học và giao tiếp đạt mức khá vững vàng. Có ý thức rèn luyện tốt 5 phẩm chất, tuy nhiên cần chú ý rèn tính chủ động và sáng tạo hơn nữa trong học tập.", 
-                     "Tiếp thu vững vàng các năng lực cốt lõi. Kỹ năng làm việc nhóm linh hoạt. Chăm chỉ, trung thực và có trách nhiệm với tập thể, tuy nhiên cần nỗ lực mạnh dạn hơn trong việc tự giải quyết vấn đề cá nhân."
-                 ]
-            },
-            "H_TrungBinh": {
-                 "Ngắn gọn": [
-                     "Đạt yêu cầu về năng lực các môn học. Cần mạnh dạn hơn trong giao tiếp. Biết yêu thương và tuân thủ nội quy.",
-                     "Mức độ hoàn thành các nội dung đặc thù ở mức cơ bản. Cần chủ động hơn khi làm việc nhóm. Chăm chỉ nhưng thiếu tính tự giác.",
-                     "Kết quả đánh giá năng lực đạt yêu cầu. Cần rèn luyện thêm tính trung thực và trách nhiệm."
-                 ],
-                 "Gần gũi": [
-                     f"Năng lực các môn đạt yêu cầu cơ bản. Cần mạnh dạn hơn khi làm việc nhóm. {cap_first(xh + 'nhắc nhở cần tăng cường sự tự giác học tập.')}",
-                     f"Kiến thức các môn ở mức cơ bản. Cần rèn luyện sự tự tin trong giao tiếp. Giữ vững thái độ trung thực, hòa đồng."
-                 ],
-                 "Khích lệ": [
-                     f"Cần nâng cao ý thức tự giác để cải thiện kết quả. Năng lực bộ môn cơ bản ổn định. Tăng cường rèn luyện tính trung thực.",
-                     f"Cần mạnh dạn thể hiện năng lực bản thân trong lớp. Kỹ năng giao tiếp cần cởi mở hơn. Cần tập trung tối đa cho việc học."
-                 ],
-                 "Đầy đủ": [
-                     "Đạt mức cơ bản về các năng lực chung và đặc thù. Kỹ năng giao tiếp và tự học còn chưa thực sự nổi bật. Biết vâng lời và yêu thương bạn bè nhưng cần nâng cao tinh thần tự giác và kỷ luật cá nhân.", 
-                     "Tiếp thu các năng lực cốt lõi ở mức đạt. Chưa chủ động trong làm việc nhóm và giải quyết khó khăn. Cần tích cực trau dồi 5 phẩm chất, đặc biệt là tính trung thực và tinh thần trách nhiệm trong các môn học."
-                 ]
-            },
-            "C": {
-                 "Ngắn gọn": [
-                     "Chưa hoàn thành tốt năng lực đặc thù. Kỹ năng tự học và giao tiếp còn hạn chế. Cần cố gắng khắc phục tính trách nhiệm.",
-                     "Kỹ năng tiếp thu kiến thức chậm. Chưa chủ động trong hợp tác và giải quyết vấn đề. Cần nghiêm túc rèn luyện kỷ luật.",
-                     "Mức độ rèn luyện phẩm chất, năng lực còn hạn chế. Cần tập trung nghiêm túc vào việc học."
-                 ],
-                 "Gần gũi": [
-                     f"Năng lực các môn học còn nhiều hạn chế. Cần cởi mở và chủ động hơn khi giao tiếp. {cap_first(xh + 'nhắc nhở cần có thái độ học tập nghiêm túc hơn.')}",
-                     f"Khả năng học bộ môn còn yếu, cần tập trung ôn tập kỹ lưỡng. Kỹ năng hợp tác nhóm chưa cao. Cần thực hiện đúng nội quy."
-                 ],
-                 "Khích lệ": [
-                     f"Cần rèn luyện chăm chỉ hơn để cải thiện kết quả các môn. Cần chủ động và tự tin khi giao tiếp. Chấn chỉnh thái độ học tập.",
-                     f"Khắc phục khó khăn bằng sự rèn luyện bền bỉ mỗi ngày. Cố gắng hợp tác cùng bạn bè. Cần tập trung cải thiện ý thức học tập."
-                 ],
-                 "Đầy đủ": [
-                     "Chưa hoàn thành yêu cầu về các năng lực đặc thù và năng lực chung. Kỹ năng tự học, giao tiếp còn nhiều hạn chế. Việc rèn luyện phẩm chất chưa tốt, thiếu sự chăm chỉ, chưa trung thực và cần nhanh chóng khắc phục ý thức trách nhiệm.", 
-                     "Mức độ tiếp thu kiến thức và giải quyết vấn đề còn rất yếu. Thường xuyên thiếu tập trung, chưa tích cực trong làm việc nhóm. Cần thay đổi ngay thái độ học tập, tuân thủ nội quy và nâng cao đạo đức nhiều hơn."
-                 ]
-            }
+        nang_luc = {
+            "T": ["năng lực đặc thù vô cùng nổi trội", "tự học và giao tiếp cực kỳ xuất sắc", "kỹ năng giải quyết vấn đề linh hoạt", "tiếp thu nhạy bén mọi kỹ năng", "sự tự chủ và tính sáng tạo rất cao"],
+            "H_Kha": ["nắm vững kiến thức đặc thù các môn", "ý thức tự học và giao tiếp khá", "kỹ năng hợp tác nhóm linh hoạt", "tự chủ trong giải quyết vấn đề khá tốt", "đạt mức khá ở các năng lực học tập"],
+            "H_TrungBinh": ["đạt yêu cầu cơ bản về năng lực các môn", "mức độ hoàn thành nội dung ở mức cơ bản", "cần chủ động hơn khi làm việc nhóm", "kỹ năng giao tiếp và tự học chưa thực sự nổi bật", "đạt mức cơ bản về các năng lực chung"],
+            "C": ["chưa hoàn thành tốt năng lực đặc thù", "kỹ năng tự học và giao tiếp còn hạn chế", "kỹ năng tiếp thu kiến thức còn chậm", "chưa chủ động trong hợp tác và giải quyết vấn đề", "mức độ tiếp thu kiến thức còn rất yếu"]
         }
-        bo_cau = kho_pcnl.get(mdd, kho_pcnl["H_Kha"])
-        cau_chon = bo_cau.get(phong_cach, bo_cau["Ngắn gọn"])
-        return random.choice(cau_chon)
+        pham_chat = {
+            "T": ["luôn nỗ lực, trách nhiệm và hòa đồng", "biết quan tâm, chia sẻ và trung thực", "rèn luyện 5 phẩm chất đạo đức gương mẫu", "thể hiện rõ sự chăm chỉ, kỷ luật và ngoan ngoãn", "có tinh thần yêu nước, nhân ái tuyệt vời"],
+            "H_Kha": ["chăm chỉ và trung thực trong học tập", "có trách nhiệm với nhiệm vụ tập thể", "luôn tuân thủ nội quy lớp học", "biết yêu thương bạn bè và nề nếp tốt", "có ý thức rèn luyện khá tốt 5 phẩm chất"],
+            "H_TrungBinh": ["biết yêu thương và tuân thủ nội quy", "chăm chỉ nhưng đôi khi thiếu tính tự giác", "biết vâng lời nhưng cần nâng cao kỷ luật cá nhân", "cần rèn luyện thêm tính trung thực và trách nhiệm", "có ý thức đạo đức tốt nhưng cần mạnh dạn hơn"],
+            "C": ["cần cố gắng khắc phục tính trách nhiệm", "cần nghiêm túc rèn luyện kỷ luật hơn nữa", "mức độ rèn luyện phẩm chất còn hạn chế", "thiếu sự chăm chỉ, chưa trung thực", "cần thay đổi ngay thái độ học tập và đạo đức"]
+        }
+        khuyen = {
+            "T": ["Là tấm gương sáng cho cả lớp.", "Cần tiếp tục phát huy mạnh mẽ nhé!", "Thái độ học tập của em cực kỳ đáng khen.", "Hãy tiếp tục duy trì năng lượng tích cực này.", "Thành quả rèn luyện của em rất xứng đáng."],
+            "H_Kha": ["Cần tự tin hơn nữa để bứt phá.", "Sự tiến bộ của em rất đáng được ghi nhận.", "Hãy tiếp tục tập trung rèn luyện mỗi ngày.", "Chỉ cần cố gắng thêm chút nữa em sẽ rất xuất sắc.", "Cần phát huy mạnh mẽ những điểm mạnh này."],
+            "H_TrungBinh": ["Cần nâng cao ý thức tự giác để cải thiện kết quả.", "Hãy tập trung tối đa cho việc học tập trên lớp.", "Cần mạnh dạn thể hiện bản thân nhiều hơn.", "Hãy cố gắng rèn luyện bền bỉ mỗi ngày.", "Cần chấn chỉnh lại ý thức kỷ luật cá nhân."],
+            "C": ["Cần thay đổi ngay thái độ học tập.", "Gia đình và giáo viên sẽ cùng hỗ trợ rèn luyện thêm.", "Cần nỗ lực gấp đôi để khắc phục khó khăn.", "Yêu cầu nghiêm túc tuân thủ nội quy.", "Cần dành tối đa thời gian để chấn chỉnh kỷ luật."]
+        }
         
+        nl = random.choice(nang_luc[mdd])
+        pc = random.choice(pham_chat[mdd])
+        kh = random.choice(khuyen[mdd]).replace("Thầy/Cô", xh.strip() if xh else "Giáo viên")
+        
+        if phong_cach == "Ngắn gọn":
+            return f"{cap_first(nl)}. Phẩm chất {pc}."
+        elif phong_cach == "Gần gũi":
+            return cap_first(f"{xh}rất vui khi thấy em có {nl}. Đồng thời {pc}. {kh}")
+        elif phong_cach == "Khích lệ":
+            return f"{cap_first(nl)}. Về phẩm chất, em {pc}. {kh}"
+        else: # Đầy đủ / Ngẫu nhiên
+            return f"{cap_first(nl)}. Trong rèn luyện, em {pc}. {kh}"
+
     elif loai_nx == "HĐGD":
-        kho_hdgd = {
-             "T": {
-                 "Ngắn gọn": ["Tích cực tham gia phong trào, hoàn thành xuất sắc hoạt động giáo dục.", "Thể hiện tính sáng tạo và nhiệt tình trong trải nghiệm, kỹ năng sống tốt.", "Đạt kết quả xuất sắc trong các tiết hoạt động chung."],
-                 "Gần gũi": [cap_first(f"{xh}đánh giá cao sự tích cực tham gia các phong trào."), cap_first(f"{xh}khen ngợi sự nhiệt tình và sáng tạo trong hoạt động.")],
-                 "Khích lệ": [f"Cần tiếp tục giữ vững tinh thần tham gia phong trào nhiệt huyết này!", f"Sự năng nổ trong các hoạt động trải nghiệm rất đáng biểu dương!"],
-                 "Đầy đủ": ["Hoàn thành xuất sắc các nội dung hoạt động giáo dục và trải nghiệm suốt năm học. Chủ động, sáng tạo, thể hiện năng lực tổ chức và kỹ năng sống tuyệt vời trong mọi phong trào của lớp và trường."]
-             },
-             "H_Kha": {
-                 "Ngắn gọn": ["Hoàn thành tốt các hoạt động giáo dục theo yêu cầu, nề nếp tốt.", "Nhiệt tình tham gia hoạt động trải nghiệm cùng tập thể lớp."],
-                 "Gần gũi": [cap_first(f"{xh}ghi nhận ý thức tham gia các hoạt động giáo dục một cách nghiêm túc.")],
-                 "Khích lệ": [f"Cần tiếp tục phát huy sự nhiệt tình trong các hoạt động trải nghiệm thực tế."],
-                 "Đầy đủ": ["Thực hiện khá tốt các nhiệm vụ trong hoạt động giáo dục suốt năm. Có ý thức tham gia phong trào, hòa đồng với bạn bè, tuy nhiên cần chủ động và tự tin phát biểu ý kiến cá nhân hơn nữa."]
-             },
-             "H_TrungBinh": {
-                 "Ngắn gọn": ["Có tham gia các hoạt động giáo dục, cần mạnh dạn và tự tin hơn.", "Mức độ hoàn thành nội dung trải nghiệm cơ bản."],
-                 "Gần gũi": [cap_first(f"{xh}lưu ý cần mạnh dạn tham gia tích cực hơn trong các hoạt động phong trào.")],
-                 "Khích lệ": [f"Cần tự tự tin thể hiện bản thân trong các hoạt động trải nghiệm nhiều hơn nữa."],
-                 "Đầy đủ": ["Đạt mức cơ bản trong các tiết hoạt động giáo dục. Đã tham gia cùng tập thể nhưng còn rụt rè, chưa mạnh dạn và thiếu tính sáng tạo. Cần tích cực và năng nổ hơn trong phong trào chung."]
-             },
-             "C": {
-                 "Ngắn gọn": ["Chưa hoàn thành nội dung trải nghiệm, cần chủ động tham gia phong trào.", "Thái độ tham gia các tiết trải nghiệm còn chưa thực sự nghiêm túc."],
-                 "Gần gũi": [f"Cần tích cực và chủ động hơn trong các giờ trải nghiệm thực tế."],
-                 "Khích lệ": [f"Cần tham gia phong trào tích cực hơn để rèn luyện kỹ năng sống."],
-                 "Đầy đủ": ["Chưa hoàn thành các mục tiêu trải nghiệm và hoạt động giáo dục. Ít tham gia các phong trào, thái độ tham gia chưa nghiêm túc. Cần phải tích cực, tự giác và nâng cao kỹ năng sống nhiều hơn."]
-             }
+        hdgd_thamgia = {
+            "T": ["Tích cực tham gia các phong trào", "Nhiệt tình và năng nổ trong trải nghiệm", "Luôn đi đầu trong các hoạt động chung", "Có ý thức tổ chức kỷ luật rất cao", "Hăng hái tham gia mọi hoạt động giáo dục"],
+            "H_Kha": ["Tham gia khá tốt các hoạt động giáo dục", "Nhiệt tình với các phong trào của lớp", "Có nề nếp tốt trong giờ trải nghiệm", "Hòa đồng và tham gia đầy đủ các hoạt động", "Ý thức tham gia sinh hoạt tập thể khá nghiêm túc"],
+            "H_TrungBinh": ["Có tham gia các hoạt động giáo dục", "Mức độ hoàn thành nội dung trải nghiệm cơ bản", "Đã tham gia cùng tập thể nhưng còn rụt rè", "Hoàn thành các nhiệm vụ được giao ở mức cơ bản", "Có ý thức tham gia nhưng chưa thực sự năng nổ"],
+            "C": ["Chưa hoàn thành nội dung trải nghiệm", "Thái độ tham gia chưa thực sự nghiêm túc", "Ít tham gia các phong trào của trường lớp", "Hay mất tập trung trong giờ sinh hoạt chung", "Chưa chủ động tham gia hoạt động giáo dục"]
         }
-        bo_cau = kho_hdgd.get(mdd, kho_hdgd["H_Kha"])
-        return random.choice(bo_cau.get(phong_cach, bo_cau["Ngắn gọn"]))
-        
+        hdgd_kynang = {
+            "T": ["thể hiện kỹ năng sống tuyệt vời", "năng lực tổ chức và làm việc nhóm xuất sắc", "tính sáng tạo và linh hoạt rất cao", "khả năng lãnh đạo và kết nối bạn bè tốt", "xử lý tình huống trải nghiệm rất thông minh"],
+            "H_Kha": ["kỹ năng hợp tác nhóm khá tốt", "biết cách hòa nhập và chia sẻ với bạn bè", "thực hiện khá tốt các kỹ năng thực tế", "có sự cố gắng trong giao tiếp", "hoàn thành các kỹ năng sống cơ bản"],
+            "H_TrungBinh": ["kỹ năng giao tiếp và làm việc nhóm còn hạn chế", "chưa mạnh dạn phát biểu ý kiến cá nhân", "cần mạnh dạn và tự tin hơn nữa", "còn rụt rè khi xử lý các tình huống", "tính sáng tạo trong hoạt động chưa cao"],
+            "C": ["kỹ năng sống còn rất nhiều hạn chế", "không thể tự xử lý tình huống cơ bản", "chưa biết cách làm việc cùng tập thể", "thiếu kỹ năng giao tiếp và hay rụt rè", "chưa nắm được các kỹ năng trải nghiệm cốt lõi"]
+        }
+        hdgd_khuyen = {
+            "T": ["Là nhân tố tích cực của lớp.", "Cần tiếp tục giữ vững tinh thần này!", "Thầy/Cô rất tự hào về sự năng nổ của em.", "Hãy lan tỏa năng lượng này cho các bạn.", "Kỹ năng hoạt động cực kỳ xuất sắc."],
+            "H_Kha": ["Cần chủ động và tự tin phát biểu hơn.", "Tiếp tục phát huy sự nhiệt tình này nhé.", "Hãy mạnh dạn dẫn dắt nhóm trong tương lai.", "Chỉ cần tự tin hơn chút là rất tuyệt vời.", "Sự cố gắng của em rất đáng khen."],
+            "H_TrungBinh": ["Cần tự tin thể hiện bản thân nhiều hơn nữa.", "Hãy tích cực giao tiếp với bạn bè xung quanh.", "Cần năng nổ hơn trong phong trào chung.", "Đừng ngại ngùng, hãy chủ động tham gia nhé.", "Thầy/Cô mong em sẽ mạnh dạn hơn ở kì sau."],
+            "C": ["Cần tham gia phong trào tích cực hơn để rèn kỹ năng.", "Yêu cầu em nghiêm túc và chủ động hơn.", "Cần thay đổi thái độ khi sinh hoạt tập thể.", "Hãy mở lòng và hòa đồng cùng các bạn.", "Cần rèn luyện tính kỷ luật và sự tự giác."]
+        }
+        tg = random.choice(hdgd_thamgia[mdd])
+        kn = random.choice(hdgd_kynang[mdd])
+        kh = random.choice(hdgd_khuyen[mdd]).replace("Thầy/Cô", xh.strip() if xh else "Giáo viên")
+
+        if phong_cach == "Ngắn gọn":
+            return f"{cap_first(tg)}. Về thực tiễn, em {kn}."
+        elif phong_cach == "Gần gũi":
+            return cap_first(f"{xh}khen ngợi em {tg.lower()}. Trong hoạt động, em {kn}. {kh}")
+        elif phong_cach == "Khích lệ":
+            return f"{cap_first(tg)}. Tuy nhiên, em {kn}. {kh}"
+        else:
+            return cap_first(f"{tg}. Em {kn}. {kh}")
+            
     else: # Môn học
         if is_cuoi_nam:
-            list_mo_bai_T = ["", "Tổng kết năm học, nắm rất vững ", "Thực hiện xuất sắc ", "Hoàn thành xuất sắc chương trình, đặc biệt ở ", "Xuyên suốt năm học, tiếp thu cực kỳ nhạy bén "]
-            list_mo_bai_Kha = ["", "Tổng kết năm học, nắm vững ", "Thực hiện tốt ", "Hoàn thành tốt chương trình, nắm vững ", "Xuyên suốt năm học, tiếp thu khá tốt "]
-            list_mo_bai_TB = ["", "Tổng kết năm học, nắm được ", "Thực hiện được cơ bản ", "Đạt mức cơ bản chương trình "]
-            list_mo_bai_C = ["", "Tổng kết năm học, chưa nắm vững ", "Thực hiện chưa tốt chương trình ", "Chưa hoàn thành "]
+            mo_T = ["Tổng kết năm học, em nắm rất vững", "Thực hiện xuất sắc cả năm", "Hoàn thành xuất sắc chương trình, đặc biệt ở", "Xuyên suốt năm học, em tiếp thu cực kỳ nhạy bén", "Đạt kết quả cuối năm nổi trội ở"]
+            mo_Kha = ["Tổng kết năm học, em nắm vững", "Thực hiện tốt chương trình", "Hoàn thành tốt năm học, hiểu rõ", "Xuyên suốt năm học, em tiếp thu khá tốt", "Đạt kết quả khá khả quan ở"]
+            mo_TB = ["Tổng kết năm học, em nắm được cơ bản", "Thực hiện được nội dung", "Đạt mức cơ bản chương trình năm học ở", "Hiểu được mức độ cơ bản của", "Hoàn thành các yêu cầu cơ bản ở"]
+            mo_C = ["Tổng kết năm học, em chưa nắm vững", "Thực hiện chưa tốt chương trình", "Còn nhiều lỗ hổng kiến thức ở", "Mức độ tiếp thu còn rất chậm ở", "Chưa hoàn thành mục tiêu năm học ở"]
         else:
-            list_mo_bai_T = ["", "Nắm rất vững ", "Thực hiện xuất sắc ", "Hoàn thành xuất sắc ", "Tiếp thu cực kỳ nhạy bén "]
-            list_mo_bai_Kha = ["", "Nắm vững ", "Thực hiện tốt ", "Hoàn thành tốt ", "Tiếp thu khá tốt "]
-            list_mo_bai_TB = ["", "Nắm được ", "Thực hiện được cơ bản ", "Đạt mức cơ bản "]
-            list_mo_bai_C = ["", "Chưa nắm vững ", "Thực hiện chưa tốt ", "Chưa hoàn thành "]
+            mo_T = ["Nắm rất vững", "Thực hiện xuất sắc", "Hoàn thành xuất sắc", "Tiếp thu cực kỳ nhạy bén", "Thể hiện năng lực nổi bật ở"]
+            mo_Kha = ["Nắm vững", "Thực hiện tốt", "Hoàn thành tốt", "Tiếp thu khá tốt", "Thể hiện sự cố gắng rõ rệt ở"]
+            mo_TB = ["Nắm được cơ bản", "Thực hiện được nội dung", "Đạt mức cơ bản", "Mức độ tiếp thu vừa đủ ở", "Hoàn thành các yêu cầu của"]
+            mo_C = ["Chưa nắm vững", "Thực hiện chưa tốt", "Còn nhiều hạn chế ở", "Mức độ tiếp thu còn chậm ở", "Chưa hoàn thành tốt"]
+
+        kynang_mon = {
+            "Tiếng Việt": {
+                "T": ["đọc diễn cảm và lưu loát, chữ viết nắn nót", "viết câu đúng ngữ pháp, giàu hình ảnh", "cảm thụ văn bản rất sâu sắc, sáng tạo", "kỹ năng đọc hiểu xuất sắc, tư duy ngôn ngữ tốt", "diễn đạt trôi chảy, cách dùng từ phong phú"],
+                "H_Kha": ["đọc to, rõ ràng, chữ viết tương đối cẩn thận", "biết cách đặt câu đúng chủ - vị", "hiểu nội dung bài đọc khá tốt", "trình bày bài sạch sẽ, diễn đạt khá trôi chảy", "kỹ năng nghe viết chính tả khá vững vàng"],
+                "H_TrungBinh": ["đọc còn vấp vài chỗ, chữ viết cần nắn nót hơn", "diễn đạt câu đôi khi còn lúng túng", "trả lời câu hỏi đọc hiểu chưa trọn vẹn", "còn mắc một số lỗi chính tả cơ bản", "cần trau chuốt hơn khi viết đoạn văn"],
+                "C": ["đọc còn rất chậm, đánh vần nhiều", "chữ viết cẩu thả, sai quá nhiều lỗi chính tả", "chưa biết cách đặt câu hoàn chỉnh", "kỹ năng đọc hiểu rất yếu, thiếu vốn từ", "viết văn lủng củng, sai cấu trúc ngữ pháp"]
+            },
+            "Toán": {
+                "T": ["tính toán nhanh nhẹn, độ chính xác tuyệt đối", "tư duy logic cực kỳ nhạy bén", "giải bài toán có lời văn rất xuất sắc", "trình bày bài giải rõ ràng, khoa học", "nắm cực kì chắc các công thức toán học"],
+                "H_Kha": ["thực hiện phép tính khá cẩn thận", "giải toán lời văn khá tốt", "nắm vững các quy tắc tính toán", "tư duy toán học ổn định, trình bày sạch", "áp dụng tốt công thức vào bài tập"],
+                "H_TrungBinh": ["tính toán đôi khi còn nhầm lẫn do ẩu", "giải toán có lời văn còn lúng túng các bước", "chưa nhớ thật kĩ các công thức phức tạp", "trình bày bài đôi lúc chưa khoa học", "thao tác giải bài còn chậm"],
+                "C": ["kỹ năng tính toán rất yếu, thường xuyên sai sót", "chưa biết cách thiết lập phép tính giải toán lời văn", "mất căn bản các công thức trọng tâm", "không tập trung khi làm bài tập tính toán", "hổng kiến thức toán học rất nhiều"]
+            },
+            "Tiếng Anh": {
+                "T": ["phát âm chuẩn xác, phản xạ giao tiếp trôi chảy", "nắm vô cùng chắc từ vựng và ngữ pháp", "nghe hiểu và đọc hiểu tiếng Anh xuất sắc", "tự tin thuyết trình bằng ngoại ngữ"],
+                "H_Kha": ["ghi nhớ tốt từ vựng cơ bản", "vận dụng được mẫu câu vào giao tiếp khá tốt", "kỹ năng nghe và đọc ở mức khá", "phát âm tương đối rõ ràng"],
+                "H_TrungBinh": ["vốn từ vựng còn hạn chế", "kỹ năng giao tiếp và phát âm chưa tự nhiên", "cần trau dồi thêm ngữ pháp cơ bản", "khả năng nghe hiểu chưa cao"],
+                "C": ["phát âm yếu, chưa phản xạ được khi giao tiếp", "lỗ hổng từ vựng lớn, chưa nắm được cấu trúc câu", "rất chậm trong việc tiếp thu ngoại ngữ", "ngại giao tiếp và không nhớ từ mới"]
+            },
+            "Chung": {
+                "T": ["kĩ năng thực hành vô cùng thành thạo", "vận dụng cực kỳ linh hoạt kiến thức vào thực tiễn", "tư duy phân tích và giải quyết vấn đề nhạy bén", "trình bày sản phẩm/bài học xuất sắc, sáng tạo", "nắm bắt bài học vô cùng thông minh"],
+                "H_Kha": ["kĩ năng thực hành đạt mức khá tốt", "vận dụng được kiến thức vào bài tập", "ghi nhớ tốt các sự kiện/nội dung trọng tâm", "biết cách giải quyết yêu cầu của bài học", "hoàn thành chỉn chu các sản phẩm thực hành"],
+                "H_TrungBinh": ["kĩ năng khai thác thông tin/thực hành còn lúng túng", "vận dụng kiến thức chưa thực sự linh hoạt", "thao tác đôi khi còn chậm, cần cẩn thận hơn", "mức độ hiểu bài chỉ dừng ở mức cơ bản", "cần trau chuốt hơn khi thực hành"],
+                "C": ["kỹ năng thực hành rất yếu, thiếu độ chính xác", "khả năng ghi nhớ và vận dụng kiến thức kém", "thiếu tập trung quan sát, thái độ học chưa tốt", "không tự giải quyết được các yêu cầu bài học", "hoàn toàn lúng túng khi thao tác"]
+            }
+        }
         
-        prefix = random.choice(list_mo_bai_T if mdd == "T" else (list_mo_bai_Kha if mdd == "H_Kha" else (list_mo_bai_TB if mdd == "H_TrungBinh" else list_mo_bai_C)))
+        loi_khuyen = {
+            "T": ["Hãy tiếp tục duy trì phong độ xuất sắc này.", "Thái độ học tập luôn chủ động, rất đáng khen.", "Luôn hăng hái phát biểu xây dựng bài.", "Cách trình bày rất chỉn chu, khoa học.", "Cần tiếp tục phát huy năng lực nổi trội này nhé."],
+            "H_Kha": ["Cần tự tin hơn nữa để đạt mức xuất sắc.", "Đã có nhiều tiến bộ, hãy tiếp tục cố gắng.", "Thái độ học tập ngoan ngoãn, chăm chỉ.", "Cần mạnh dạn phát biểu ý kiến hơn trong giờ.", "Chỉ cần cẩn thận hơn chút nữa là hoàn hảo."],
+            "H_TrungBinh": ["Cần chú ý ôn tập nhiều hơn tại nhà.", "Cần tập trung nghe giảng hơn trong lớp.", "Khuyến khích rèn luyện thêm để nâng cao kỹ năng.", "Cần mạnh dạn hỏi bài khi chưa hiểu rõ.", "Nên dành nhiều thời gian hơn để làm bài tập củng cố."],
+            "C": ["Cần nỗ lực ôn tập lại các kiến thức bị hổng.", "Yêu cầu nghiêm túc chấn chỉnh thái độ học tập.", "Cần chăm chỉ làm bài và chú ý nghe giảng hơn.", "Nên chủ động nhờ sự hỗ trợ từ bạn bè và thầy cô.", "Cần dành tối đa thời gian để rèn luyện lại từ căn bản."]
+        }
 
-        if phong_cach == "Đầy đủ":
-            if mdd == "T":
-                if mon == "Tiếng Việt": return f"{prefix}nội dung {focus_kt}. Đọc ngắt nghỉ đúng nhịp, chữ viết nắn nót, đúng chính tả, biết viết câu đúng ngữ pháp và giàu hình ảnh."
-                elif mon == "Toán": return f"{prefix}phần {focus_kt}. Kĩ năng tính toán nhanh, chính xác; tư duy logic nhạy bén và giải quyết trọn vẹn các bài toán có lời văn."
-                elif mon == "Lịch sử & Địa lý": return f"{prefix}kiến thức {focus_kt}. Kĩ năng học tập vô cùng thành thạo. Ghi nhớ tốt các sự kiện lịch sử và đặc điểm vùng miền."
-                elif mon == "Công nghệ": return f"{prefix}vai trò của công nghệ, thực hiện nội dung {focus_kt} rất xuất sắc. Có tư duy thiết kế tốt, hoàn thành các sản phẩm thực hành cực kì khéo léo."
-                elif mon == "Tiếng Anh": return f"{prefix}phần {focus_kt}. Phát âm tiếng Anh chuẩn xác, phản xạ giao tiếp trôi chảy. Nắm vững từ vựng, cấu trúc ngữ pháp."
-                elif mon == "Khoa học": return f"{prefix}kiến thức về {focus_kt}. Tư duy nhạy bén, biết giải thích các hiện tượng và vận dụng linh hoạt vào thực tế."
-                elif mon == "Tin học": return f"{prefix}các thao tác ở nội dung {focus_kt}. Nắm rất vững lý thuyết, hoàn thành xuất sắc các bài thực hành với tư duy logic cao."
-                elif mon == "Đạo đức": return f"{prefix}các chuẩn mực đạo đức trong bài {focus_kt}. Luôn tự giác, gương mẫu trong học tập, ứng xử lễ phép và biết chia sẻ."
-                elif mon == "Âm nhạc": return f"{prefix}kỹ năng {focus_kt}. Thể hiện năng khiếu âm nhạc xuất sắc. Hát đúng giai điệu, thuộc lời ca và biết kết hợp vận động."
-                elif mon == "Mĩ thuật": return f"{prefix}nội dung {focus_kt}. Năng khiếu tạo hình rất tốt. Thể hiện sự sáng tạo cao trong bố cục, màu sắc. Hoàn thành sản phẩm vô cùng đẹp mắt."
-                elif mon == "GDTC": return f"{prefix}nội dung {focus_kt}. Thể lực rất tốt, thực hiện thành thạo các động tác. Tích cực, năng nổ trong mọi hoạt động vận động."
-                elif mon == "Hoạt động trải nghiệm": return f"{prefix}nội dung {focus_kt}. Thể hiện sự tự tin, chủ động và sáng tạo trong các hoạt động phong trào. Kỹ năng sống rất xuất sắc."
-                else: return f"{prefix}nội dung {focus_kt}. Vận dụng vô cùng linh hoạt kiến thức vào thực tiễn, kĩ năng thực hành thành thạo và tư duy rất nhạy bén."
-            
-            elif mdd == "H_Kha":
-                if mon == "Tiếng Việt": return f"{prefix}nội dung {focus_kt}. Chữ viết khá cẩn thận, biết cách đặt câu đúng chủ - vị và hoàn thành tốt các bài tập đọc hiểu."
-                elif mon == "Toán": return f"{prefix}nội dung {focus_kt}. Thực hiện các phép tính khá nhanh, cẩn thận. Kĩ năng giải toán có lời văn tốt, cần chú ý nâng cao tốc độ ở bài toán khó."
-                elif mon == "Lịch sử & Địa lý": return f"{prefix}nội dung {focus_kt}. Hiểu và ghi nhớ tốt các kiến thức trọng tâm. Kĩ năng quan sát, tìm hiểu khá vững vàng, cần mạnh dạn phát biểu."
-                elif mon == "Công nghệ": return f"{prefix}nội dung {focus_kt}. Thực hiện khá tốt quy trình tạo ra các sản phẩm. Có ý thức giữ an toàn khi sử dụng dụng cụ, cần chăm chút thẩm mỹ."
-                elif mon == "Tiếng Anh": return f"{prefix}nội dung {focus_kt}. Ghi nhớ được từ vựng cơ bản và biết cách vận dụng vào giao tiếp, cần trau dồi cách phát âm tự nhiên hơn."
-                elif mon == "Khoa học": return f"{prefix}nội dung {focus_kt}. Thực hiện khá tốt các yêu cầu bài học, hiểu bản chất hiện tượng, cần chủ động phát biểu ý kiến hơn."
-                elif mon == "Tin học": return f"{prefix}nội dung {focus_kt}. Biết sử dụng các công cụ phần mềm cơ bản, cần rèn luyện để thao tác nhanh nhẹn và chính xác hơn."
-                elif mon == "Đạo đức": return f"{prefix}bài học {focus_kt}. Có ý thức tuân thủ nội quy, hành xử hòa nhã, cần rèn luyện sự tự tin khi giao tiếp."
-                elif mon == "Âm nhạc": return f"{prefix}nội dung {focus_kt}. Nắm được nhịp điệu, kỹ năng hát ở mức khá, cần mạnh dạn biểu diễn trước lớp."
-                elif mon == "Mĩ thuật": return f"{prefix}bài {focus_kt}. Sản phẩm có bố cục tương đối, có cố gắng trong thể hiện ý tưởng, cần chú ý để thực hiện chuẩn xác hơn."
-                elif mon == "GDTC": return f"{prefix}nội dung {focus_kt}. Nắm được kỹ thuật động tác, thái độ học tập tích cực, cần phát huy sự nhanh nhẹn hơn nữa."
-                elif mon == "Hoạt động trải nghiệm": return f"{prefix}nội dung {focus_kt}. Có ý thức tham gia các hoạt động phong trào, hòa đồng với bạn bè, cần mạnh dạn phát biểu ý kiến hơn."
-                else: return f"{prefix}nội dung {focus_kt}. Có ý thức tự giác học tập, kĩ năng thực hành và vận dụng kiến thức đạt mức khá tốt, cần phát huy."
-            
-            elif mdd == "H_TrungBinh":
-                if mon == "Tiếng Việt": return f"{prefix}nội dung {focus_kt}, tuy nhiên trả lời câu hỏi đọc hiểu chưa trọn vẹn. Cần nâng cao tính cẩn thận, hạn chế lỗi chính tả."
-                elif mon == "Toán": return f"{prefix}nội dung {focus_kt} nhưng tính toán đôi khi còn nhầm lẫn do thiếu cẩn thận. Cần dành thêm thời gian ôn tập kỹ hơn các công thức và các bước giải bài tập."
-                elif mon == "Lịch sử & Địa lý": return f"{prefix}nội dung {focus_kt}. Kĩ năng khai thác thông tin còn lúng túng, cần tập trung hơn trong giờ học và tích cực học hỏi."
-                elif mon == "Công nghệ": return f"{prefix}nội dung {focus_kt} nhưng thao tác còn chậm và lúng túng. Cần nâng cao tính cẩn thận, tuân thủ quy trình và rèn luyện sự khéo léo."
-                elif mon == "Tiếng Anh": return f"{prefix}nội dung {focus_kt}. Kĩ năng thực hành ngoại ngữ còn nhiều hạn chế, cần mạnh dạn, chủ động và cố gắng trau dồi mỗi ngày."
-                elif mon == "Khoa học": return f"{prefix}nội dung {focus_kt} nhưng còn lúng túng khi giải thích hiện tượng. Cần chú ý nghe giảng và học bài cũ nghiêm túc."
-                elif mon == "Tin học": return f"{prefix}lý thuyết {focus_kt} nhưng kỹ năng thực hành còn lúng túng, chậm chạp. Cần tập trung theo dõi thao tác mẫu."
-                elif mon == "Đạo đức": return f"{prefix}nội dung {focus_kt}. Đôi lúc chưa tự giác thực hiện đúng nội quy, cần nghiêm túc khắc phục thái độ và hành vi trong lớp."
-                elif mon == "Âm nhạc": return f"{prefix}lý thuyết nhưng thực hành {focus_kt} còn yếu. Cần chú ý lắng nghe giai điệu và rèn luyện sự tự tin khi hát."
-                elif mon == "Mĩ thuật": return f"{prefix}bài {focus_kt} nhưng sản phẩm chưa cân đối. Sản phẩm thiếu sự tinh tế, cần chú ý quan sát và cẩn thận hơn để hoàn thiện."
-                elif mon == "GDTC": return f"{prefix}nội dung {focus_kt} nhưng thao tác còn chậm, chưa dứt khoát. Cần tích cực trau dồi thể lực và tập trung rèn luyện."
-                elif mon == "Hoạt động trải nghiệm": return f"{prefix}nội dung {focus_kt}. Đã tham gia cùng tập thể nhưng còn rụt rè, chưa thực sự chủ động. Cần tích cực và năng nổ hơn."
-                else: return f"{prefix}nội dung {focus_kt}, tuy nhiên việc vận dụng kiến thức còn nhiều lúng túng. Cần cố gắng khắc phục điểm này bằng việc làm bài tập đầy đủ."
-                     
-            else: # mdd == "C"
-                if mon == "Tiếng Việt": return f"{prefix}nội dung {focus_kt}. Kiến thức và kỹ năng đọc viết còn hạn chế, sai lỗi chính tả nhiều. Cần chú ý luyện tập thường xuyên cách viết câu đúng ngữ pháp."
-                elif mon == "Toán": return f"{prefix}nội dung {focus_kt}. Kĩ năng tính toán còn yếu, thường xuyên sai sót các phép tính cơ bản. Cần nỗ lực khắc phục ngay các lỗ hổng kiến thức."
-                elif mon == "Lịch sử & Địa lý": return f"{prefix}nội dung {focus_kt}. Thiếu tập trung, chưa biết cách khai thác thông tin địa lý, lịch sử. Cần thay đổi thái độ học tập và tích cực ôn luyện."
-                elif mon == "Công nghệ": return f"{prefix}nội dung {focus_kt}. Thao tác thực hành rất chậm, chưa hoàn thành sản phẩm theo yêu cầu. Cần chú ý quan sát hướng dẫn để thực hành tốt hơn."
-                elif mon == "Tiếng Anh": return f"{prefix}nội dung {focus_kt}. Vốn từ vựng còn quá ít, kĩ năng giao tiếp ngoại ngữ rất yếu. Cần tích cực trau dồi và ôn tập củng cố kiến thức mỗi ngày."
-                elif mon == "Khoa học": return f"{prefix}nội dung {focus_kt}. Khả năng ghi nhớ và vận dụng yếu, thiếu tập trung quan sát các hiện tượng, cần chấn chỉnh ngay thái độ học tập."
-                elif mon == "Tin học": return f"{prefix}nội dung {focus_kt}. Kỹ năng thực hành rất yếu, thường xuyên mất tập trung. Cần chủ động thực hành mỗi ngày trên máy tính."
-                elif mon == "Đạo đức": return f"{prefix}nội dung {focus_kt}. Cần thay đổi thái độ, nghiêm túc tuân thủ nội quy lớp học, rèn luyện ý thức kỷ luật và tu dưỡng đạo đức thường xuyên."
-                elif mon == "Âm nhạc": return f"{prefix}kỹ năng {focus_kt}. Thái độ học tập chưa tốt, cần nghiêm túc luyện tập, tập trung hơn trong giờ và chủ động học tập tích cực hơn."
-                elif mon == "Mĩ thuật": return f"{prefix}nội dung {focus_kt}. Kỹ năng tạo hình và sử dụng màu yếu. Thái độ học tập thiếu tập trung, cần nghiêm túc trau dồi thêm."
-                elif mon == "GDTC": return f"{prefix}nội dung {focus_kt}. Thể lực còn hạn chế, thái độ học tập chưa tích cực, thiếu ý thức kỷ luật trong giờ học, cần nỗ lực cải thiện thể chất."
-                elif mon == "Hoạt động trải nghiệm": return f"{prefix}nội dung {focus_kt}. Ít tham gia các phong trào, thái độ trải nghiệm chưa nghiêm túc. Cần phải tích cực và tự giác hơn."
-                else: return f"{prefix}nội dung {focus_kt}, kĩ năng thực hành còn rất yếu và thiếu chính xác. Cần nỗ lực rèn luyện, tự giác học bài nghiêm túc và tập trung hoàn thiện."
-
-        else: 
-            if mdd == "T":
-                if is_nang_khieu:
-                    mau_ngan_gon = [f"{prefix}nội dung {focus_kt}.", f"Kỹ năng và thái độ học tập phần {focus_kt} rất tốt.", f"Mục tiêu bài {focus_kt} được thực hiện rất xuất sắc."]
-                    mau_gan_gui = [cap_first(f"{xh}đánh giá cao kỹ năng thực hành nội dung {focus_kt}."), cap_first(f"{xh}ghi nhận thái độ tích cực và kỹ năng rất tốt trong phần {focus_kt}.")]
-                    mau_khich_le = [f"Kỹ năng {focus_kt} rất tốt, cần tiếp tục phát huy năng lực này.", f"Thái độ học tập xuất sắc ở phần {focus_kt}, cần duy trì phong độ."]
-                else:
-                    mau_ngan_gon = [
-                        f"{prefix}nội dung {focus_kt}.",
-                        f"Kỹ năng thực hành phần {focus_kt} rất vững vàng.",
-                        f"Tư duy nhạy bén, xử lý chính xác phần {focus_kt}."
-                    ]
-                    mau_gan_gui = [
-                         cap_first(f"{xh}đánh giá cao kỹ năng xử lý kiến thức {focus_kt}."),
-                         cap_first(f"{xh}ghi nhận sự nhạy bén và kiến thức vững chắc trong phần {focus_kt}.")
-                    ]
-                    mau_khich_le = [
-                         f"Khả năng tiếp thu {focus_kt} rất tốt, cần tiếp tục phát huy năng lực này.",
-                         f"Kết quả đạt được rất xuất sắc ở phần {focus_kt}, cần duy trì phong độ môn học."
-                    ]
-            elif mdd == "H_Kha":
-                if is_nang_khieu:
-                    mau_ngan_gon = [f"{prefix}nội dung {focus_kt}.", f"Kỹ năng phần {focus_kt} khá vững, có tiến bộ.", f"Bài {focus_kt} được thực hiện tốt."]
-                    mau_gan_gui = [cap_first(f"{xh}ghi nhận sự tiến bộ khi thực hành {focus_kt}, cần tích cực trau dồi hơn."), cap_first(f"{xh}đánh giá tốt việc nắm khá chắc kỹ năng {focus_kt}.")]
-                    mau_khich_le = [f"Sự tiến bộ ở bài học {focus_kt} rất đáng ghi nhận, cần tiếp tục luyện tập.", f"Kỹ năng phần {focus_kt} khá tốt, cần nỗ lực để đạt mức xuất sắc."]
-                else:
-                    mau_ngan_gon = [
-                        f"{prefix}nội dung {focus_kt}, vận dụng khá tốt.",
-                        f"Kỹ năng học tập phần {focus_kt} khá vững.",
-                        f"Đạt kết quả khả quan ở bài học {focus_kt}, kỹ năng ổn định."
-                    ]
-                    mau_gan_gui = [
-                         cap_first(f"{xh}ghi nhận kỹ năng thực hành {focus_kt} có tiến bộ, cần cẩn thận để chính xác hơn."),
-                         cap_first(f"{xh}đánh giá tốt việc nắm khá chắc nội dung bài {focus_kt}.")
-                    ]
-                    mau_khich_le = [
-                         f"Sự tiến bộ ở bài học {focus_kt} rất đáng ghi nhận, cần duy trì sự cố gắng này.",
-                         f"Kết quả môn học phần {focus_kt} khá tốt, cần nỗ lực hơn để hoàn thiện."
-                    ]
-            elif mdd == "H_TrungBinh":
-                if is_nang_khieu:
-                    mau_ngan_gon = [f"{prefix}phần {focus_kt}, cần cố gắng hơn.", f"Kỹ năng {focus_kt} ở mức đạt, thao tác còn chậm.", f"Thái độ học tập phần {focus_kt} cần tích cực hơn."]
-                    mau_gan_gui = [f"Việc thực hành bài {focus_kt} còn hạn chế, {cap_first(xh + 'cần dành thêm thời gian ôn tập.')}", f"Cần chủ động thực hành phần {focus_kt} để trau dồi kỹ năng."]
-                    mau_khich_le = [f"Cần tập trung khắc phục kỹ năng {focus_kt} để cải thiện kết quả.", f"Cần dành thời gian thực hành bài {focus_kt} để thành thạo hơn."]
-                else:
-                    mau_ngan_gon = [
-                        f"{prefix}nội dung {focus_kt}, cần làm bài cẩn thận hơn.",
-                        f"Thao tác giải quyết bài {focus_kt} còn chậm.",
-                        f"Mức độ nắm bắt kiến thức {focus_kt} trung bình, cần chú ý ôn tập."
-                    ]
-                    mau_gan_gui = [
-                         f"Kỹ năng xử lý bài {focus_kt} còn hạn chế, {cap_first(xh + 'cần nâng cao tính chính xác.')}",
-                         f"Cần ôn tập kỹ hơn về {focus_kt} để củng cố nền tảng kiến thức."
-                    ]
-                    mau_khich_le = [
-                         f"Cần tập trung ôn tập kỹ hơn về nội dung {focus_kt} để cải thiện kết quả.",
-                         f"Cần dành nhiều thời gian hơn để khắc phục kỹ năng {focus_kt} tại nhà."
-                    ]
-            else: # mdd == "C"
-                if is_nang_khieu:
-                    mau_ngan_gon = [f"{prefix}kỹ năng {focus_kt}, cần nỗ lực cải thiện.", f"Thực hành {focus_kt} còn rất yếu, thái độ chưa tập trung.", f"Phần {focus_kt} chưa đạt, cần chấn chỉnh ý thức."]
-                    mau_gan_gui = [f"Kỹ năng {focus_kt} chưa đạt, cần nghiêm túc thực hành thêm.", f"Cần chăm chỉ và tập trung rèn luyện nội dung {focus_kt} mỗi ngày."]
-                    mau_khich_le = [f"Kỹ năng phần {focus_kt} còn rất nhiều hạn chế, cần nỗ lực thực hành thường xuyên.", f"Nội dung {focus_kt} cần chủ động khắc phục tích cực."]
-                else:
-                    mau_ngan_gon = [
-                        f"{prefix}nội dung {focus_kt}, mức độ tiếp thu kiến thức yếu.",
-                        f"Kỹ năng thực hành {focus_kt} còn hạn chế, cần tích cực học hỏi.",
-                        f"Thiếu hụt kiến thức phần {focus_kt}, cần nghiêm túc chấn chỉnh thái độ."
-                    ]
-                    mau_gan_gui = [
-                         f"Nội dung {focus_kt} chưa được nắm vững, cần nghiêm túc ôn tập thêm.",
-                         f"Cần chăm chỉ và tập trung ôn luyện nội dung {focus_kt} hơn nữa."
-                    ]
-                    mau_khich_le = [
-                         f"Phần {focus_kt} còn rất nhiều hạn chế, cần nỗ lực rèn luyện thường xuyên.",
-                         f"Kiến thức {focus_kt} chưa đạt yêu cầu, cần chủ động rèn luyện và chú ý nghe giảng."
-                    ]
-                
-            if phong_cach == "Ngắn gọn":
-                return random.choice(mau_ngan_gon)
-            elif phong_cach == "Gần gũi":
-                return random.choice(mau_gan_gui)
-            elif phong_cach == "Khích lệ":
-                return random.choice(mau_khich_le)
-            else: # Ngẫu nhiên
-                 return random.choice(mau_ngan_gon + mau_gan_gui + mau_khich_le)
+        dict_mo = {"T": mo_T, "H_Kha": mo_Kha, "H_TrungBinh": mo_TB, "C": mo_C}
+        mo_chon = random.choice(dict_mo[mdd])
+        
+        nguon_kynang = kynang_mon.get(mon, kynang_mon["Chung"])
+        kn_chon = random.choice(nguon_kynang[mdd])
+        
+        lk_chon = random.choice(loi_khuyen[mdd])
+        
+        if phong_cach == "Ngắn gọn":
+            return cap_first(f"{mo_chon} nội dung {focus_kt}. Kỹ năng {kn_chon}.")
+        elif phong_cach == "Gần gũi":
+            return cap_first(f"{xh}nhận thấy em {mo_chon.lower()} nội dung {focus_kt}. Biểu hiện là {kn_chon}. {lk_chon}")
+        elif phong_cach == "Khích lệ":
+            return cap_first(f"Qua nội dung {focus_kt}, em {mo_chon.lower()} kiến thức. Khả năng {kn_chon}. {xh}khuyên em {lk_chon.lower()}")
+        else: # Đầy đủ / Ngẫu nhiên
+            return cap_first(f"{mo_chon} nội dung {focus_kt}. Khả năng {kn_chon}. {lk_chon}")
 
 # --- 2. GIAO DIỆN PREMIUM 2026 ---
 st.set_page_config(layout="wide", page_title="Đổi mới cùng thầy Thịnh", page_icon="✨")
 
 st.markdown("""
-<div style="background: linear-gradient(135deg, #1A73E8, #34A853); padding: 25px; border-radius: 12px; text-align: center; margin-bottom: 30px; box-shadow: 0 8px 16px rgba(0,0,0,0.1);">
-    <h1 style="color: white; margin: 0; font-size: 3.2rem; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; text-shadow: 2px 2px 5px rgba(0,0,0,0.3);">✨ Đổi mới cùng thầy Thịnh ✨</h1>
-    <p style="color: #e8f0fe; font-size: 1.3rem; font-style: italic; margin-top: 8px; margin-bottom: 0; font-weight: 500;">Hệ thống Nhận xét Học bạ Tự động AI - Chuẩn TT27 (Phiên bản 2026)</p>
+<div style="background: linear-gradient(135deg, #1A73E8, #34A853); padding: 20px 25px; border-radius: 12px; text-align: left; margin-bottom: 30px; box-shadow: 0 8px 16px rgba(0,0,0,0.1);">
+    <h1 style="color: white; margin: 0; font-size: 2.2rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">✨ Đổi mới cùng thầy Thịnh ✨</h1>
+    <p style="color: #e8f0fe; font-size: 1.15rem; font-style: italic; margin-top: 5px; margin-bottom: 0; font-weight: 500;">Hệ thống Nhận xét Học bạ Tự động AI - Chuẩn TT27 (Phiên bản 2026)</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -627,6 +479,13 @@ def phan_tich_file(file, thoi_diem):
 
 # --- 4. SIDEBAR CẤU HÌNH ---
 with st.sidebar:
+    st.markdown("""
+    <div style="padding: 15px; background: linear-gradient(135deg, #f6f8fb, #e9f0f7); border-left: 4px solid #1A73E8; border-radius: 6px; margin-bottom: 25px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+        <p style="font-size: 0.95rem; font-style: italic; color: #444; margin: 0; line-height: 1.5;">"Học tập là hạt giống của kiến thức,<br>kiến thức là hạt giống của hạnh phúc."</p>
+        <p style="font-size: 0.85rem; font-weight: 700; color: #1A73E8; margin: 8px 0 0 0; text-align: right;">– Ngạn ngữ Gruzia –</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
     st.markdown("### 🖥️ HỆ THỐNG ĐIỀU KHIỂN")
     api_key = st.text_input("🔑 API Key Gemini (Bỏ trống chạy Offline)", type="password")
     
@@ -759,7 +618,7 @@ if f_hs:
             }
             
             if bat_xung_ho:
-                lenh_xung_ho = f"CHỈ ĐƯỢC dùng đại từ '{xung_ho}' (ví dụ: {xung_ho} nhận thấy, {xung_ho} đánh giá...). TUYỆT ĐỐI KHÔNG dùng các từ 'con', 'em', 'trò' hay gọi tên học sinh."
+                lenh_xung_ho = f"CHỈ ĐƯỢC dùng đại từ '{xung_ho}' (ví dụ: {xung_ho} nhận thấy, {xung_ho} đánh giá...). TUYỆT KHÔNG dùng các từ 'con', 'em', 'trò' hay gọi tên học sinh."
             else:
                 lenh_xung_ho = "TUYỆT ĐỐI KHÔNG dùng bất kỳ từ xưng hô nào (không dùng Thầy, Cô, tôi, mình, con, em, trò) hay gọi tên học sinh. Chỉ nhận xét thẳng thắn, khách quan trực tiếp vào kết quả môn học."
                 
@@ -895,7 +754,7 @@ if f_hs:
                 tab_place.dataframe(df_view, use_container_width=True, height=450, column_config=config)
                 bar.progress((idx + 1) / len(df_view))
                 status.text(f"✔ Đang hoàn thiện: {ten_hs}")
-                time.sleep(1.0 if api_key else 0.01)
+                time.sleep(1.5 if api_key else 0.01)
 
             st.balloons()
             status.success(f"✅ Hoàn thành xuất sắc bộ học bạ môn {mon}!")
