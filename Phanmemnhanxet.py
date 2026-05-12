@@ -102,7 +102,7 @@ PHAN_PHOI_CHUONG_TRINH = {
     "Hoạt động trải nghiệm": {
         "Khối 1": {"Giữa học kì I": ["khám phá bản thân", "nội quy trường lớp"], "Cuối học kì I": ["sinh hoạt gia đình", "an toàn cho bản thân"], "Giữa học kì II": ["bảo vệ môi trường", "giúp đỡ bạn bè"], "Cuối học kì II": ["toàn bộ chương trình trải nghiệm", "ý thức tự phục vụ", "tình yêu quê hương"]},
         "Khối 2": {"Giữa học kì I": ["tự chăm sóc bản thân", "sinh hoạt sao nhi đồng"], "Cuối học kì I": ["tìm hiểu nghề nghiệp bố mẹ", "giữ gìn vệ sinh chung"], "Giữa học kì II": ["phòng tránh rủi ro", "bảo vệ cảnh quan"], "Cuối học kì II": ["toàn bộ chương trình trải nghiệm", "kỹ năng chia sẻ yêu thương", "năng lực giao tiếp"]},
-        "Khối 3": {"Giữa học kì I": ["phát huy điểm mạnh bản thân", "truyền thống nhà trường"], "Cuối học kì I": ["lập kế hoạch cá nhân", "an toàn giao thông"], "Giữa học kì II": ["tham gia hoạt động thiện nguyện", "bảo vệ môi trường sống"], "Cuối học kì II": ["toàn bộ chương trình trải nghiệm", "kỹ năng làm việc nhóm", "tinh thần tự hào quê hương"]},
+        "Khối 3": {"Giữa học kì I": ["phát huy điểm mạnh bản thân", "truền thống nhà trường"], "Cuối học kì I": ["lập kế hoạch cá nhân", "an toàn giao thông"], "Giữa học kì II": ["tham gia hoạt động thiện nguyện", "bảo vệ môi trường sống"], "Cuối học kì II": ["toàn bộ chương trình trải nghiệm", "kỹ năng làm việc nhóm", "tinh thần tự hào quê hương"]},
         "Khối 4": {"Giữa học kì I": ["hoạt động cộng đồng", "tự hào về trường em"], "Cuối học kì I": ["quản lý chi tiêu", "lập thời gian biểu"], "Giữa học kì II": ["phòng tránh xâm hại", "chăm sóc cảnh quan"], "Cuối học kì II": ["toàn bộ chương trình trải nghiệm", "kỹ năng sinh tồn cơ bản", "phát huy truyền thống quê hương"]},
         "Khối 5": {"Giữa học kì I": ["tự hoàn thiện bản thân", "xây dựng tình bạn đẹp"], "Cuối học kì I": ["tìm hiểu nghề nghiệp tương lai", "ý thức công dân"], "Giữa học kì II": ["ứng phó với thiên tai", "kỹ năng tổ chức sự kiện"], "Cuối học kì II": ["toàn bộ chương trình trải nghiệm", "năng lực tự chủ", "chuẩn bị sẵn sàng chuyển cấp"]}
     }
@@ -129,39 +129,53 @@ def sinh_nhan_xet_pcnl_offline(mdd_nlc, mdd_nldt, mdd_pc, phong_cach, xung_ho, b
         return s[0].upper() + s[1:]
         
     nlc_kho = {
-        "T": ["tự học và giao tiếp cực kỳ xuất sắc", "tiếp thu nhạy bén các kỹ năng chung", "có kỹ năng giải quyết vấn đề linh hoạt", "năng lực tự chủ và giao tiếp rất tốt"],
-        "H_Kha": ["có ý thức tự học và giao tiếp khá", "có kỹ năng hợp tác nhóm linh hoạt", "tự chủ trong giải quyết vấn đề khá tốt", "năng lực chung đạt mức khá"],
-        "H_TrungBinh": ["kỹ năng giao tiếp và tự học chưa thực sự nổi bật", "đạt mức cơ bản về các năng lực chung", "cần chủ động hơn khi làm việc nhóm", "năng lực tự học đạt mức cơ bản"],
-        "C": ["còn hạn chế trong kỹ năng tự học và giao tiếp", "chưa chủ động trong hợp tác và giải quyết vấn đề", "kỹ năng làm việc nhóm còn yếu", "còn rụt rè, chưa mạnh dạn giao tiếp"]
+        "T": ["tự học và giao tiếp cực kỳ xuất sắc", "tiếp thu nhạy bén các kỹ năng chung", "có kỹ năng giải quyết vấn đề linh hoạt", "thể hiện năng lực tự chủ và giao tiếp rất tốt", "có ý thức tự học cao"],
+        "H_Kha": ["có ý thức tự học và giao tiếp khá", "hợp tác nhóm linh hoạt", "tự chủ trong giải quyết vấn đề khá tốt", "thực hiện khá tốt các năng lực chung"],
+        "H_TrungBinh": ["giao tiếp và tự học ở mức cơ bản", "đạt yêu cầu về các năng lực chung", "cần chủ động hơn khi làm việc nhóm", "năng lực tự học đạt mức cơ bản"],
+        "C": ["còn hạn chế trong kỹ năng tự học và giao tiếp", "chưa chủ động hợp tác và giải quyết vấn đề", "kỹ năng làm việc nhóm còn yếu", "còn rụt rè, chưa mạnh dạn giao tiếp"]
     }
     nldt_kho = {
         "T": ["có năng lực đặc thù vô cùng nổi trội", "tiếp thu rất tốt kiến thức các môn học", "phát huy xuất sắc năng lực chuyên biệt", "thể hiện tính sáng tạo rất cao trong học tập"],
-        "H_Kha": ["nắm vững kiến thức đặc thù các môn", "phát huy khá tốt các năng lực bộ môn", "đạt kết quả khá ở các môn học", "kỹ năng thực hành bộ môn khá vững"],
-        "H_TrungBinh": ["đạt yêu cầu cơ bản về năng lực các môn", "mức độ hoàn thành các môn học ở mức cơ bản", "tiếp thu kiến thức ở mức đạt", "cần tập trung hơn trong các giờ học"],
-        "C": ["chưa hoàn thành tốt các năng lực đặc thù", "tiếp thu kiến thức bộ môn còn chậm", "còn rất yếu trong việc rèn luyện năng lực môn học", "chưa nắm vững kiến thức trọng tâm"]
+        "H_Kha": ["nắm vững kiến thức đặc thù các môn", "phát huy khá tốt năng lực bộ môn", "đạt kết quả khá ở các môn học", "kỹ năng thực hành bộ môn khá vững"],
+        "H_TrungBinh": ["đạt yêu cầu cơ bản về năng lực các môn", "hoàn thành các môn học ở mức cơ bản", "tiếp thu kiến thức ở mức đạt", "cần tập trung hơn trong các giờ học"],
+        "C": ["chưa hoàn thành tốt các năng lực đặc thù", "tiếp thu kiến thức bộ môn còn chậm", "rèn luyện năng lực môn học còn yếu", "chưa nắm vững kiến thức trọng tâm"]
     }
     pc_kho = {
         "T": ["luôn nỗ lực, trách nhiệm và hòa đồng", "biết quan tâm, chia sẻ và trung thực", "thể hiện rõ sự chăm chỉ, kỷ luật và ngoan ngoãn", "có tinh thần yêu nước, nhân ái tuyệt vời"],
         "H_Kha": ["chăm chỉ và trung thực trong học tập", "có trách nhiệm với nhiệm vụ tập thể", "luôn tuân thủ nội quy lớp học", "có ý thức rèn luyện khá tốt các phẩm chất"],
-        "H_TrungBinh": ["biết yêu thương và tuân thủ nội quy", "chăm chỉ nhưng đôi khi thiếu tính tự giác", "biết vâng lời nhưng cần nâng cao kỷ luật cá nhân", "có ý thức đạo đức tốt nhưng cần mạnh dạn hơn"],
+        "H_TrungBinh": ["biết yêu thương và tuân thủ nội quy", "chăm chỉ nhưng đôi khi thiếu tính tự giác", "biết vâng lời nhưng cần rèn kỷ luật cá nhân", "có ý thức đạo đức tốt nhưng cần mạnh dạn hơn"],
         "C": ["cần cố gắng khắc phục tính trách nhiệm", "cần nghiêm túc rèn luyện kỷ luật hơn nữa", "còn hạn chế nhiều về mặt phẩm chất", "thiếu sự chăm chỉ, chưa trung thực"]
     }
     
-    khuyen_nlc = {"T": "Hãy tiếp tục phát huy.", "H_Kha": "Cần tự tin hơn nữa để bứt phá.", "H_TrungBinh": "Cần năng nổ hơn trong các hoạt động.", "C": "Cần mạnh dạn và cởi mở hơn."}
-    khuyen_nldt = {"T": "Kết quả rèn luyện rất xứng đáng.", "H_Kha": "Chỉ cần cố gắng thêm chút nữa em sẽ rất xuất sắc.", "H_TrungBinh": "Hãy tập trung tối đa cho việc học.", "C": "Cần nỗ lực gấp đôi để khắc phục."}
-    khuyen_pc = {"T": "Là tấm gương sáng cho cả lớp.", "H_Kha": "Sự rèn luyện của em rất đáng khen.", "H_TrungBinh": "Cần chấn chỉnh lại ý thức kỷ luật.", "C": "Yêu cầu nghiêm túc tuân thủ nội quy."}
+    khuyen_nlc = {"T": ["Hãy tiếp tục phát huy.", "Kỹ năng rất đáng khen."], "H_Kha": ["Cần tự tin hơn nữa để bứt phá.", "Cố gắng phát huy nhé."], "H_TrungBinh": ["Cần năng nổ hơn trong các hoạt động.", "Hãy chủ động hơn."], "C": ["Cần mạnh dạn và cởi mở hơn.", "Chú ý rèn luyện thêm."]}
+    khuyen_nldt = {"T": ["Kết quả rèn luyện rất xứng đáng.", "Tuyệt vời!"], "H_Kha": ["Chỉ cần cố gắng thêm chút nữa em sẽ rất xuất sắc.", "Tiếp tục nỗ lực nhé."], "H_TrungBinh": ["Hãy tập trung tối đa cho việc học.", "Cần chăm chỉ hơn."], "C": ["Cần nỗ lực gấp đôi để khắc phục.", "Phải cố gắng rất nhiều."]}
+    khuyen_pc = {"T": ["Là tấm gương sáng cho cả lớp.", "Rất đáng tự hào."], "H_Kha": ["Sự rèn luyện của em rất đáng khen.", "Cần duy trì thái độ này."], "H_TrungBinh": ["Cần chấn chỉnh lại ý thức kỷ luật.", "Cố gắng khắc phục nhé."], "C": ["Yêu cầu nghiêm túc tuân thủ nội quy.", "Cần thay đổi thái độ học tập."]}
     
     nx_nlc, nx_nldt, nx_pc = "", "", ""
+    
     if mdd_nlc:
-        if phong_cach == "Ngắn gọn": nx_nlc = cap_first(random.choice(nlc_kho[mdd_nlc])) + "."
-        else: nx_nlc = cap_first(f"{xh}nhận thấy em {random.choice(nlc_kho[mdd_nlc])}. {khuyen_nlc[mdd_nlc]}")
+        txt = random.choice(nlc_kho[mdd_nlc])
+        if phong_cach == "Ngắn gọn":
+            nx_nlc = cap_first(txt) + "."
+        else:
+            pfx = random.choice([f"{xh}đánh giá cao việc em ", ""]) if mdd_nlc in ["T", "H_Kha"] else random.choice([f"{xh}nhắc nhở em ", ""])
+            if not pfx: txt = cap_first(txt)
+            nx_nlc = f"{pfx}{txt}. {random.choice(khuyen_nlc[mdd_nlc])}"
+
     if mdd_nldt:
-        if phong_cach == "Ngắn gọn": nx_nldt = cap_first(random.choice(nldt_kho[mdd_nldt])) + "."
-        else: nx_nldt = cap_first(f"Em {random.choice(nldt_kho[mdd_nldt])}. {khuyen_nldt[mdd_nldt]}")
+        txt = random.choice(nldt_kho[mdd_nldt])
+        if phong_cach == "Ngắn gọn":
+            nx_nldt = cap_first(txt) + "."
+        else:
+            nx_nldt = f"{cap_first(txt)}. {random.choice(khuyen_nldt[mdd_nldt])}"
+
     if mdd_pc:
-        if phong_cach == "Ngắn gọn": nx_pc = cap_first(random.choice(pc_kho[mdd_pc])) + "."
-        else: nx_pc = cap_first(f"Về phẩm chất, em {random.choice(pc_kho[mdd_pc])}. {khuyen_pc[mdd_pc]}")
-        
+        txt = random.choice(pc_kho[mdd_pc])
+        if phong_cach == "Ngắn gọn":
+            nx_pc = cap_first(txt) + "."
+        else:
+            nx_pc = f"{cap_first(txt)}. {random.choice(khuyen_pc[mdd_pc])}"
+            
     return nx_nlc.replace("Thầy/Cô", xh.strip() if xh else "Giáo viên"), nx_nldt.replace("Thầy/Cô", xh.strip() if xh else "Giáo viên"), nx_pc.replace("Thầy/Cô", xh.strip() if xh else "Giáo viên")
 
 
@@ -269,6 +283,8 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
         else: # Đầy đủ / Ngẫu nhiên
             return cap_first(f"{mo_chon} nội dung {focus_kt}. Khả năng {kn_chon}. {lk_chon}")
 
+KEYS_15_PCNL = [f"nl{i}" for i in range(1, 11)] + [f"pc{i}" for i in range(1, 6)]
+
 def check_col_has_data(df, col_idx, start_row, check_type="level"):
     for r in range(start_row, min(start_row + 3, len(df))):
         val = str(df.iloc[r, col_idx]).strip().upper()
@@ -311,6 +327,8 @@ def phan_tich_file(file, thoi_diem):
                 
         diem_cands, muc_cands, c_cands = [], [], []
         explicit_diem_cands, explicit_muc_cands = [], []
+        nl_cands, pc_cands = [], []
+        explicit_nl_cands, explicit_pc_cands = [], []
         
         pcnl_cols = {
             'muc_nlc': -1, 'nx_nlc': -1,
@@ -322,6 +340,9 @@ def phan_tich_file(file, thoi_diem):
             'muc_nldt': [], 'nx_nldt': [],
             'muc_pc': [], 'nx_pc': []
         }
+        
+        detailed_cands = {k: [] for k in KEYS_15_PCNL}
+        explicit_detailed_cands = {k: [] for k in KEYS_15_PCNL}
         
         current_term_context = None 
         
@@ -482,12 +503,19 @@ if f_hs:
     if df_raw is not None:
         data_list = []
         mapping_indices = []
+        header_r = max(0, s_row - 1)
         
-        # Đảm bảo các cột Nhận xét PC-NL tồn tại (để chuẩn bị ghi đè)
+        # Đảm bảo các cột Nhận xét PC-NL tồn tại và CÓ TIÊU ĐỀ RÕ RÀNG để giáo viên dễ copy
         if loai_nx == "PC-NL":
-            if pcnl_cols['nx_nlc'] == -1: pcnl_cols['nx_nlc'] = len(df_raw.columns); df_raw[pcnl_cols['nx_nlc']] = ""
-            if pcnl_cols['nx_nldt'] == -1: pcnl_cols['nx_nldt'] = len(df_raw.columns); df_raw[pcnl_cols['nx_nldt']] = ""
-            if pcnl_cols['nx_pc'] == -1: pcnl_cols['nx_pc'] = len(df_raw.columns); df_raw[pcnl_cols['nx_pc']] = ""
+            if pcnl_cols['nx_nlc'] == -1: 
+                pcnl_cols['nx_nlc'] = len(df_raw.columns); df_raw[pcnl_cols['nx_nlc']] = ""
+                df_raw.iloc[header_r, pcnl_cols['nx_nlc']] = "NX Năng lực chung"
+            if pcnl_cols['nx_nldt'] == -1: 
+                pcnl_cols['nx_nldt'] = len(df_raw.columns); df_raw[pcnl_cols['nx_nldt']] = ""
+                df_raw.iloc[header_r, pcnl_cols['nx_nldt']] = "NX Năng lực đặc thù"
+            if pcnl_cols['nx_pc'] == -1: 
+                pcnl_cols['nx_pc'] = len(df_raw.columns); df_raw[pcnl_cols['nx_pc']] = ""
+                df_raw.iloc[header_r, pcnl_cols['nx_pc']] = "NX Phẩm chất"
 
         for i in range(s_row, len(df_raw)):
             ten = str(df_raw.iloc[i, n_col]).strip()
@@ -701,7 +729,7 @@ if f_hs:
             
             if st.session_state.ket_qua_nhan_xet:
                 if loai_nx == "PC-NL":
-                    st.warning("🚨 **LƯU Ý VỚI BẢNG PC-NL:** Bảng PC-NL chứa tới 3 cột nhận xét khác nhau. Thầy/Cô vui lòng **Tải file kết quả dự phòng** (nút bên dưới) và đẩy trực tiếp lên SMAS để đảm bảo thông tin khớp 100% vào đúng từng cột, hạn chế thao tác Copy-Paste bị lệch ô!")
+                    st.warning("🚨 **LƯU Ý VỚI BẢNG PC-NL:** Bảng PC-NL chứa tới 3 cột nhận xét khác nhau. Thầy/Cô vui lòng **Tải file kết quả dự phòng** (nút bên dưới) và mở bằng Excel để sử dụng, lúc này 3 cột nhận xét đã có tên rõ ràng và nằm chuẩn xác ở cuối danh sách!")
                 else:
                     st.markdown("### 📋 KẾT QUẢ COPY NHANH (DÁN TRỰC TIẾP VÀO EXCEL)")
                     copy_text = "\n".join(st.session_state.ket_qua_nhan_xet)
