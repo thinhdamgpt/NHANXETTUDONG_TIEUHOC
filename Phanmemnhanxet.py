@@ -130,6 +130,8 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
         s = s.strip()
         return s[0].upper() + s[1:] if s else ""
 
+    tu_noi = ["Bên cạnh đó,", "Ngoài ra,", "Về phẩm chất,", "Trong rèn luyện,", "Mặt khác,", "Song song đó,", "Cùng với đó,", "Về mặt đạo đức,", "Đặc biệt,", "Đồng thời,"]
+
     if loai_nx == "PC-NL":
         nang_luc = {
             "T": ["có năng lực đặc thù vô cùng nổi trội", "tự học và giao tiếp cực kỳ xuất sắc", "có kỹ năng giải quyết vấn đề linh hoạt", "tiếp thu nhạy bén mọi kỹ năng", "có sự tự chủ và tính sáng tạo rất cao"],
@@ -153,9 +155,6 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
         nl = random.choice(nang_luc[mdd])
         pc = random.choice(pham_chat[mdd])
         kh = random.choice(khuyen[mdd]).replace("Thầy/Cô", xh.strip() if xh else "Giáo viên")
-        
-        # BỔ SUNG KHO TỪ NỐI ĐA DẠNG CHỐNG LẶP CHO PHẦN PHẨM CHẤT
-        tu_noi = ["Bên cạnh đó,", "Ngoài ra,", "Đồng thời,", "Về phẩm chất,", "Trong rèn luyện,", "Mặt khác,", "Song song đó,", "Cùng với đó,", "Về mặt đạo đức,", "Đặc biệt,"]
         tn = random.choice(tu_noi)
         
         if phong_cach == "Ngắn gọn":
@@ -316,9 +315,9 @@ def phan_tich_file(file, thoi_diem):
         
         # TỪ KHÓA CHUẨN XÁC, QUÉT KÌ 2 TRƯỚC, KÌ 1 SAU
         term_2_mid_kws = ['ghkii', 'ghk2', 'gk2', 'giữahk2', 'giữahkii', 'giữahọckì2', 'giữahọckỳ2', 'giữakì2', 'giữakỳ2', 'gkii', 'giữakỳii', 'giữakìii', 'giữahọckỳii', 'giữahọckìii']
-        term_2_end_kws = ['chkii', 'chk2', 'ck2', 'cuốihk2', 'cuốihkii', 'cuốihọckì2', 'cuốihọckỳ2', 'cuốikì2', 'cuốikỳ2', 'hkii', 'hk2', 'cuốinăm', 'cn', 'ckii', 'cuốikỳii', 'cuốikìii', 'cuốihọckỳii', 'cuốihọckìii']
+        term_2_end_kws = ['chkii', 'chk2', 'ck2', 'cuốihk2', 'cuốihkii', 'cuốihọckì2', 'cuốihọckỳ2', 'cuốikì2', 'cuốikỳ2', 'hkii', 'hk2', 'họckì2', 'họckỳ2', 'họckìii', 'họckỳii', 'cuốinăm', 'cn', 'ckii', 'cuốikỳii', 'cuốikìii', 'cuốihọckỳii', 'cuốihọckìii']
         term_1_mid_kws = ['ghk1', 'gk1', 'giữahk1', 'giữahki', 'giữahọckì1', 'giữahọckỳ1', 'giữakì1', 'giữakỳ1', 'gki', 'giữakỳi', 'giữakìi', 'giữahọckỳi', 'giữahọckìi']
-        term_1_end_kws = ['chk1', 'ck1', 'cuốihk1', 'cuốihki', 'cuốihọckì1', 'cuốihọckỳ1', 'cuốikì1', 'cuốikỳ1', 'hk1', 'cki', 'cuốikỳi', 'cuốikìi', 'cuốihọckỳi', 'cuốihọckìi']
+        term_1_end_kws = ['chk1', 'ck1', 'cuốihk1', 'cuốihki', 'cuốihọckì1', 'cuốihọckỳ1', 'cuốikì1', 'cuốikỳ1', 'hk1', 'cki', 'họckì1', 'họckỳ1', 'họckìi', 'họckỳi', 'cuốikỳi', 'cuốikìi', 'cuốihọckỳi', 'cuốihọckìi']
         
         for j in range(n_col + 1, len(df.columns)):
             header_area = " ".join([str(df.iloc[r, j]).lower() for r in range(max(0, h_row - 4), s_row)])
@@ -339,9 +338,9 @@ def phan_tich_file(file, thoi_diem):
             if is_other_term:
                 continue
             
-            is_diem = "điểm" in header_area or "đg" in header_area
-            is_muc = "mức" in header_area or "đạt được" in header_area or "đánh giá" in header_area or "kết quả" in header_area
-            is_nx = "nhận xét" in header_area or "lời phê" in header_area or "nx" in header_area
+            is_diem = "điểm" in header_area
+            is_muc = any(w in header_area for w in ["mức", "đạt được", "đánh giá", "kết quả", "xếp loại", "xl", "đg", "mdd"])
+            is_nx = any(w in header_area for w in ["nhận xét", "lời phê", "nx"])
             
             if is_nx and not is_muc and not is_diem:
                 c_cands.append(j)
@@ -353,6 +352,13 @@ def phan_tich_file(file, thoi_diem):
                 if is_muc: 
                     muc_cands.append(j)
                     if is_my_term: explicit_muc_cands.append(j)
+                    
+                # HỖ TRỢ ĐẶC BIỆT CHO MÔN ĐẠO ĐỨC/HĐTN (Cột chỉ ghi "GHKII" mà không ghi Điểm/Mức)
+                if is_my_term and not is_diem and not is_muc and not is_nx:
+                    diem_cands.append(j)
+                    muc_cands.append(j)
+                    explicit_diem_cands.append(j)
+                    explicit_muc_cands.append(j)
             
             is_nl = "năng lực" in header_area
             is_pc = "phẩm chất" in header_area
@@ -374,13 +380,19 @@ def phan_tich_file(file, thoi_diem):
         diem_col = get_best_col_strict(df, explicit_diem_cands, s_row, "score")
         muc_col = get_best_col_strict(df, explicit_muc_cands, s_row, "level")
         
-        # Nếu chưa tìm thấy data, nhưng có tiêu đề đích danh -> lấy cột trống đó
         if diem_col == -1 and explicit_diem_cands: diem_col = explicit_diem_cands[-1]
         if muc_col == -1 and explicit_muc_cands: muc_col = explicit_muc_cands[-1]
         
-        # Dự phòng toàn cục nếu không có dòng tiêu đề học kì cụ thể
         if diem_col == -1: diem_col = get_best_col_strict(df, diem_cands, s_row, "score")
         if muc_col == -1: muc_col = get_best_col_strict(df, muc_cands, s_row, "level")
+        
+        if diem_col == -1 and diem_cands:
+            if "I" in thoi_diem and "II" not in thoi_diem: diem_col = diem_cands[0]
+            else: diem_col = diem_cands[-1]
+            
+        if muc_col == -1 and muc_cands:
+            if "I" in thoi_diem and "II" not in thoi_diem: muc_col = muc_cands[0]
+            else: muc_col = muc_cands[-1]
             
         if diem_col == muc_col and diem_col != -1:
             if check_col_has_data(df, diem_col, s_row, "score"): muc_col = -1
@@ -397,12 +409,23 @@ def phan_tich_file(file, thoi_diem):
         if nl_col == -1: nl_col = get_best_col_strict(df, nl_cands, s_row, "level")
         if pc_col == -1: pc_col = get_best_col_strict(df, pc_cands, s_row, "level")
         
+        if nl_col == -1 and nl_cands:
+            if "I" in thoi_diem and "II" not in thoi_diem: nl_col = nl_cands[0]
+            else: nl_col = nl_cands[-1]
+            
+        if pc_col == -1 and pc_cands:
+            if "I" in thoi_diem and "II" not in thoi_diem: pc_col = pc_cands[0]
+            else: pc_col = pc_cands[-1]
+        
         # --- CHỐT CỘT CHI TIẾT NL/PC ---
         detailed_cols = {}
         for k in KEYS_15_PCNL:
             col_idx = get_best_col_strict(df, explicit_detailed_cands[k], s_row, "level")
             if col_idx == -1 and explicit_detailed_cands[k]: col_idx = explicit_detailed_cands[k][-1]
             if col_idx == -1: col_idx = get_best_col_strict(df, detailed_cands[k], s_row, "level")
+            if col_idx == -1 and detailed_cands[k]:
+                if "I" in thoi_diem and "II" not in thoi_diem: col_idx = detailed_cands[k][0]
+                else: col_idx = detailed_cands[k][-1]
             detailed_cols[k] = col_idx
                 
         ref_cols = []
@@ -710,7 +733,7 @@ if f_hs:
                 tab_place.dataframe(df_view, use_container_width=True, height=450, column_config=config)
                 bar.progress((idx + 1) / len(df_view))
                 status.text(f"✔ Đang hoàn thiện: {ten_hs}")
-                time.sleep(1.5 if api_key else 0.01)
+                time.sleep(1.0 if api_key else 0.01)
 
             st.balloons()
             status.success(f"✅ Hoàn thành xuất sắc bộ học bạ môn {mon}!")
