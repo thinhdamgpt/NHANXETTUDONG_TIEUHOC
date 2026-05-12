@@ -177,6 +177,7 @@ def sinh_nhan_xet_pcnl_offline(mdd_nlc, mdd_nldt, mdd_pc):
 
 def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xung_ho="Thầy", bat_xung_ho=True, mon="", thoi_diem=""):
     xh = f"{xung_ho} " if bat_xung_ho else ""
+    is_cuoi_nam = thoi_diem == "Cuối học kì II"
     
     def cap_first(s):
         if not s: return s
@@ -185,10 +186,10 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
 
     if loai_nx == "HĐGD":
         hdgd_thamgia = {
-            "T": ["tích cực tham gia các phong trào", "nhiệt tình và năng nổ trong trải nghiệm", "luôn đi đầu trong các hoạt động chung", "có ý thức tổ chức kỷ luật rất cao", "hăng hái tham gia mọi hoạt động giáo dục"],
-            "H_Kha": ["tham gia khá tốt các hoạt động giáo dục", "nhiệt tình với các phong trào của lớp", "có nề nếp tốt trong giờ trải nghiệm", "hòa đồng và tham gia đầy đủ các hoạt động", "ý thức tham gia sinh hoạt tập thể khá nghiêm túc"],
-            "H_TrungBinh": ["có tham gia các hoạt động giáo dục", "mức độ hoàn thành nội dung trải nghiệm cơ bản", "đã tham gia cùng tập thể nhưng còn rụt rè", "hoàn thành các nhiệm vụ được giao ở mức cơ bản", "có ý thức tham gia nhưng chưa thực sự năng nổ"],
-            "C": ["chưa hoàn thành nội dung trải nghiệm", "thái độ tham gia chưa thực sự nghiêm túc", "ít tham gia các phong trào của trường lớp", "hay mất tập trung trong giờ sinh hoạt chung", "chưa chủ động tham gia hoạt động giáo dục"]
+            "T": ["Tích cực tham gia các phong trào", "Nhiệt tình và năng nổ trong trải nghiệm", "Luôn đi đầu trong các hoạt động chung", "Có ý thức tổ chức kỷ luật rất cao", "Hăng hái tham gia mọi hoạt động giáo dục"],
+            "H_Kha": ["Tham gia khá tốt các hoạt động giáo dục", "Nhiệt tình với các phong trào của lớp", "Có nề nếp tốt trong giờ trải nghiệm", "Hòa đồng và tham gia đầy đủ các hoạt động", "Ý thức tham gia sinh hoạt tập thể khá nghiêm túc"],
+            "H_TrungBinh": ["Có tham gia các hoạt động giáo dục", "Mức độ hoàn thành nội dung trải nghiệm cơ bản", "Đã tham gia cùng tập thể nhưng còn rụt rè", "Hoàn thành các nhiệm vụ được giao ở mức cơ bản", "Có ý thức tham gia nhưng chưa thực sự năng nổ"],
+            "C": ["Chưa hoàn thành nội dung trải nghiệm", "Thái độ tham gia chưa thực sự nghiêm túc", "Ít tham gia các phong trào của trường lớp", "Hay mất tập trung trong giờ sinh hoạt chung", "Chưa chủ động tham gia hoạt động giáo dục"]
         }
         hdgd_kynang = {
             "T": ["thể hiện kỹ năng sống tuyệt vời", "năng lực tổ chức và làm việc nhóm xuất sắc", "tính sáng tạo và linh hoạt rất cao", "khả năng lãnh đạo và kết nối bạn bè tốt", "xử lý tình huống trải nghiệm rất thông minh"],
@@ -197,26 +198,35 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
             "C": ["kỹ năng sống còn rất nhiều hạn chế", "không thể tự xử lý tình huống cơ bản", "chưa biết cách làm việc cùng tập thể", "thiếu kỹ năng giao tiếp và hay rụt rè", "chưa nắm được các kỹ năng trải nghiệm cốt lõi"]
         }
         hdgd_khuyen = {
-            "T": ["Là nhân tố tích cực của lớp.", "Cần tiếp tục giữ vững tinh thần này!", "Kỹ năng hoạt động cực kỳ xuất sắc."],
-            "H_Kha": ["Cần chủ động và tự tin phát biểu hơn.", "Tiếp tục phát huy sự nhiệt tình này nhé.", "Sự cố gắng rất đáng khen."],
-            "H_TrungBinh": ["Cần tự tin thể hiện bản thân nhiều hơn nữa.", "Hãy tích cực giao tiếp với bạn bè xung quanh.", "Đừng ngại ngùng, hãy chủ động tham gia nhé."],
-            "C": ["Cần tham gia phong trào tích cực hơn để rèn kỹ năng.", "Yêu cầu nghiêm túc và chủ động hơn.", "Cần rèn luyện tính kỷ luật và sự tự giác."]
+            "T": ["Là nhân tố tích cực của lớp.", "Cần tiếp tục giữ vững tinh thần này!", "Thầy/Cô rất tự hào về sự năng nổ của em.", "Hãy lan tỏa năng lượng này cho các bạn.", "Kỹ năng hoạt động cực kỳ xuất sắc."],
+            "H_Kha": ["Cần chủ động và tự tin phát biểu hơn.", "Tiếp tục phát huy sự nhiệt tình này nhé.", "Hãy mạnh dạn dẫn dắt nhóm trong tương lai.", "Chỉ cần tự tin hơn chút là rất tuyệt vời.", "Sự cố gắng của em rất đáng khen."],
+            "H_TrungBinh": ["Cần tự tin thể hiện bản thân nhiều hơn nữa.", "Hãy tích cực giao tiếp với bạn bè xung quanh.", "Cần năng nổ hơn trong phong trào chung.", "Đừng ngại ngùng, hãy chủ động tham gia nhé.", "Thầy/Cô mong em sẽ mạnh dạn hơn ở kì sau."],
+            "C": ["Cần tham gia phong trào tích cực hơn để rèn kỹ năng.", "Yêu cầu em nghiêm túc và chủ động hơn.", "Cần thay đổi thái độ khi sinh hoạt tập thể.", "Hãy mở lòng và hòa đồng cùng các bạn.", "Cần rèn luyện tính kỷ luật và sự tự giác."]
         }
         tg = random.choice(hdgd_thamgia[mdd])
         kn = random.choice(hdgd_kynang[mdd])
-        kh = random.choice(hdgd_khuyen[mdd])
-        
-        formats = [
-            f"{cap_first(tg)}. {cap_first(kn)}. {kh}",
-            f"{cap_first(kn)}. {cap_first(tg)}. {kh}"
-        ]
-        return random.choice(formats)
+        kh = random.choice(hdgd_khuyen[mdd]).replace("Thầy/Cô", xh.strip() if xh else "Giáo viên")
+
+        if phong_cach == "Ngắn gọn":
+            return f"{cap_first(tg)}. Về thực tiễn, em {kn}."
+        elif phong_cach == "Gần gũi":
+            return cap_first(f"{xh}khen ngợi em {tg.lower()}. Trong hoạt động, em {kn}. {kh}")
+        elif phong_cach == "Khích lệ":
+            return f"{cap_first(tg)}. Tuy nhiên, em {kn}. {kh}"
+        else:
+            return cap_first(f"{tg}. Em {kn}. {kh}")
             
     else: # Môn học
-        mo_T = ["nắm rất vững", "hiểu rất sâu", "thực hiện xuất sắc", "nắm chắc", "tiếp thu cực kỳ tốt"]
-        mo_Kha = ["nắm khá vững", "hiểu rõ", "thực hiện tốt", "tiếp thu khá tốt", "đạt kết quả khá tốt ở"]
-        mo_TB = ["nắm được cơ bản", "hiểu ở mức cơ bản", "thực hiện được", "đạt mức cơ bản", "tiếp thu được"]
-        mo_C = ["chưa nắm vững", "còn nhiều hạn chế ở", "thực hiện chưa tốt", "chưa đạt yêu cầu", "gặp khó khăn ở"]
+        if is_cuoi_nam:
+            mo_T = ["Tổng kết năm học, em nắm rất vững", "Thực hiện xuất sắc cả năm", "Hoàn thành xuất sắc chương trình, đặc biệt ở", "Xuyên suốt năm học, em tiếp thu cực kỳ nhạy bén", "Đạt kết quả cuối năm nổi trội ở"]
+            mo_Kha = ["Tổng kết năm học, em nắm vững", "Thực hiện tốt chương trình", "Hoàn thành tốt năm học, hiểu rõ", "Xuyên suốt năm học, em tiếp thu khá tốt", "Đạt kết quả khá khả quan ở"]
+            mo_TB = ["Tổng kết năm học, em nắm được cơ bản", "Thực hiện được nội dung", "Đạt mức cơ bản chương trình năm học ở", "Hiểu được mức độ cơ bản của", "Hoàn thành các yêu cầu cơ bản ở"]
+            mo_C = ["Tổng kết năm học, em chưa nắm vững", "Thực hiện chưa tốt chương trình", "Còn nhiều lỗ hổng kiến thức ở", "Mức độ tiếp thu còn rất chậm ở", "Chưa hoàn thành mục tiêu năm học ở"]
+        else:
+            mo_T = ["Nắm rất vững", "Thực hiện xuất sắc", "Hoàn thành xuất sắc", "Tiếp thu cực kỳ nhạy bén", "Thể hiện năng lực nổi bật ở"]
+            mo_Kha = ["Nắm vững", "Thực hiện tốt", "Hoàn thành tốt", "Tiếp thu khá tốt", "Thể hiện sự cố gắng rõ rệt ở"]
+            mo_TB = ["Nắm được cơ bản", "Thực hiện được nội dung", "Đạt mức cơ bản", "Mức độ tiếp thu vừa đủ ở", "Hoàn thành các yêu cầu của"]
+            mo_C = ["Chưa nắm vững", "Thực hiện chưa tốt", "Còn nhiều hạn chế ở", "Mức độ tiếp thu còn chậm ở", "Chưa hoàn thành tốt"]
 
         kynang_mon = {
             "Tiếng Việt": {
@@ -232,13 +242,13 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
                 "C": ["kỹ năng tính toán rất yếu, thường xuyên sai sót", "chưa biết cách thiết lập phép tính giải toán lời văn", "mất căn bản các công thức trọng tâm", "không tập trung khi làm bài tập tính toán", "hổng kiến thức toán học rất nhiều"]
             },
             "Tiếng Anh": {
-                "T": ["phát âm chuẩn xác, phản xạ giao tiếp trôi chảy", "nắm vô cùng chắc từ vựng và ngữ pháp", "nghe hiểu và đọc hiểu tiếng Anh xuất sắc", "tự tin thuyết trình bằng ngoại ngữ"],
+                "T": ["phát âm chuẩn xác, phản xạ giao tiếp trôi chảy", "nắm vô cùng chắc từ vựng và ngữ pháp", "nghe hiểu và đọc hiểu tiếng Anh xuất sắc", "tự tự tin thuyết trình bằng ngoại ngữ"],
                 "H_Kha": ["ghi nhớ tốt từ vựng cơ bản", "vận dụng được mẫu câu vào giao tiếp khá tốt", "kỹ năng nghe và đọc ở mức khá", "phát âm tương đối rõ ràng"],
                 "H_TrungBinh": ["vốn từ vựng còn hạn chế", "kỹ năng giao tiếp và phát âm chưa tự nhiên", "cần trau dồi thêm ngữ pháp cơ bản", "khả năng nghe hiểu chưa cao"],
                 "C": ["phát âm yếu, chưa phản xạ được khi giao tiếp", "lỗ hổng từ vựng lớn, chưa nắm được cấu trúc câu", "rất chậm trong việc tiếp thu ngoại ngữ", "ngại giao tiếp và không nhớ từ mới"]
             },
             "Chung": {
-                "T": ["kĩ năng thực hành vô cùng thành thạo", "vận dụng cực kỳ linh hoạt kiến thức vào thực tiễn", "tư duy phân tích và giải quyết vấn đề nhạy bén", "trình bày sản phẩm xuất sắc, sáng tạo", "nắm bắt bài học vô cùng thông minh"],
+                "T": ["kĩ năng thực hành vô cùng thành thạo", "vận dụng cực kỳ linh hoạt kiến thức vào thực tiễn", "tư duy phân tích và giải quyết vấn đề nhạy bén", "trình bày sản phẩm/bài học xuất sắc, sáng tạo", "nắm bắt bài học vô cùng thông minh"],
                 "H_Kha": ["kĩ năng thực hành đạt mức khá tốt", "vận dụng được kiến thức vào bài tập", "ghi nhớ tốt các sự kiện/nội dung trọng tâm", "biết cách giải quyết yêu cầu của bài học", "hoàn thành chỉn chu các sản phẩm thực hành"],
                 "H_TrungBinh": ["kĩ năng khai thác thông tin/thực hành còn lúng túng", "vận dụng kiến thức chưa thực sự linh hoạt", "thao tác đôi khi còn chậm, cần cẩn thận hơn", "mức độ hiểu bài chỉ dừng ở mức cơ bản", "cần trau chuốt hơn khi thực hành"],
                 "C": ["kỹ năng thực hành rất yếu, thiếu độ chính xác", "khả năng ghi nhớ và vận dụng kiến thức kém", "thiếu tập trung quan sát, thái độ học chưa tốt", "không tự giải quyết được các yêu cầu bài học", "hoàn toàn lúng túng khi thao tác"]
@@ -253,27 +263,28 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
         }
 
         dict_mo = {"T": mo_T, "H_Kha": mo_Kha, "H_TrungBinh": mo_TB, "C": mo_C}
-        md = random.choice(dict_mo[mdd])
+        mo_chon = random.choice(dict_mo[mdd])
         
         nguon_kynang = kynang_mon.get(mon, kynang_mon["Chung"])
-        kn = random.choice(nguon_kynang[mdd])
+        kn_chon = random.choice(nguon_kynang[mdd])
         
-        lk = random.choice(loi_khuyen[mdd])
+        lk_chon = random.choice(loi_khuyen[mdd])
         
-        formats = [
-            f"{cap_first(md)} nội dung {focus_kt}. {cap_first(kn)}. {lk}",
-            f"{cap_first(kn)} ở nội dung {focus_kt}. {lk}",
-            f"Đối với nội dung {focus_kt}, {md} kiến thức. {cap_first(kn)}. {lk}",
-            f"{cap_first(kn)}. {cap_first(md)} nội dung {focus_kt}. {lk}"
-        ]
-        return random.choice(formats)
+        if phong_cach == "Ngắn gọn":
+            return cap_first(f"{mo_chon} nội dung {focus_kt}. Kỹ năng {kn_chon}.")
+        elif phong_cach == "Gần gũi":
+            return cap_first(f"{xh}nhận thấy em {mo_chon.lower()} nội dung {focus_kt}. Biểu hiện là {kn_chon}. {lk_chon}")
+        elif phong_cach == "Khích lệ":
+            return cap_first(f"Qua nội dung {focus_kt}, em {mo_chon.lower()} kiến thức. Khả năng {kn_chon}. {xh}khuyên em {lk_chon.lower()}")
+        else: # Đầy đủ / Ngẫu nhiên
+            return cap_first(f"{mo_chon} nội dung {focus_kt}. Khả năng {kn_chon}. {lk_chon}")
 
 def check_col_has_data(df, col_idx, start_row, check_type="level"):
     for r in range(start_row, min(start_row + 3, len(df))):
         val = str(df.iloc[r, col_idx]).strip().upper()
         if val in ['NAN', 'NONE', '']: continue
         if check_type == "score" and val.replace('.','',1).isdigit(): return True
-        if check_type == "level" and val in ['T', 'Đ', 'C', 'HTT', 'HT', 'CHT', 'H', 'K', 'A', 'B']: return True
+        if check_type == "level" and val in ['T', 'Đ', 'C', 'HTT', 'HT', 'CHT', 'H', 'K']: return True
     return False
 
 def get_best_col_strict(df, cands, s_row, check_type):
@@ -352,12 +363,13 @@ def phan_tich_file(file, thoi_diem):
             if is_other_term:
                 continue
                 
-            is_nx = any(w in header_area for w in ["nhận xét", "lời phê", "nx", "ý kiến"])
-            if is_my_term and not is_nx:
+            # Đánh dấu các cột điểm chi tiết cho PC-NL (T, H, C, Đ) của kì hiện tại
+            if is_my_term and check_col_has_data(df, j, s_row, "level"):
                 valid_eval_cols.append(j)
             
             is_diem = "điểm" in header_area or "đg" in header_area
             is_muc = any(w in header_area for w in ["mức", "đạt được", "đánh giá", "kết quả", "xếp loại", "xl", "mdd"])
+            is_nx = any(w in header_area for w in ["nhận xét", "lời phê", "nx"])
             
             if is_nx and not is_muc and not is_diem:
                 c_cands.append(j)
@@ -370,6 +382,12 @@ def phan_tich_file(file, thoi_diem):
                     muc_cands.append(j)
                     if is_my_term: explicit_muc_cands.append(j)
                     
+                if is_my_term and not is_diem and not is_muc and not is_nx:
+                    diem_cands.append(j)
+                    muc_cands.append(j)
+                    explicit_diem_cands.append(j)
+                    explicit_muc_cands.append(j)
+            
             is_nlc = "năng lực chung" in header_area or ("chung" in header_area and "năng" in header_area) or "nlc" in header_clean
             is_nldt = "đặc thù" in header_area or ("đặc" in header_area and "năng" in header_area) or "nlđt" in header_clean or "nldt" in header_clean
             is_pc = "phẩm chất" in header_area or "pc" in header_clean
@@ -427,13 +445,14 @@ def phan_tich_file(file, thoi_diem):
             if valid_c: c_col = valid_c[0]
             else: c_col = c_cands[-1]
                 
+        # SỬ DỤNG .insert ĐỂ ĐẢM BẢO KHÔNG BỊ LỖI PANDAS INDEX (Tránh KeyError)
         if c_col == -1: 
             c_col = len(df.columns)
             df.insert(c_col, f"NX_MON_{uuid.uuid4().hex[:4]}", "")
             df.iat[max(0, s_row - 1), c_col] = "Nhận xét"
         
         return df, n_col, diem_col, muc_col, c_col, s_row, pcnl_cols, valid_eval_cols
-    except Exception: return None, None, None, None, None, None, None, None
+    except: return None, None, None, None, None, None, None, None
 
 # --- 4. SIDEBAR CẤU HÌNH ---
 with st.sidebar:
@@ -471,7 +490,7 @@ if f_hs:
         mapping_indices = []
         header_r = max(0, s_row - 1)
         
-        # BỐC CÁC CỘT CHI TIẾT CỦA PC-NL RA GIAO DIỆN
+        # BỐC CÁC CỘT CHI TIẾT CỦA PC-NL RA GIAO DIỆN (Lấy 15 cột T,H,C,Đ)
         pcnl_headers = []
         if loai_nx == "PC-NL" and valid_eval_cols:
             for j in valid_eval_cols:
@@ -493,17 +512,14 @@ if f_hs:
                 pcnl_cols['nx_nlc'] = len(df_raw.columns)
                 df_raw.insert(pcnl_cols['nx_nlc'], f"NX_NLC_{uuid.uuid4().hex[:4]}", "")
                 df_raw.iat[header_r, pcnl_cols['nx_nlc']] = "NX Năng lực chung"
-                if header_r > 0: df_raw.iat[header_r - 1, pcnl_cols['nx_nlc']] = "NX Năng lực chung"
             if pcnl_cols['nx_nldt'] == -1: 
                 pcnl_cols['nx_nldt'] = len(df_raw.columns)
                 df_raw.insert(pcnl_cols['nx_nldt'], f"NX_NLDT_{uuid.uuid4().hex[:4]}", "")
                 df_raw.iat[header_r, pcnl_cols['nx_nldt']] = "NX Năng lực đặc thù"
-                if header_r > 0: df_raw.iat[header_r - 1, pcnl_cols['nx_nldt']] = "NX Năng lực đặc thù"
             if pcnl_cols['nx_pc'] == -1: 
                 pcnl_cols['nx_pc'] = len(df_raw.columns)
                 df_raw.insert(pcnl_cols['nx_pc'], f"NX_PC_{uuid.uuid4().hex[:4]}", "")
                 df_raw.iat[header_r, pcnl_cols['nx_pc']] = "NX Phẩm chất"
-                if header_r > 0: df_raw.iat[header_r - 1, pcnl_cols['nx_pc']] = "NX Phẩm chất"
 
         for i in range(s_row, len(df_raw)):
             ten = str(df_raw.iloc[i, n_col]).strip()
@@ -597,6 +613,24 @@ if f_hs:
                 lenh_mon_dac_thu = "BẮT BUỘC NHẬN XÉT ĐẶC THÙ: Đây là môn năng khiếu/đạo đức. TUYỆT ĐỐI KHÔNG KHUYÊN 'ôn tập kiến thức', 'củng cố nền tảng', 'làm bài tập'. Hãy nhận xét về việc 'rèn luyện kỹ năng', 'thái độ', 'thực hành', 'ứng xử' và 'ý thức'."
             else:
                 lenh_mon_dac_thu = ""
+                
+            is_cuoi_nam = thoi_diem == "Cuối học kì II"
+            if is_cuoi_nam:
+                mang_cau_truc_mo_bai = [
+                    "BẮT BUỘC MỞ CÂU: Bằng việc TỔNG KẾT NĂM HỌC (VD: Tổng kết năm học, mức độ nắm bắt kiến thức là...)",
+                    "BẮT BUỘC MỞ CÂU: Bằng việc đánh giá TOÀN DIỆN KỸ NĂNG (VD: Xuyên suốt năm học, kỹ năng thực hành...)",
+                    "BẮT BUỘC MỞ CÂU: Bằng sự ĐÁNH GIÁ CHUNG (VD: Hoàn thành xuất sắc/tốt/cơ bản chương trình năm học...)"
+                ]
+            else:
+                mang_cau_truc_mo_bai = [
+                    "BẮT BUỘC MỞ CÂU: Bằng việc ghi nhận MỨC ĐỘ NẮM BẮT KIẾN THỨC (VD: Nắm rất vững, Thực hiện chưa tốt, Đạt mức cơ bản...)",
+                    "BẮT BUỘC MỞ CÂU: Bằng việc đánh giá KỸ NĂNG THỰC HÀNH/VẬN DỤNG (VD: Thực hiện xuất sắc, Kỹ năng thực hành yếu...)",
+                    "BẮT BUỘC MỞ CÂU: Bằng sự TỔNG KẾT KẾT QUẢ (VD: Kết quả học tập xuất sắc, Chưa hoàn thành mục tiêu...)",
+                    "BẮT BUỘC MỞ CÂU: Bằng việc phân tích THÁI ĐỘ/TƯ DUY (VD: Tư duy nhạy bén, Thái độ học tập thiếu tập trung...)",
+                    "BẮT BUỘC MỞ CÂU: Bằng một ĐIỂM SÁNG/ĐIỂM YẾU CỤ THỂ của môn học (VD: Đọc diễn cảm rất tốt, Kỹ năng tính toán còn chậm...)",
+                    "BẮT BUỘC MỞ CÂU: Bằng cụm danh từ CHỈ NĂNG LỰC (VD: Năng lực học tập môn này rất tốt, Mức độ tiếp thu còn hạn chế...)",
+                    "BẮT BUỘC MỞ CÂU: Bắt đầu ngay bằng TÊN MẠCH KIẾN THỨC (VD: Đối với nội dung [Tên bài], kết quả đạt được là...)"
+                ]
 
             for idx, row in df_view.iterrows():
                 real_idx = mapping_indices[idx]; ten_hs = row["Họ và tên"]; nx_text = ""
@@ -610,7 +644,8 @@ if f_hs:
                 else:
                     lenh_do_dai = "Khoảng 15-20 từ. Viết súc tích."
                     
-                lenh_chong_lap = f"CHỐNG LẶP CẤU TRÚC (QUAN TRỌNG NHẤT): TUYỆT ĐỐI KHÔNG DÙNG CHUNG 1 KIỂU MỞ CÂU CHO TẤT CẢ. Không được luôn luôn bắt đầu bằng đại từ xưng hô, hãy linh hoạt đưa đại từ (nếu có) vào giữa hoặc cuối câu để câu văn tự nhiên. CHỐNG LẶP CÂU CHỐT: TUYỆT ĐỐI KHÔNG lặp đi lặp lại cụm từ 'cần rèn luyện thêm' ở cuối các câu nhận xét. Hãy thay thế bằng đa dạng các lời khuyên chuyên môn khác (Ví dụ: cần chú ý ôn tập kỹ lưỡng, cần nỗ lực khắc phục lỗ hổng kiến thức, nên dành thêm thời gian thực hành, cần nghiêm túc trau dồi mỗi ngày...)."
+                huong_mo_dau = random.choice(mang_cau_truc_mo_bai)
+                lenh_chong_lap = f"CHỐNG LẶP CẤU TRÚC (QUAN TRỌNG NHẤT): Bắt buộc {huong_mo_dau}. TUYỆT ĐỐI KHÔNG DÙNG CHUNG 1 KIỂU MỞ CÂU CHO TẤT CẢ. Không được luôn luôn bắt đầu bằng đại từ xưng hô, hãy linh hoạt đưa đại từ (nếu có) vào giữa hoặc cuối câu để câu văn tự nhiên. CHỐNG LẶP CÂU CHỐT: TUYỆT ĐỐI KHÔNG lặp đi lặp lại cụm từ 'cần rèn luyện thêm' ở cuối các câu nhận xét. Hãy thay thế bằng đa dạng các lời khuyên chuyên môn khác (Ví dụ: cần chú ý ôn tập kỹ lưỡng, cần nỗ lực khắc phục lỗ hổng kiến thức, nên dành thêm thời gian thực hành, cần nghiêm túc trau dồi mỗi ngày...)."
 
                 is_empty_row = False
                 
@@ -630,17 +665,15 @@ if f_hs:
 
                 if is_empty_row:
                     if loai_nx == "PC-NL":
-                        if "NX Năng lực chung" in df_view.columns:
-                            df_view.at[idx, "NX Năng lực chung"] = ""
-                            df_view.at[idx, "NX Năng lực đặc thù"] = ""
-                            df_view.at[idx, "NX Phẩm chất"] = ""
+                        df_view.at[idx, "NX Năng lực chung"] = ""
+                        df_view.at[idx, "NX Năng lực đặc thù"] = ""
+                        df_view.at[idx, "NX Phẩm chất"] = ""
                         df_raw.iat[int(real_idx), int(pcnl_cols['nx_nlc'])] = ""
                         df_raw.iat[int(real_idx), int(pcnl_cols['nx_nldt'])] = ""
                         df_raw.iat[int(real_idx), int(pcnl_cols['nx_pc'])] = ""
                         st.session_state.ket_qua_nhan_xet.append("")
                     else:
-                        if "Nhận xét" in df_view.columns:
-                            df_view.at[idx, "Nhận xét"] = ""
+                        df_view.at[idx, "Nhận xét"] = ""
                         df_raw.iat[int(real_idx), int(c_col)] = ""
                         st.session_state.ket_qua_nhan_xet.append("")
                 else:
@@ -669,10 +702,9 @@ if f_hs:
                         else:
                             nx_nlc, nx_nldt, nx_pc = sinh_nhan_xet_pcnl_offline(mdd_nlc, mdd_nldt, mdd_pc)
                         
-                        if "NX Năng lực chung" in df_view.columns:
-                            df_view.at[idx, "NX Năng lực chung"] = nx_nlc
-                            df_view.at[idx, "NX Năng lực đặc thù"] = nx_nldt
-                            df_view.at[idx, "NX Phẩm chất"] = nx_pc
+                        df_view.at[idx, "NX Năng lực chung"] = nx_nlc
+                        df_view.at[idx, "NX Năng lực đặc thù"] = nx_nldt
+                        df_view.at[idx, "NX Phẩm chất"] = nx_pc
                         
                         df_raw.iat[int(real_idx), int(pcnl_cols['nx_nlc'])] = nx_nlc
                         df_raw.iat[int(real_idx), int(pcnl_cols['nx_nldt'])] = nx_nldt
@@ -711,8 +743,7 @@ if f_hs:
                         if not nx_text:
                             nx_text = sinh_nhan_xet_offline("Môn học", mdd, focus_kt, style_key, xung_ho, bat_xung_ho, mon, thoi_diem)
 
-                        if "Nhận xét" in df_view.columns:
-                            df_view.at[idx, "Nhận xét"] = nx_text
+                        df_view.at[idx, "Nhận xét"] = nx_text
                         df_raw.iat[int(real_idx), int(c_col)] = nx_text
                         st.session_state.ket_qua_nhan_xet.append(nx_text)
                 
