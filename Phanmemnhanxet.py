@@ -9,18 +9,28 @@ import uuid
 # --- CẤU HÌNH TRANG & GIAO DIỆN PREMIUM (ĐƯA LÊN TRÊN CÙNG) ---
 st.set_page_config(layout="wide", page_title="Hệ thống Nhận xét AI", page_icon="✨")
 
+# Ép khoảng trống mặc định của trang nhỏ lại để đẩy giao diện lên sát mép trên
+st.markdown("""<style>
+.block-container { padding-top: 1.5rem !important; padding-bottom: 1rem !important; }
+.main { background-color: #f0f4f8; font-family: 'Inter', sans-serif; } 
+.copy-area { background-color: #ffffff; padding: 18px; border-radius: 8px; border: 1px solid #d1d9e6; margin-top: 20px; max-height: 300px; overflow-y: auto; white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 14.5px; box-shadow: 0 4px 6px rgba(0,0,0,0.04); line-height: 1.6;}
+div[data-testid="stSidebar"] { background-color: #ffffff; box-shadow: 2px 0 12px rgba(0,0,0,0.06); }
+.stButton>button { background-color: #1A73E8; color: white; border-radius: 6px; border: none; font-weight: 600; padding: 10px 20px; transition: all 0.3s ease; }
+.stButton>button:hover { background-color: #1557b0; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(26,115,232,0.3); }
+</style>""", unsafe_allow_html=True)
+
 st.markdown("""
-<div style="display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #1A73E8, #34A853); padding: 10px 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); flex-wrap: wrap; gap: 10px;">
+<div style="display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #1A73E8, #34A853); padding: 8px 20px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); flex-wrap: wrap; gap: 10px;">
     <div style="text-align: left; min-width: 300px;">
-        <div style="margin-bottom: 4px;">
-            <span style="background: rgba(255, 255, 255, 0.15); color: #FFEA00; font-size: 0.75rem; font-weight: 700; padding: 2px 10px; border-radius: 15px; border: 1px solid rgba(255, 234, 0, 0.4); letter-spacing: 0.5px;">© COPYRIGHT BY THỊNH ĐÀM</span>
+        <div style="margin-bottom: 2px;">
+            <span style="background: rgba(255, 255, 255, 0.15); color: #FFEA00; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 12px; border: 1px solid rgba(255, 234, 0, 0.4); letter-spacing: 0.5px;">© COPYRIGHT BY THỊNH ĐÀM</span>
         </div>
-        <h1 style="color: white; margin: 0; font-size: 1.65rem; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">✨ HỆ THỐNG NHẬN XÉT HỌC BẠ TỰ ĐỘNG AI ✨</h1>
-        <p style="color: #e8f0fe; font-size: 0.95rem; font-style: italic; margin: 2px 0 0 0; font-weight: 500;">Chuẩn Thông tư 27 - Trợ lý đắc lực cho Giáo viên</p>
+        <h1 style="color: white; margin: 0; font-size: 1.4rem; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); line-height: 1.2;">✨ HỆ THỐNG NHẬN XÉT HỌC BẠ TỰ ĐỘNG AI ✨</h1>
+        <p style="color: #e8f0fe; font-size: 0.85rem; font-style: italic; margin: 0; font-weight: 500;">Chuẩn Thông tư 27 - Trợ lý đắc lực cho Giáo viên</p>
     </div>
     <div style="text-align: right; border-left: 2px solid rgba(255,255,255,0.2); padding-left: 15px; flex: 1; min-width: 250px;">
-        <p style="font-size: 0.9rem; font-style: italic; color: white; margin: 0; line-height: 1.3;">"Học tập là hạt giống của kiến thức,<br>kiến thức là hạt giống của hạnh phúc."</p>
-        <p style="font-size: 0.8rem; font-weight: 700; color: #e8f0fe; margin: 3px 0 0 0;">– Ngạn ngữ Gruzia –</p>
+        <p style="font-size: 0.85rem; font-style: italic; color: white; margin: 0; line-height: 1.2;">"Học tập là hạt giống của kiến thức,<br>kiến thức là hạt giống của hạnh phúc."</p>
+        <p style="font-size: 0.75rem; font-weight: 700; color: #e8f0fe; margin: 2px 0 0 0;">– Ngạn ngữ Gruzia –</p>
     </div>
 </div>
 """, unsafe_allow_html=True)
