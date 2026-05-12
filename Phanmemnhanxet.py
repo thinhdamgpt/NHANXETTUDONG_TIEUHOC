@@ -9,9 +9,9 @@ import uuid
 # --- CẤU HÌNH TRANG & GIAO DIỆN PREMIUM (ĐƯA LÊN TRÊN CÙNG) ---
 st.set_page_config(layout="wide", page_title="Hệ thống Nhận xét AI", page_icon="✨")
 
-# Ép khoảng trống mặc định của trang nhỏ lại để đẩy giao diện lên sát mép trên
+# Tỷ lệ vàng: padding-top: 2.5rem giúp đẩy sát mép mà không bị lẹm chữ Copyright
 st.markdown("""<style>
-.block-container { padding-top: 1.5rem !important; padding-bottom: 1rem !important; }
+.block-container { padding-top: 2.5rem !important; padding-bottom: 1rem !important; }
 .main { background-color: #f0f4f8; font-family: 'Inter', sans-serif; } 
 .copy-area { background-color: #ffffff; padding: 18px; border-radius: 8px; border: 1px solid #d1d9e6; margin-top: 20px; max-height: 300px; overflow-y: auto; white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 14.5px; box-shadow: 0 4px 6px rgba(0,0,0,0.04); line-height: 1.6;}
 div[data-testid="stSidebar"] { background-color: #ffffff; box-shadow: 2px 0 12px rgba(0,0,0,0.06); }
