@@ -10,15 +10,17 @@ import uuid
 st.set_page_config(layout="wide", page_title="Hệ thống Nhận xét AI", page_icon="✨")
 
 st.markdown("""
-<div style="display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #1A73E8, #34A853); padding: 15px 25px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); flex-wrap: wrap; gap: 15px;">
+<div style="display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #1A73E8, #34A853); padding: 10px 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); flex-wrap: wrap; gap: 10px;">
     <div style="text-align: left; min-width: 300px;">
-        <span style="display: inline-block; background: #FFD700; color: #1A73E8; font-size: 0.85rem; font-weight: 800; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">© Copyright by Thịnh Đàm</span>
-        <h1 style="color: white; margin: 0; font-size: 2rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">✨ HỆ THỐNG NHẬN XÉT HỌC BẠ TỰ ĐỘNG AI ✨</h1>
-        <p style="color: #e8f0fe; font-size: 1.1rem; font-style: italic; margin-top: 5px; margin-bottom: 0; font-weight: 500;">Chuẩn Thông tư 27 - Trợ lý đắc lực cho Giáo viên</p>
+        <div style="margin-bottom: 4px;">
+            <span style="background: rgba(255, 255, 255, 0.15); color: #FFEA00; font-size: 0.75rem; font-weight: 700; padding: 2px 10px; border-radius: 15px; border: 1px solid rgba(255, 234, 0, 0.4); letter-spacing: 0.5px;">© COPYRIGHT BY THỊNH ĐÀM</span>
+        </div>
+        <h1 style="color: white; margin: 0; font-size: 1.65rem; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">✨ HỆ THỐNG NHẬN XÉT HỌC BẠ TỰ ĐỘNG AI ✨</h1>
+        <p style="color: #e8f0fe; font-size: 0.95rem; font-style: italic; margin: 2px 0 0 0; font-weight: 500;">Chuẩn Thông tư 27 - Trợ lý đắc lực cho Giáo viên</p>
     </div>
-    <div style="text-align: right; border-left: 2px solid rgba(255,255,255,0.3); padding-left: 20px; flex: 1; min-width: 300px;">
-        <p style="font-size: 1rem; font-style: italic; color: white; margin: 0; line-height: 1.4;">"Học tập là hạt giống của kiến thức,<br>kiến thức là hạt giống của hạnh phúc."</p>
-        <p style="font-size: 0.85rem; font-weight: 700; color: #e8f0fe; margin: 5px 0 0 0;">– Ngạn ngữ Gruzia –</p>
+    <div style="text-align: right; border-left: 2px solid rgba(255,255,255,0.2); padding-left: 15px; flex: 1; min-width: 250px;">
+        <p style="font-size: 0.9rem; font-style: italic; color: white; margin: 0; line-height: 1.3;">"Học tập là hạt giống của kiến thức,<br>kiến thức là hạt giống của hạnh phúc."</p>
+        <p style="font-size: 0.8rem; font-weight: 700; color: #e8f0fe; margin: 3px 0 0 0;">– Ngạn ngữ Gruzia –</p>
     </div>
 </div>
 """, unsafe_allow_html=True)
