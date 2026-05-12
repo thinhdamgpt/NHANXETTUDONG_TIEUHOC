@@ -145,21 +145,21 @@ def sinh_nhan_xet_pcnl_offline(mdd_nlc, mdd_nldt, mdd_pc):
         return s[0].upper() + s[1:]
         
     nlc_kho = {
-        "T": ["tự học và giao tiếp cực kỳ xuất sắc", "tiếp thu nhạy bén các kỹ năng chung", "có kỹ năng giải quyết vấn đề linh hoạt", "thể hiện năng lực tự chủ và giao tiếp rất tốt", "có ý thức tự học cao"],
-        "H_Kha": ["có ý thức tự học và giao tiếp khá", "hợp tác nhóm linh hoạt", "tự chủ trong giải quyết vấn đề khá tốt", "thực hiện khá tốt các năng lực chung"],
+        "T": ["tự học và giao tiếp cực kỳ xuất sắc", "tiếp thu nhạy bén các kỹ năng chung", "kỹ năng giải quyết vấn đề linh hoạt", "năng lực tự chủ và giao tiếp rất tốt", "ý thức tự học cao"],
+        "H_Kha": ["ý thức tự học và giao tiếp khá", "hợp tác nhóm linh hoạt", "tự chủ trong giải quyết vấn đề khá tốt", "thực hiện khá tốt các năng lực chung"],
         "H_TrungBinh": ["giao tiếp và tự học ở mức cơ bản", "đạt yêu cầu về các năng lực chung", "cần chủ động hơn khi làm việc nhóm", "năng lực tự học đạt mức cơ bản"],
         "C": ["còn hạn chế trong kỹ năng tự học và giao tiếp", "chưa chủ động hợp tác và giải quyết vấn đề", "kỹ năng làm việc nhóm còn yếu", "còn rụt rè, chưa mạnh dạn giao tiếp"]
     }
     nldt_kho = {
-        "T": ["có năng lực đặc thù vô cùng nổi trội", "tiếp thu rất tốt kiến thức các môn học", "phát huy xuất sắc năng lực chuyên biệt", "thể hiện tính sáng tạo rất cao trong học tập"],
-        "H_Kha": ["nắm vững kiến thức đặc thù các môn", "phát huy khá tốt năng lực bộ môn", "đạt kết quả khá ở các môn học", "kỹ năng thực hành bộ môn khá vững"],
+        "T": ["năng lực đặc thù vô cùng nổi trội", "tiếp thu rất tốt kiến thức các môn học", "phát huy xuất sắc năng lực chuyên biệt", "tính sáng tạo rất cao trong học tập"],
+        "H_Kha": ["nắm vững kiến thức đặc thù các môn", "phát huy khá tốt năng lực bộ môn", "kết quả khá ở các môn học", "kỹ năng thực hành bộ môn khá vững"],
         "H_TrungBinh": ["đạt yêu cầu cơ bản về năng lực các môn", "hoàn thành các môn học ở mức cơ bản", "tiếp thu kiến thức ở mức đạt", "cần tập trung hơn trong các giờ học"],
         "C": ["chưa hoàn thành tốt các năng lực đặc thù", "tiếp thu kiến thức bộ môn còn chậm", "rèn luyện năng lực môn học còn yếu", "chưa nắm vững kiến thức trọng tâm"]
     }
     pc_kho = {
-        "T": ["luôn nỗ lực, trách nhiệm và hòa đồng", "biết quan tâm, chia sẻ và trung thực", "thể hiện rõ sự chăm chỉ, kỷ luật và ngoan ngoãn", "có tinh thần yêu nước, nhân ái tuyệt vời"],
-        "H_Kha": ["chăm chỉ và trung thực trong học tập", "có trách nhiệm với nhiệm vụ tập thể", "luôn tuân thủ nội quy lớp học", "có ý thức rèn luyện khá tốt các phẩm chất"],
-        "H_TrungBinh": ["biết yêu thương và tuân thủ nội quy", "chăm chỉ nhưng đôi khi thiếu tính tự giác", "biết vâng lời nhưng cần rèn kỷ luật cá nhân", "có ý thức đạo đức tốt nhưng cần mạnh dạn hơn"],
+        "T": ["luôn nỗ lực, trách nhiệm và hòa đồng", "biết quan tâm, chia sẻ và trung thực", "chăm chỉ, kỷ luật và ngoan ngoãn", "tinh thần yêu nước, nhân ái tuyệt vời"],
+        "H_Kha": ["chăm chỉ và trung thực trong học tập", "có trách nhiệm với nhiệm vụ tập thể", "luôn tuân thủ nội quy lớp học", "ý thức rèn luyện khá tốt các phẩm chất"],
+        "H_TrungBinh": ["biết yêu thương và tuân thủ nội quy", "chăm chỉ nhưng đôi khi thiếu tính tự giác", "biết vâng lời nhưng cần rèn kỷ luật cá nhân", "ý thức đạo đức tốt nhưng cần mạnh dạn hơn"],
         "C": ["cần cố gắng khắc phục tính trách nhiệm", "cần nghiêm túc rèn luyện kỷ luật hơn nữa", "còn hạn chế nhiều về mặt phẩm chất", "thiếu sự chăm chỉ, chưa trung thực"]
     }
     
@@ -279,8 +279,6 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
         else: # Đầy đủ / Ngẫu nhiên
             return cap_first(f"{mo_chon} nội dung {focus_kt}. Khả năng {kn_chon}. {lk_chon}")
 
-KEYS_15_PCNL = [f"nl{i}" for i in range(1, 11)] + [f"pc{i}" for i in range(1, 6)]
-
 def check_col_has_data(df, col_idx, start_row, check_type="level"):
     for r in range(start_row, min(start_row + 3, len(df))):
         val = str(df.iloc[r, col_idx]).strip().upper()
@@ -337,9 +335,7 @@ def phan_tich_file(file, thoi_diem):
             'muc_pc': [], 'nx_pc': []
         }
         
-        detailed_cands = {k: [] for k in KEYS_15_PCNL}
-        explicit_detailed_cands = {k: [] for k in KEYS_15_PCNL}
-        
+        valid_eval_cols = []
         current_term_context = None 
         
         # TỪ KHÓA CHUẨN XÁC, QUÉT KÌ 2 TRƯỚC, KÌ 1 SAU
@@ -366,6 +362,10 @@ def phan_tich_file(file, thoi_diem):
 
             if is_other_term:
                 continue
+                
+            # Đánh dấu các cột điểm chi tiết cho PC-NL (T, H, C, Đ) của kì hiện tại
+            if is_my_term and check_col_has_data(df, j, s_row, "level"):
+                valid_eval_cols.append(j)
             
             is_diem = "điểm" in header_area or "đg" in header_area
             is_muc = any(w in header_area for w in ["mức", "đạt được", "đánh giá", "kết quả", "xếp loại", "xl", "mdd"])
@@ -382,14 +382,12 @@ def phan_tich_file(file, thoi_diem):
                     muc_cands.append(j)
                     if is_my_term: explicit_muc_cands.append(j)
                     
-                # HỖ TRỢ ĐẶC BIỆT CHO MÔN ĐẠO ĐỨC/HĐTN (Cột chỉ ghi Học kì mà không ghi Điểm/Mức)
                 if is_my_term and not is_diem and not is_muc and not is_nx:
                     diem_cands.append(j)
                     muc_cands.append(j)
                     explicit_diem_cands.append(j)
                     explicit_muc_cands.append(j)
             
-            # --- LUỒNG QUÉT TỪ KHÓA CHO PC-NL ---
             is_nlc = "năng lực chung" in header_area or ("chung" in header_area and "năng" in header_area) or "nlc" in header_clean
             is_nldt = "đặc thù" in header_area or ("đặc" in header_area and "năng" in header_area) or "nlđt" in header_clean or "nldt" in header_clean
             is_pc = "phẩm chất" in header_area or "pc" in header_clean
@@ -406,7 +404,6 @@ def phan_tich_file(file, thoi_diem):
                     if is_muc or (not is_muc and not is_nx): cands_pcnl['muc_pc'].append(j)
                     if is_nx: cands_pcnl['nx_pc'].append(j)
                     
-        # --- CHỐT CỘT ĐIỂM/MỨC CHÍNH XÁC ---
         diem_col = get_best_col_strict(df, explicit_diem_cands, s_row, "score")
         muc_col = get_best_col_strict(df, explicit_muc_cands, s_row, "level")
         
@@ -429,7 +426,6 @@ def phan_tich_file(file, thoi_diem):
             elif check_col_has_data(df, diem_col, s_row, "level"): diem_col = -1
             else: diem_col = -1 
             
-        # --- CHỐT CỘT PC-NL (3 PHẦN RIÊNG BIỆT) ---
         for k in pcnl_cols:
             if 'muc' in k:
                 pcnl_cols[k] = get_best_col_strict(df, cands_pcnl[k], s_row, "level")
@@ -437,18 +433,6 @@ def phan_tich_file(file, thoi_diem):
             else:
                 if cands_pcnl[k]: pcnl_cols[k] = cands_pcnl[k][-1]
                 
-        # --- CHỐT CỘT CHI TIẾT NL/PC ---
-        detailed_cols = {}
-        for k in KEYS_15_PCNL:
-            col_idx = get_best_col_strict(df, explicit_detailed_cands[k], s_row, "level")
-            if col_idx == -1 and explicit_detailed_cands[k]: col_idx = explicit_detailed_cands[k][-1]
-            if col_idx == -1: col_idx = get_best_col_strict(df, detailed_cands[k], s_row, "level")
-            if col_idx == -1 and detailed_cands[k]:
-                if "I" in thoi_diem and "II" not in thoi_diem: col_idx = detailed_cands[k][0]
-                else: col_idx = detailed_cands[k][-1]
-            detailed_cols[k] = col_idx
-                
-        # --- CHỐT CỘT NHẬN XÉT MÔN HỌC ---
         ref_cols = []
         if diem_col != -1: ref_cols.append(diem_col)
         if muc_col != -1: ref_cols.append(muc_col)
@@ -461,12 +445,13 @@ def phan_tich_file(file, thoi_diem):
             if valid_c: c_col = valid_c[0]
             else: c_col = c_cands[-1]
                 
+        # SỬ DỤNG .insert ĐỂ ĐẢM BẢO KHÔNG BỊ LỖI PANDAS INDEX (Tránh KeyError)
         if c_col == -1: 
             c_col = len(df.columns)
-            df[c_col] = ""
-            df.iloc[h_row, c_col] = "Nhận xét"
+            df.insert(c_col, f"NX_MON_{uuid.uuid4().hex[:4]}", "")
+            df.iat[max(0, s_row - 1), c_col] = "Nhận xét"
         
-        return df, n_col, diem_col, muc_col, c_col, s_row, pcnl_cols, detailed_cols
+        return df, n_col, diem_col, muc_col, c_col, s_row, pcnl_cols, valid_eval_cols
     except: return None, None, None, None, None, None, None, None
 
 # --- 4. SIDEBAR CẤU HÌNH ---
@@ -498,59 +483,65 @@ if "ket_qua_nhan_xet" not in st.session_state:
 # --- 5. NỘI DUNG CHÍNH ---
 
 if f_hs:
-    df_raw, n_col, d_col, m_col, c_col, s_row, pcnl_cols, detailed_cols = phan_tich_file(f_hs, thoi_diem)
+    df_raw, n_col, d_col, m_col, c_col, s_row, pcnl_cols, valid_eval_cols = phan_tich_file(f_hs, thoi_diem)
     
     if df_raw is not None:
         data_list = []
         mapping_indices = []
         header_r = max(0, s_row - 1)
         
-        has_detailed_pcnl = False
-        if loai_nx == "PC-NL" and detailed_cols:
-            has_detailed_pcnl = all(k in detailed_cols and detailed_cols[k] != -1 for k in KEYS_15_PCNL)
+        # BỐC CÁC CỘT CHI TIẾT CỦA PC-NL RA GIAO DIỆN (Lấy 15 cột T,H,C,Đ)
+        pcnl_headers = []
+        if loai_nx == "PC-NL" and valid_eval_cols:
+            for j in valid_eval_cols:
+                h_name = str(df_raw.iloc[max(0, s_row-1), j]).strip().replace("\n", " ")
+                if h_name.lower() in ['nan', 'none', '']: 
+                    h_name = str(df_raw.iloc[max(0, s_row-2), j]).strip().replace("\n", " ")
+                if h_name.lower() in ['nan', 'none', '']: h_name = f"Cột {j}"
+                
+                orig = h_name
+                count = 1
+                while h_name in [n for _, n in pcnl_headers]:
+                    h_name = f"{orig} ({count})"
+                    count += 1
+                pcnl_headers.append((j, h_name))
         
         # Đảm bảo các cột Nhận xét PC-NL tồn tại và CÓ TIÊU ĐỀ RÕ RÀNG để giáo viên dễ copy
         if loai_nx == "PC-NL":
             if pcnl_cols['nx_nlc'] == -1: 
-                pcnl_cols['nx_nlc'] = len(df_raw.columns); df_raw[pcnl_cols['nx_nlc']] = ""
-                df_raw.iloc[header_r, pcnl_cols['nx_nlc']] = "NX Năng lực chung"
+                pcnl_cols['nx_nlc'] = len(df_raw.columns)
+                df_raw.insert(pcnl_cols['nx_nlc'], f"NX_NLC_{uuid.uuid4().hex[:4]}", "")
+                df_raw.iat[header_r, pcnl_cols['nx_nlc']] = "NX Năng lực chung"
             if pcnl_cols['nx_nldt'] == -1: 
-                pcnl_cols['nx_nldt'] = len(df_raw.columns); df_raw[pcnl_cols['nx_nldt']] = ""
-                df_raw.iloc[header_r, pcnl_cols['nx_nldt']] = "NX Năng lực đặc thù"
+                pcnl_cols['nx_nldt'] = len(df_raw.columns)
+                df_raw.insert(pcnl_cols['nx_nldt'], f"NX_NLDT_{uuid.uuid4().hex[:4]}", "")
+                df_raw.iat[header_r, pcnl_cols['nx_nldt']] = "NX Năng lực đặc thù"
             if pcnl_cols['nx_pc'] == -1: 
-                pcnl_cols['nx_pc'] = len(df_raw.columns); df_raw[pcnl_cols['nx_pc']] = ""
-                df_raw.iloc[header_r, pcnl_cols['nx_pc']] = "NX Phẩm chất"
+                pcnl_cols['nx_pc'] = len(df_raw.columns)
+                df_raw.insert(pcnl_cols['nx_pc'], f"NX_PC_{uuid.uuid4().hex[:4]}", "")
+                df_raw.iat[header_r, pcnl_cols['nx_pc']] = "NX Phẩm chất"
 
         for i in range(s_row, len(df_raw)):
             ten = str(df_raw.iloc[i, n_col]).strip()
             if ten.lower() not in ['nan', 'none', '']:
                 if loai_nx == "PC-NL":
-                    if has_detailed_pcnl:
-                        nl_vals = [str(df_raw.iloc[i, detailed_cols[f"nl{k}"]]).strip().upper() for k in range(1, 11)]
-                        pc_vals = [str(df_raw.iloc[i, detailed_cols[f"pc{k}"]]).strip().upper() for k in range(1, 6)]
-                        
-                        row_data = {"Họ và tên": ten}
-                        for k in range(1, 11): row_data[f"NL{k}"] = nl_vals[k-1] if nl_vals[k-1] not in ['NAN', 'NONE'] else ""
-                        for k in range(1, 6): row_data[f"PC{k}"] = pc_vals[k-1] if pc_vals[k-1] not in ['NAN', 'NONE'] else ""
-                        
-                        row_data["NX Năng lực chung"] = ""
-                        row_data["NX Năng lực đặc thù"] = ""
-                        row_data["NX Phẩm chất"] = ""
-                        data_list.append(row_data)
+                    row_data = {"Họ và tên": ten}
+                    if pcnl_headers:
+                        for j, h_name in pcnl_headers:
+                            val = str(df_raw.iloc[i, j]).strip().upper()
+                            row_data[h_name] = val if val not in ['NAN', 'NONE'] else ""
                     else:
                         m_nlc = str(df_raw.iloc[i, pcnl_cols['muc_nlc']]).strip().upper() if pcnl_cols['muc_nlc'] != -1 else ""
                         m_nldt = str(df_raw.iloc[i, pcnl_cols['muc_nldt']]).strip().upper() if pcnl_cols['muc_nldt'] != -1 else ""
                         m_pc = str(df_raw.iloc[i, pcnl_cols['muc_pc']]).strip().upper() if pcnl_cols['muc_pc'] != -1 else ""
+                        row_data["Mức NLC"] = m_nlc if m_nlc not in ['NAN', 'NONE'] else ""
+                        row_data["Mức NLĐT"] = m_nldt if m_nldt not in ['NAN', 'NONE'] else ""
+                        row_data["Mức PC"] = m_pc if m_pc not in ['NAN', 'NONE'] else ""
                         
-                        data_list.append({
-                            "Họ và tên": ten,
-                            "Mức NLC": m_nlc if m_nlc not in ['NAN', 'NONE'] else "",
-                            "Mức NLĐT": m_nldt if m_nldt not in ['NAN', 'NONE'] else "",
-                            "Mức PC": m_pc if m_pc not in ['NAN', 'NONE'] else "",
-                            "NX Năng lực chung": "",
-                            "NX Năng lực đặc thù": "",
-                            "NX Phẩm chất": ""
-                        })
+                    row_data["NX Năng lực chung"] = ""
+                    row_data["NX Năng lực đặc thù"] = ""
+                    row_data["NX Phẩm chất"] = ""
+                    data_list.append(row_data)
                 else:
                     v_diem = str(df_raw.iloc[i, d_col]).strip() if d_col != -1 else ""
                     v_muc = str(df_raw.iloc[i, m_col]).strip().upper() if m_col != -1 else ""
@@ -561,11 +552,11 @@ if f_hs:
         
         if not data_list:
             if loai_nx == "PC-NL":
-                if has_detailed_pcnl:
-                    cols = ["Họ và tên"] + [f"NL{i}" for i in range(1,11)] + [f"PC{i}" for i in range(1,6)] + ["NX Năng lực chung", "NX Năng lực đặc thù", "NX Phẩm chất"]
-                    df_view = pd.DataFrame(columns=cols)
-                else:
-                    df_view = pd.DataFrame(columns=["Họ và tên", "Mức NLC", "Mức NLĐT", "Mức PC", "NX Năng lực chung", "NX Năng lực đặc thù", "NX Phẩm chất"])
+                cols = ["Họ và tên"]
+                if pcnl_headers: cols.extend([h for _, h in pcnl_headers])
+                else: cols.extend(["Mức NLC", "Mức NLĐT", "Mức PC"])
+                cols.extend(["NX Năng lực chung", "NX Năng lực đặc thù", "NX Phẩm chất"])
+                df_view = pd.DataFrame(columns=cols)
             else:
                 df_view = pd.DataFrame(columns=["Họ và tên", "Điểm", "Mức", "Nhận xét"])
         else:
@@ -579,34 +570,17 @@ if f_hs:
         }
         
         if loai_nx == "PC-NL":
-            if has_detailed_pcnl:
-                config.update({
-                    "NL1": st.column_config.Column("T.Học", width="small"),
-                    "NL2": st.column_config.Column("G.Tiếp", width="small"),
-                    "NL3": st.column_config.Column("GQVĐ", width="small"),
-                    "NL4": st.column_config.Column("N.Ngữ", width="small"),
-                    "NL5": st.column_config.Column("Toán", width="small"),
-                    "NL6": st.column_config.Column("K.Học", width="small"),
-                    "NL7": st.column_config.Column("C.Nghệ", width="small"),
-                    "NL8": st.column_config.Column("Tin", width="small"),
-                    "NL9": st.column_config.Column("T.Mỹ", width="small"),
-                    "NL10": st.column_config.Column("T.Chất", width="small"),
-                    "PC1": st.column_config.Column("Y.Nước", width="small"),
-                    "PC2": st.column_config.Column("N.Ái", width="small"),
-                    "PC3": st.column_config.Column("C.Chỉ", width="small"),
-                    "PC4": st.column_config.Column("T.Thực", width="small"),
-                    "PC5": st.column_config.Column("T.Nhiệm", width="small"),
-                    "NX Năng lực chung": st.column_config.Column(width="medium"),
-                    "NX Năng lực đặc thù": st.column_config.Column(width="medium"),
-                    "NX Phẩm chất": st.column_config.Column(width="medium")
-                })
+            if pcnl_headers:
+                for _, h_name in pcnl_headers:
+                    config[h_name] = st.column_config.Column(width="small")
             else:
                 config["Mức NLC"] = st.column_config.Column(width="small")
                 config["Mức NLĐT"] = st.column_config.Column(width="small")
                 config["Mức PC"] = st.column_config.Column(width="small")
-                config["NX Năng lực chung"] = st.column_config.Column(width="medium")
-                config["NX Năng lực đặc thù"] = st.column_config.Column(width="medium")
-                config["NX Phẩm chất"] = st.column_config.Column(width="medium")
+            
+            config["NX Năng lực chung"] = st.column_config.Column(width="medium")
+            config["NX Năng lực đặc thù"] = st.column_config.Column(width="medium")
+            config["NX Phẩm chất"] = st.column_config.Column(width="medium")
         else: 
             config["Điểm"] = st.column_config.Column(width="small")
             config["Mức"] = st.column_config.Column(width="small")
@@ -676,10 +650,9 @@ if f_hs:
                 is_empty_row = False
                 
                 if loai_nx == "PC-NL":
-                    if has_detailed_pcnl:
-                        raw_nls = [str(row.get(f"NL{k}", "")).strip() for k in range(1, 11)]
-                        raw_pcs = [str(row.get(f"PC{k}", "")).strip() for k in range(1, 6)]
-                        if all(v == "" for v in raw_nls + raw_pcs): is_empty_row = True
+                    if pcnl_headers:
+                        all_vals = [str(row.get(h_name, "")).strip() for _, h_name in pcnl_headers]
+                        if all(v == "" for v in all_vals): is_empty_row = True
                     else:
                         m_nlc = str(row.get("Mức NLC", "")).strip()
                         m_nldt = str(row.get("Mức NLĐT", "")).strip()
@@ -695,20 +668,22 @@ if f_hs:
                         df_view.at[idx, "NX Năng lực chung"] = ""
                         df_view.at[idx, "NX Năng lực đặc thù"] = ""
                         df_view.at[idx, "NX Phẩm chất"] = ""
-                        df_raw.iloc[real_idx, pcnl_cols['nx_nlc']] = ""
-                        df_raw.iloc[real_idx, pcnl_cols['nx_nldt']] = ""
-                        df_raw.iloc[real_idx, pcnl_cols['nx_pc']] = ""
+                        df_raw.iat[int(real_idx), int(pcnl_cols['nx_nlc'])] = ""
+                        df_raw.iat[int(real_idx), int(pcnl_cols['nx_nldt'])] = ""
+                        df_raw.iat[int(real_idx), int(pcnl_cols['nx_pc'])] = ""
                         st.session_state.ket_qua_nhan_xet.append("")
                     else:
                         df_view.at[idx, "Nhận xét"] = ""
-                        df_raw.iloc[real_idx, c_col] = ""
+                        df_raw.iat[int(real_idx), int(c_col)] = ""
                         st.session_state.ket_qua_nhan_xet.append("")
                 else:
                     if loai_nx == "PC-NL":
-                        if has_detailed_pcnl:
-                            mdd_nlc = calc_overall_mdd([row.get(f"NL{k}", "Đ") for k in range(1, 4)])
-                            mdd_nldt = calc_overall_mdd([row.get(f"NL{k}", "Đ") for k in range(4, 11)])
-                            mdd_pc = calc_overall_mdd([row.get(f"PC{k}", "Đ") for k in range(1, 6)])
+                        if pcnl_headers:
+                            all_evals = [str(row.get(h_name, "")).upper() for _, h_name in pcnl_headers]
+                            overall = calc_overall_mdd(all_evals)
+                            mdd_nlc = get_mdd(str(row.get("Mức NLC", ""))) if "Mức NLC" in row and row["Mức NLC"] else overall
+                            mdd_nldt = get_mdd(str(row.get("Mức NLĐT", ""))) if "Mức NLĐT" in row and row["Mức NLĐT"] else overall
+                            mdd_pc = get_mdd(str(row.get("Mức PC", ""))) if "Mức PC" in row and row["Mức PC"] else overall
                         else:
                             mdd_nlc = get_mdd(m_nlc)
                             mdd_nldt = get_mdd(m_nldt)
@@ -731,9 +706,9 @@ if f_hs:
                         df_view.at[idx, "NX Năng lực đặc thù"] = nx_nldt
                         df_view.at[idx, "NX Phẩm chất"] = nx_pc
                         
-                        df_raw.iloc[real_idx, pcnl_cols['nx_nlc']] = nx_nlc
-                        df_raw.iloc[real_idx, pcnl_cols['nx_nldt']] = nx_nldt
-                        df_raw.iloc[real_idx, pcnl_cols['nx_pc']] = nx_pc
+                        df_raw.iat[int(real_idx), int(pcnl_cols['nx_nlc'])] = nx_nlc
+                        df_raw.iat[int(real_idx), int(pcnl_cols['nx_nldt'])] = nx_nldt
+                        df_raw.iat[int(real_idx), int(pcnl_cols['nx_pc'])] = nx_pc
                         st.session_state.ket_qua_nhan_xet.append(f"{nx_nlc} | {nx_nldt} | {nx_pc}")
                         
                     else:
@@ -769,7 +744,7 @@ if f_hs:
                             nx_text = sinh_nhan_xet_offline("Môn học", mdd, focus_kt, style_key, xung_ho, bat_xung_ho, mon, thoi_diem)
 
                         df_view.at[idx, "Nhận xét"] = nx_text
-                        df_raw.iloc[real_idx, c_col] = nx_text
+                        df_raw.iat[int(real_idx), int(c_col)] = nx_text
                         st.session_state.ket_qua_nhan_xet.append(nx_text)
                 
                 tab_place.dataframe(df_view, use_container_width=True, height=450, column_config=config)
@@ -782,7 +757,7 @@ if f_hs:
             
             if st.session_state.ket_qua_nhan_xet:
                 if loai_nx == "PC-NL":
-                    st.warning("🚨 **LƯU Ý VỚI BẢNG PC-NL:** Bảng PC-NL chứa tới 3 cột nhận xét khác nhau. Thầy/Cô vui lòng **Tải file kết quả dự phòng** (nút bên dưới) và mở bằng Excel để sử dụng, lúc này 3 cột nhận xét đã có tên rõ ràng và nằm chuẩn xác ở cuối danh sách!")
+                    st.warning("🚨 **LƯU Ý VỚI BẢNG PC-NL:** Bảng PC-NL chứa tới 3 cột nhận xét khác nhau. Thầy/Cô vui lòng **Tải file kết quả dự phòng** (nút bên dưới) và mở bằng Excel để sử dụng. Trên file tải về, 3 cột nhận xét đã có TIÊU ĐỀ IN ĐẬM rõ ràng và nằm chuẩn xác ở cuối danh sách!")
                 else:
                     st.markdown("### 📋 KẾT QUẢ COPY NHANH (DÁN TRỰC TIẾP VÀO EXCEL)")
                     copy_text = "\n".join(st.session_state.ket_qua_nhan_xet)
