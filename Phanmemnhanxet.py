@@ -241,6 +241,60 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
                 "H_TrungBinh": ["vốn từ vựng còn hạn chế", "kỹ năng giao tiếp và phát âm chưa tự nhiên", "cần trau dồi thêm ngữ pháp cơ bản", "khả năng nghe hiểu chưa cao"],
                 "C": ["phát âm yếu, chưa phản xạ được khi giao tiếp", "lỗ hổng từ vựng lớn, chưa nắm được cấu trúc câu", "rất chậm trong việc tiếp thu ngoại ngữ", "ngại giao tiếp và không nhớ từ mới"]
             },
+            "Khoa học": {
+                "T": ["giải thích hiện tượng tự nhiên rất logic", "vận dụng kiến thức khoa học vào thực tiễn cực kì xuất sắc", "kỹ năng quan sát và thực hành thí nghiệm nhạy bén", "tư duy khám phá khoa học vô cùng thông minh"],
+                "H_Kha": ["nhận biết tốt các sự vật hiện tượng", "biết cách thực hành thí nghiệm khoa học khá chuẩn", "áp dụng khá tốt kiến thức vào đời sống", "ghi nhớ khá tốt các kiến thức khoa học"],
+                "H_TrungBinh": ["nắm được các hiện tượng khoa học cơ bản", "thao tác thực hành đôi khi còn lúng túng", "cần quan sát tỉ mỉ hơn trong các bài thực hành", "hiểu được bề mặt kiến thức khoa học"],
+                "C": ["chưa nhận biết được các hiện tượng tự nhiên", "thao tác thực hành rất yếu", "còn mơ hồ về các kiến thức khoa học căn bản", "chưa biết cách ứng dụng kiến thức vào thực tế"]
+            },
+            "Lịch sử & Địa lý": {
+                "T": ["ghi nhớ xuất sắc các mốc sự kiện", "sử dụng bản đồ và lược đồ vô cùng thành thạo", "tư duy phân tích sự kiện lịch sử rất nhạy bén", "nắm bắt đặc điểm địa lý các vùng miền cực tốt"],
+                "H_Kha": ["nhớ khá rõ các sự kiện lịch sử trọng tâm", "biết cách xác định vị trí trên lược đồ", "trình bày nội dung bài học khá rõ ràng", "nắm khá chắc đặc điểm địa hình, khí hậu"],
+                "H_TrungBinh": ["nhớ được sự kiện cơ bản nhưng chưa sâu", "kỹ năng xem bản đồ còn chậm", "cần rèn luyện thêm cách phân tích lược đồ", "hay nhầm lẫn các mốc thời gian"],
+                "C": ["không nhớ các mốc sự kiện lịch sử", "hoàn toàn lúng túng khi xem bản đồ", "mất căn bản về đặc điểm địa lý vùng miền", "chưa hiểu rõ nội dung các bài học trọng tâm"]
+            },
+            "Đạo đức": {
+                "T": ["nhận thức chuẩn mực đạo đức vô cùng sâu sắc", "luôn gương mẫu và ứng xử tình huống tuyệt vời", "thể hiện thái độ đúng đắn trong mọi hoàn cảnh", "hiểu và thực hành xuất sắc các bài học đạo đức"],
+                "H_Kha": ["nhận biết khá tốt các hành vi đạo đức", "biết cách ứng xử phù hợp trong thực tế", "ngoan ngoãn, hoàn thành khá tốt yêu cầu bài học", "hiểu rõ các quy tắc đạo đức trên lớp"],
+                "H_TrungBinh": ["nắm được bài học nhưng ứng dụng còn hạn chế", "đôi lúc còn rụt rè khi xử lý tình huống giao tiếp", "cần mạnh dạn hơn khi bày tỏ ý kiến cá nhân", "nhận thức đạo đức ở mức cơ bản"],
+                "C": ["chưa nắm được các chuẩn mực hành vi", "ứng xử tình huống còn rất yếu", "thiếu tập trung trong giờ học đạo đức", "cần rèn luyện rất nhiều về thái độ và ý thức"]
+            },
+            "Âm nhạc": {
+                "T": ["cảm thụ âm nhạc cực kỳ tinh tế", "hát đúng giai điệu, gõ đệm nhịp nhàng", "tự tin biểu diễn cực kỳ xuất sắc", "có năng khiếu âm nhạc nổi trội"],
+                "H_Kha": ["thuộc lời bài hát và hát khá đúng nhịp", "biết kết hợp gõ đệm cơ bản", "thể hiện bài hát khá rõ ràng", "nhận biết khá tốt các nốt nhạc"],
+                "H_TrungBinh": ["thuộc lời nhưng đôi chỗ hát còn chệch nhịp", "cần mạnh dạn, tự tin hơn khi biểu diễn", "thao tác gõ đệm còn hơi cứng", "cần rèn luyện thêm về cao độ và trường độ"],
+                "C": ["chưa thuộc kỹ lời bài hát", "hát sai giai điệu và nhịp điệu nhiều", "còn rất nhút nhát, không dám biểu diễn", "kỹ năng cảm thụ âm nhạc còn yếu"]
+            },
+            "Mĩ thuật": {
+                "T": ["có năng khiếu thẩm mỹ tuyệt vời", "phối màu sắc cực kỳ hài hòa", "nét vẽ vô cùng sáng tạo và phóng khoáng", "bố cục tranh cực kì chỉn chu, đẹp mắt"],
+                "H_Kha": ["biết cách sắp xếp bố cục hợp lý", "tô màu khá cẩn thận", "có ý tưởng vẽ tranh khá tốt", "hoàn thành bài thực hành khá đẹp"],
+                "H_TrungBinh": ["hoàn thành bài vẽ ở mức cơ bản", "nét vẽ cần nắn nót và trau chuốt hơn", "cách phối màu còn hơi đơn điệu", "cần tỉ mỉ hơn khi hoàn thiện sản phẩm"],
+                "C": ["kỹ năng vẽ và tô màu còn yếu", "bài làm thường chưa hoàn thiện", "bố cục tranh lộn xộn, thiếu ý tưởng", "thiếu tập trung trong giờ học vẽ"]
+            },
+            "GDTC": {
+                "T": ["thực hiện các động tác vô cùng chuẩn xác", "thể dục nhịp điệu cực kỳ dẻo dai", "thao tác vận động rất nhanh nhẹn, dứt khoát", "có tố chất thể thao rất xuất sắc"],
+                "H_Kha": ["hoàn thành khá tốt các bài tập thể dục", "vận động cơ thể khá nhịp nhàng", "thuộc khá kỹ các động tác bài tập", "nhanh nhẹn và tích cực trong giờ học"],
+                "H_TrungBinh": ["thực hiện được các động tác cơ bản", "cần linh hoạt và dứt khoát hơn khi vận động", "đôi lúc còn nhầm lẫn thứ tự động tác", "cần mạnh dạn hơn khi tham gia trò chơi"],
+                "C": ["thể lực còn hạn chế", "thực hiện sai nhiều động tác kỹ thuật", "rất lúng túng khi phối hợp vận động", "chưa bắt nhịp được với bài tập của lớp"]
+            },
+            "Công nghệ": {
+                "T": ["thao tác lắp ráp mô hình vô cùng khéo léo", "tư duy thiết kế cực kỳ sáng tạo", "sử dụng dụng cụ thủ công rất chuyên nghiệp", "hoàn thiện sản phẩm cực kì đẹp mắt"],
+                "H_Kha": ["biết cách sử dụng bộ lắp ghép khá thành thạo", "hoàn thiện sản phẩm tương đối tốt", "thao tác thực hành khá cẩn thận", "nắm vững quy trình công nghệ cơ bản"],
+                "H_TrungBinh": ["thực hiện được các bước lắp ráp ở mức cơ bản", "thao tác đôi khi còn lúng túng", "cần cẩn thận và khéo léo hơn", "sản phẩm làm ra chưa thực sự hoàn thiện"],
+                "C": ["thao tác thực hành rất chậm", "chưa biết cách lắp ráp hoàn thiện sản phẩm", "thường xuyên làm sai các bước hướng dẫn", "sử dụng dụng cụ còn rất lóng ngóng"]
+            },
+            "Tin học": {
+                "T": ["sử dụng phần mềm cực kỳ thành thạo", "thao tác máy tính vô cùng nhanh nhẹn", "tư duy logic tin học xuất sắc", "vận dụng công nghệ vào bài tập rất thông minh"],
+                "H_Kha": ["nắm khá chắc các thao tác tin học cơ bản", "biết cách vận dụng phần mềm khá tốt", "gõ phím và sử dụng chuột tương đối linh hoạt", "thực hành trên máy tính khá trôi chảy"],
+                "H_TrungBinh": ["thực hiện được thao tác chuột và bàn phím cơ bản", "cần thực hành nhiều hơn để nhớ các lệnh", "sử dụng phần mềm đôi lúc còn chậm", "chỉ mới nắm được kiến thức ở bề mặt"],
+                "C": ["rất lúng túng khi sử dụng chuột và bàn phím", "chưa nắm được các thao tác tin học cơ bản", "không tự thực hành được trên máy tính", "tiếp thu kiến thức tin học còn rất hạn chế"]
+            },
+            "Hoạt động trải nghiệm": {
+                "T": ["kỹ năng xử lý tình huống thực tế cực kỳ thông minh", "làm việc nhóm và giao tiếp vô cùng xuất sắc", "tích cực, chủ động trong mọi phong trào", "thể hiện năng lực tự chủ vô cùng nổi bật"],
+                "H_Kha": ["kỹ năng hợp tác nhóm khá linh hoạt", "biết cách ứng xử khá tốt trong trải nghiệm", "hòa nhập nhanh với các hoạt động tập thể", "nắm khá vững các kỹ năng sống cơ bản"],
+                "H_TrungBinh": ["hoàn thành các nhiệm vụ trải nghiệm cơ bản", "cần mạnh dạn hơn khi làm việc nhóm", "đôi lúc còn rụt rè khi bày tỏ ý kiến", "kỹ năng giao tiếp và xử lý tình huống ở mức đạt"],
+                "C": ["còn rất nhút nhát, ngại tham gia phong trào", "kỹ năng xử lý tình huống thực tế cực kỳ yếu", "chưa biết cách hợp tác với bạn bè", "thiếu kỹ năng sống trầm trọng"]
+            },
             "Chung": {
                 "T": ["kĩ năng thực hành vô cùng thành thạo", "vận dụng cực kỳ linh hoạt kiến thức vào thực tiễn", "tư duy phân tích và giải quyết vấn đề nhạy bén", "trình bày sản phẩm xuất sắc, sáng tạo", "nắm bắt bài học vô cùng thông minh"],
                 "H_Kha": ["kĩ năng thực hành đạt mức khá tốt", "vận dụng được kiến thức vào bài tập", "ghi nhớ tốt các sự kiện/nội dung trọng tâm", "biết cách giải quyết yêu cầu của bài học", "hoàn thành chỉn chu các sản phẩm thực hành"],
