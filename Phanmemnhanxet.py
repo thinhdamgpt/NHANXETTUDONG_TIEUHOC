@@ -265,8 +265,13 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
         lk = random.choice(loi_khuyen[mdd])
         
         if phong_cach == "Ngắn gọn":
-            short_md = {"T": "Nắm vững kiến thức", "H_Kha": "Tiếp thu khá tốt", "H_TrungBinh": "Đạt mức cơ bản", "C": "Chưa nắm vững kiến thức"}
-            return f"{short_md[mdd]}. {cap_first(kn)}."
+            short_md = {
+                "T": ["Nắm vững kiến thức", "Hiểu rất sâu bài", "Tiếp thu rất tốt", "Hoàn thành xuất sắc", "Nắm chắc bài học", "Kết quả học tập xuất sắc"],
+                "H_Kha": ["Tiếp thu khá tốt", "Nắm khá vững bài", "Thực hiện khá tốt", "Hiểu rõ nội dung", "Hoàn thành tốt yêu cầu", "Đạt kết quả khá"],
+                "H_TrungBinh": ["Đạt mức cơ bản", "Tiếp thu được bài", "Hoàn thành yêu cầu", "Nắm được kiến thức cơ bản", "Thực hiện được nội dung", "Kết quả ở mức đạt"],
+                "C": ["Chưa nắm vững kiến thức", "Còn hạn chế", "Tiếp thu còn chậm", "Chưa hoàn thành tốt", "Gặp khó khăn khi tiếp thu", "Cần cố gắng nhiều hơn"]
+            }
+            return f"{random.choice(short_md[mdd])}. {cap_first(kn)}."
 
         formats = [
             f"{cap_first(md)} nội dung {focus_kt}. {cap_first(kn)}. {lk}",
