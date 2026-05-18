@@ -11,7 +11,7 @@ st.set_page_config(layout="wide", page_title="Hệ thống Nhận xét AI", page
 
 # Tỷ lệ vàng: padding-top: 2.5rem giúp đẩy sát mép mà không bị lẹm chữ Copyright
 st.markdown("""<style>
-.block-container { padding-top: 2.5rem !important; padding-bottom: 1rem !important; }
+.block-container { padding-top: 2.5rem !important; }
 .main { background-color: #f0f4f8; font-family: 'Inter', sans-serif; } 
 .copy-area { background-color: #ffffff; padding: 18px; border-radius: 8px; border: 1px solid #d1d9e6; margin-top: 20px; max-height: 300px; overflow-y: auto; white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 14.5px; box-shadow: 0 4px 6px rgba(0,0,0,0.04); line-height: 1.6;}
 div[data-testid="stSidebar"] { background-color: #ffffff; box-shadow: 2px 0 12px rgba(0,0,0,0.06); }
@@ -34,14 +34,6 @@ st.markdown("""
     </div>
 </div>
 """, unsafe_allow_html=True)
-
-st.markdown("""<style>
-.main { background-color: #f0f4f8; font-family: 'Inter', sans-serif; } 
-.copy-area { background-color: #ffffff; padding: 18px; border-radius: 8px; border: 1px solid #d1d9e6; margin-top: 20px; max-height: 300px; overflow-y: auto; white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 14.5px; box-shadow: 0 4px 6px rgba(0,0,0,0.04); line-height: 1.6;}
-div[data-testid="stSidebar"] { background-color: #ffffff; box-shadow: 2px 0 12px rgba(0,0,0,0.06); }
-.stButton>button { background-color: #1A73E8; color: white; border-radius: 6px; border: none; font-weight: 600; padding: 10px 20px; transition: all 0.3s ease; }
-.stButton>button:hover { background-color: #1557b0; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(26,115,232,0.3); }
-</style>""", unsafe_allow_html=True)
 
 # --- 1. MA TRẬN PHÂN PHỐI CHƯƠNG TRÌNH GDPT 2018 ĐƯỢC CHIA CHI TIẾT THEO KỲ HỌC ---
 PHAN_PHOI_CHUONG_TRINH = {
@@ -189,7 +181,6 @@ def sinh_nhan_xet_pcnl_offline(mdd_nlc, mdd_nldt, mdd_pc):
     return nx_nlc, nx_nldt, nx_pc
 
 def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xung_ho="Thầy", bat_xung_ho=True, mon="", thoi_diem=""):
-    xh = f"{xung_ho} " if bat_xung_ho else ""
     
     def cap_first(s):
         if not s: return s
@@ -227,9 +218,9 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
             
     else: # Môn học
         mo_T = ["nắm rất vững", "hiểu rất sâu", "thực hiện xuất sắc", "nắm chắc", "tiếp thu cực kỳ tốt"]
-        mo_Kha = ["nắm khá vững", "hiểu rõ", "thực hiện tốt", "tiếp thu khá tốt", "đạt kết quả khá tốt ở"]
+        mo_Kha = ["nắm khá vững", "hiểu rõ", "thực hiện tốt", "tiếp thu khá tốt", "đạt kết quả khá tốt"]
         mo_TB = ["nắm được cơ bản", "hiểu ở mức cơ bản", "thực hiện được", "đạt mức cơ bản", "tiếp thu được"]
-        mo_C = ["chưa nắm vững", "còn nhiều hạn chế ở", "thực hiện chưa tốt", "chưa đạt yêu cầu", "gặp khó khăn ở"]
+        mo_C = ["chưa nắm vững", "còn nhiều hạn chế", "thực hiện chưa tốt", "chưa đạt yêu cầu", "gặp khó khăn"]
 
         kynang_mon = {
             "Tiếng Việt": {
@@ -273,10 +264,12 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
         
         lk = random.choice(loi_khuyen[mdd])
         
+        if phong_cach == "Ngắn gọn":
+            short_md = {"T": "Nắm vững kiến thức", "H_Kha": "Tiếp thu khá tốt", "H_TrungBinh": "Đạt mức cơ bản", "C": "Chưa nắm vững kiến thức"}
+            return f"{short_md[mdd]}. {cap_first(kn)}."
+
         formats = [
             f"{cap_first(md)} nội dung {focus_kt}. {cap_first(kn)}. {lk}",
-            f"{cap_first(kn)} ở nội dung {focus_kt}. {lk}",
-            f"Đối với nội dung {focus_kt}, {md} kiến thức. {cap_first(kn)}. {lk}",
             f"{cap_first(kn)}. {cap_first(md)} nội dung {focus_kt}. {lk}"
         ]
         return random.choice(formats)
@@ -632,6 +625,13 @@ if f_hs:
                 style_key = phong_cach if phong_cach != "Ngẫu nhiên" else random.choice(["Ngắn gọn", "Gần gũi", "Khích lệ", "Đầy đủ"])
                 style_prompt = style_dict[style_key]
                 salt = str(uuid.uuid4())[:5]
+                
+                if style_key == "Đầy đủ":
+                    lenh_do_dai = "Khoảng 25-35 từ. Cần viết dài, chi tiết, đầy đủ câu chủ vị và phân tích sâu sát chuyên môn."
+                elif style_key == "Ngắn gọn":
+                    lenh_do_dai = "TUYỆT ĐỐI NGẮN GỌN. Tối đa 2 câu (Dưới 12 từ). Bỏ qua các từ rườm rà, đi thẳng vào đánh giá kỹ năng cốt lõi."
+                else:
+                    lenh_do_dai = "Khoảng 15-20 từ. Viết súc tích."
 
                 is_empty_row = False
                 
@@ -651,15 +651,17 @@ if f_hs:
 
                 if is_empty_row:
                     if loai_nx == "PC-NL":
-                        df_view.at[idx, "NX Năng lực chung"] = ""
-                        df_view.at[idx, "NX Năng lực đặc thù"] = ""
-                        df_view.at[idx, "NX Phẩm chất"] = ""
+                        if "NX Năng lực chung" in df_view.columns:
+                            df_view.at[idx, "NX Năng lực chung"] = ""
+                            df_view.at[idx, "NX Năng lực đặc thù"] = ""
+                            df_view.at[idx, "NX Phẩm chất"] = ""
                         df_raw.iat[int(real_idx), int(pcnl_cols['nx_nlc'])] = ""
                         df_raw.iat[int(real_idx), int(pcnl_cols['nx_nldt'])] = ""
                         df_raw.iat[int(real_idx), int(pcnl_cols['nx_pc'])] = ""
                         st.session_state.ket_qua_nhan_xet.append("")
                     else:
-                        df_view.at[idx, "Nhận xét"] = ""
+                        if "Nhận xét" in df_view.columns:
+                            df_view.at[idx, "Nhận xét"] = ""
                         df_raw.iat[int(real_idx), int(c_col)] = ""
                         st.session_state.ket_qua_nhan_xet.append("")
                 else:
@@ -688,9 +690,10 @@ if f_hs:
                         else:
                             nx_nlc, nx_nldt, nx_pc = sinh_nhan_xet_pcnl_offline(mdd_nlc, mdd_nldt, mdd_pc)
                         
-                        df_view.at[idx, "NX Năng lực chung"] = nx_nlc
-                        df_view.at[idx, "NX Năng lực đặc thù"] = nx_nldt
-                        df_view.at[idx, "NX Phẩm chất"] = nx_pc
+                        if "NX Năng lực chung" in df_view.columns:
+                            df_view.at[idx, "NX Năng lực chung"] = nx_nlc
+                            df_view.at[idx, "NX Năng lực đặc thù"] = nx_nldt
+                            df_view.at[idx, "NX Phẩm chất"] = nx_pc
                         
                         df_raw.iat[int(real_idx), int(pcnl_cols['nx_nlc'])] = nx_nlc
                         df_raw.iat[int(real_idx), int(pcnl_cols['nx_nldt'])] = nx_nldt
@@ -729,7 +732,8 @@ if f_hs:
                         if not nx_text:
                             nx_text = sinh_nhan_xet_offline("Môn học", mdd, focus_kt, style_key, xung_ho, bat_xung_ho, mon, thoi_diem)
 
-                        df_view.at[idx, "Nhận xét"] = nx_text
+                        if "Nhận xét" in df_view.columns:
+                            df_view.at[idx, "Nhận xét"] = nx_text
                         df_raw.iat[int(real_idx), int(c_col)] = nx_text
                         st.session_state.ket_qua_nhan_xet.append(nx_text)
                 
@@ -747,7 +751,8 @@ if f_hs:
                 else:
                     st.markdown("### 📋 KẾT QUẢ COPY NHANH (DÁN TRỰC TIẾP VÀO EXCEL)")
                     copy_text = "\n".join(st.session_state.ket_qua_nhan_xet)
-                    st.text_area("Bấm chuột vào khung dưới đây, ấn Ctrl+A để chọn tất cả, rồi ấn Ctrl+C để Copy:", value=copy_text, height=350)
+                    st.info("💡 **MẸO COPY SIÊU NHANH:** Thầy/Cô chỉ cần rê chuột vào góc trên cùng bên phải của khung chữ dưới đây, bấm vào **biểu tượng Copy (Hình 2 tờ giấy xếp lên nhau)** là xong! Khỏi cần bôi đen hay Ctrl+C nữa nhé!")
+                    st.code(copy_text, language="text")
                     st.warning("🚨 **LỖI DÁN 1 DÒNG DÀI NGOẰNG VÀ CÁCH KHẮC PHỤC:**\nNguyên nhân là do thầy/cô đã click đúp (nhấn chuột 2 lần) vào ô Excel khiến con trỏ nhấp nháy bên trong ô.\n\n👉 **CÁCH LÀM ĐÚNG:** Chỉ **CLICK CHUỘT 1 LẦN DUY NHẤT** vào ô đầu tiên (sao cho ô đó hiện viền màu xanh, TUYỆT ĐỐI KHÔNG có con trỏ nháy nháy bên trong). Sau đó ấn **Ctrl + V**, Excel sẽ tự động rải đều mỗi em 1 dòng!")
 
             out = io.BytesIO()
