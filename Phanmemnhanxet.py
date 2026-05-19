@@ -217,10 +217,10 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
         return random.choice(formats)
             
     else: # Môn học
-        mo_T = ["nắm rất vững", "hiểu rất sâu", "thực hiện xuất sắc", "nắm chắc", "tiếp thu cực kỳ tốt"]
-        mo_Kha = ["nắm khá vững", "hiểu rõ", "thực hiện tốt", "tiếp thu khá tốt", "đạt kết quả khá tốt"]
-        mo_TB = ["nắm được cơ bản", "hiểu ở mức cơ bản", "thực hiện được", "đạt mức cơ bản", "tiếp thu được"]
-        mo_C = ["chưa nắm vững", "còn nhiều hạn chế", "thực hiện chưa tốt", "chưa đạt yêu cầu", "gặp khó khăn"]
+        mo_T = [f"nắm rất vững nội dung {focus_kt}", f"tiếp thu cực kỳ tốt nội dung {focus_kt}", f"hoàn thành xuất sắc bài học {focus_kt}"]
+        mo_Kha = [f"nắm khá vững nội dung {focus_kt}", f"tiếp thu khá tốt bài học {focus_kt}", f"thực hiện tốt nội dung {focus_kt}"]
+        mo_TB = [f"nắm được cơ bản nội dung {focus_kt}", f"hoàn thành nội dung {focus_kt} ở mức cơ bản", f"tiếp thu được bài học {focus_kt}"]
+        mo_C = [f"chưa nắm vững nội dung {focus_kt}", f"còn nhiều hạn chế ở bài học {focus_kt}", f"gặp khó khăn khi tiếp thu {focus_kt}"]
 
         kynang_mon = {
             "Tiếng Việt": {
@@ -310,12 +310,9 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
             "C": ["Cần nỗ lực ôn tập lại các kiến thức bị hổng.", "Yêu cầu nghiêm túc chấn chỉnh thái độ học tập.", "Cần chăm chỉ làm bài và chú ý nghe giảng hơn.", "Nên chủ động nhờ sự hỗ trợ từ bạn bè và thầy cô.", "Cần dành tối đa thời gian để rèn luyện lại từ căn bản."]
         }
 
-        dict_mo = {"T": mo_T, "H_Kha": mo_Kha, "H_TrungBinh": mo_TB, "C": mo_C}
-        md = random.choice(dict_mo[mdd])
-        
+        md = random.choice({"T": mo_T, "H_Kha": mo_Kha, "H_TrungBinh": mo_TB, "C": mo_C}[mdd])
         nguon_kynang = kynang_mon.get(mon, kynang_mon["Chung"])
         kn = random.choice(nguon_kynang[mdd])
-        
         lk = random.choice(loi_khuyen[mdd])
         
         if phong_cach == "Ngắn gọn":
@@ -328,8 +325,10 @@ def sinh_nhan_xet_offline(loai_nx, mdd, focus_kt, phong_cach="Ngắn gọn", xun
             return f"{random.choice(short_md[mdd])}. {cap_first(kn)}."
 
         formats = [
-            f"{cap_first(md)} nội dung {focus_kt}. {cap_first(kn)}. {lk}",
-            f"{cap_first(kn)}. {cap_first(md)} nội dung {focus_kt}. {lk}"
+            f"{cap_first(md)}. {cap_first(kn)}. {lk}",
+            f"{cap_first(kn)}. {cap_first(md)}. {lk}",
+            f"Qua nội dung {focus_kt}, {kn}. {lk}",
+            f"{cap_first(kn)}. Nắm bắt nội dung {focus_kt} ở mức {mdd.replace('H_TrungBinh', 'đạt').replace('H_Kha', 'khá').replace('T', 'tốt').replace('C', 'chưa đạt')}. {lk}"
         ]
         return random.choice(formats)
 
@@ -359,7 +358,7 @@ def phan_tich_file(file, thoi_diem):
                     n_col, h_row = j, i; break
             if n_col != -1: break
             
-        if n_col == -1: return None, None, None, None, None, None, None, None, None
+        if n_col == -1: return None, None, None, None, None, None, None, None
         
         s_row = h_row + 1
         found_student = False
@@ -387,8 +386,6 @@ def phan_tich_file(file, thoi_diem):
                 
         diem_cands, muc_cands, c_cands = [], [], []
         explicit_diem_cands, explicit_muc_cands = [], []
-        nl_cands, pc_cands = [], []
-        explicit_nl_cands, explicit_pc_cands = [], []
         
         pcnl_cols = {
             'muc_nlc': -1, 'nx_nlc': -1,
@@ -567,28 +564,28 @@ if f_hs:
                     count += 1
                 pcnl_headers.append((j, h_name))
         
-        # Đảm bảo các cột Nhận xét tồn tại an toàn để tránh KeyError
+        # SỬ DỤNG CÁCH CHÈN CỘT AN TOÀN TUYỆT ĐỐI CHỐNG KEY ERROR
         if loai_nx == "PC-NL":
             if pcnl_cols['nx_nlc'] == -1: 
                 new_col = f"NX_NLC_{uuid.uuid4().hex[:4]}"
-                df_raw.insert(len(df_raw.columns), new_col, "")
-                pcnl_cols['nx_nlc'] = df_raw.columns.get_loc(new_col)
+                df_raw[new_col] = ""
+                pcnl_cols['nx_nlc'] = len(df_raw.columns) - 1
                 df_raw.iat[header_r, pcnl_cols['nx_nlc']] = "NX Năng lực chung"
             if pcnl_cols['nx_nldt'] == -1: 
                 new_col = f"NX_NLDT_{uuid.uuid4().hex[:4]}"
-                df_raw.insert(len(df_raw.columns), new_col, "")
-                pcnl_cols['nx_nldt'] = df_raw.columns.get_loc(new_col)
+                df_raw[new_col] = ""
+                pcnl_cols['nx_nldt'] = len(df_raw.columns) - 1
                 df_raw.iat[header_r, pcnl_cols['nx_nldt']] = "NX Năng lực đặc thù"
             if pcnl_cols['nx_pc'] == -1: 
                 new_col = f"NX_PC_{uuid.uuid4().hex[:4]}"
-                df_raw.insert(len(df_raw.columns), new_col, "")
-                pcnl_cols['nx_pc'] = df_raw.columns.get_loc(new_col)
+                df_raw[new_col] = ""
+                pcnl_cols['nx_pc'] = len(df_raw.columns) - 1
                 df_raw.iat[header_r, pcnl_cols['nx_pc']] = "NX Phẩm chất"
         else:
             if c_col == -1:
                 new_col = f"NX_MON_{uuid.uuid4().hex[:4]}"
-                df_raw.insert(len(df_raw.columns), new_col, "")
-                c_col = df_raw.columns.get_loc(new_col)
+                df_raw[new_col] = ""
+                c_col = len(df_raw.columns) - 1
                 df_raw.iat[header_r, c_col] = "Nhận xét"
 
         for i in range(s_row, len(df_raw)):
@@ -678,6 +675,12 @@ if f_hs:
                 
             lenh_cam_cam_xuc = "TUYỆT ĐỐI KHÔNG DÙNG các từ ngữ cảm xúc, an ủi, hứa hẹn, nhắc đến gia đình hay ra lệnh cứng nhắc (như: 'Đừng lo lắng', 'Mong', 'Mong có sự', 'Mong rằng', 'Sẽ', 'Sẽ đồng hành', 'Tin kết quả sẽ tốt', 'Gia đình', 'Nhắc nhở', 'Yêu cầu'). CHỈ đánh giá khách quan, khoa học trực tiếp vào ưu/khuyết điểm của nội dung kiến thức môn học và dùng từ 'cần' hoặc 'nên' để đề xuất khắc phục."
             
+            is_nang_khieu = mon in ["Đạo đức", "Âm nhạc", "Mĩ thuật", "GDTC", "HĐGD", "Hoạt động trải nghiệm"]
+            if is_nang_khieu:
+                lenh_mon_dac_thu = "BẮT BUỘC NHẬN XÉT ĐẶC THÙ: Đây là môn năng khiếu/đạo đức. TUYỆT ĐỐI KHÔNG KHUYÊN 'ôn tập kiến thức', 'củng cố nền tảng', 'làm bài tập'. Hãy nhận xét về việc 'rèn luyện kỹ năng', 'thái độ', 'thực hành', 'ứng xử' và 'ý thức'."
+            else:
+                lenh_mon_dac_thu = ""
+
             for idx, row in df_view.iterrows():
                 real_idx = mapping_indices[idx]; ten_hs = row["Họ và tên"]; nx_text = ""
                 
