@@ -93,7 +93,7 @@ def calc_overall_mdd(vals):
     if all(v == "T" for v in mapped): return "T"
     return "Đ"
 
-def sinh_nhan_xet_pcnl_offline(mdd_nlc, mdd_nldt, mdd_pc):
+def sinh_nhan_xet_pcnl_offline(mdd_nlc, mdd_nldt, mdd_pc, student_idx=None):
     def cap_first(s):
         if not s: return ""
         s = s.strip()
@@ -104,90 +104,161 @@ def sinh_nhan_xet_pcnl_offline(mdd_nlc, mdd_nldt, mdd_pc):
     nlc_kho = {
         "T": [
             "tự chủ trong học tập và giao tiếp rất tốt",
-            "tiếp thu nhạy bén các kỹ năng chung, biết tự học",
-            "kỹ năng giải quyết vấn đề và hợp tác nhóm linh hoạt",
-            "chủ động trong mọi hoạt động học tập và giao tiếp",
-            "ý thức tự học cao, tích cực tương tác với bạn bè"
+            "ý thức tự giác cao, luôn chủ động chuẩn bị bài và đồ dùng học tập chu đáo",
+            "giao tiếp tự tin, diễn đạt rõ ràng, biết lắng nghe và tôn trọng ý kiến bạn bè",
+            "hợp tác nhóm tích cực, có kỹ năng chia sẻ và phối hợp cùng bạn rất hiệu quả",
+            "có tinh thần tự học tốt, biết tìm tòi tài liệu và hoàn thành nhiệm vụ nhanh nhẹn",
+            "xử lý tình huống linh hoạt, tư duy giải quyết vấn đề sáng tạo và nhạy bén",
+            "chủ động trong mọi hoạt động học tập, tích cực tương tác và xây dựng bài",
+            "tự giác hoàn thành tốt nhiệm vụ học tập, biết tự kiểm tra và chỉnh sửa bài làm",
+            "biết cách lập kế hoạch học tập cá nhân và thực hiện rất nghiêm túc",
+            "tự tin bày tỏ chính kiến, có kỹ năng hợp tác và điều hành nhóm tốt",
+            "tiếp thu nhạy bén các kỹ năng chung, luôn năng nổ trong các hoạt động lớp",
+            "kỹ năng làm việc nhóm xuất sắc, luôn đoàn kết và hỗ trợ bạn bè cùng tiến bộ"
         ],
         "Đ": [
-            "giao tiếp và tự học đạt yêu cầu",
-            "hoàn thành các nhiệm vụ năng lực chung",
-            "biết hợp tác với bạn bè khi làm việc nhóm",
-            "có ý thức tự giác thực hiện nhiệm vụ học tập",
-            "biết lắng nghe và chia sẻ ý kiến với bạn"
+            "giao tiếp và tự học đạt yêu cầu của lứa tuổi",
+            "có ý thức tự giác học tập và hoàn thành các nhiệm vụ được giao",
+            "biết hợp tác với bạn bè khi làm việc nhóm, chuẩn bị bài tương đối đầy đủ",
+            "giao tiếp rõ ràng, biết lắng nghe thầy cô và trao đổi ý kiến cùng bạn",
+            "thực hiện đạt chuẩn các nhiệm vụ tự học và giải quyết vấn đề",
+            "có tinh thần học hỏi, tích cực tham gia các hoạt động tập thể",
+            "biết lắng nghe góp ý từ thầy cô, bạn bè và có ý thức sửa sai",
+            "hoàn thành nhiệm vụ học tập theo hướng dẫn của giáo viên",
+            "chăm chú lắng nghe bài giảng và chấp hành tốt các quy định chung",
+            "biết phối hợp cùng các bạn trong nhóm để hoàn thành bài tập",
+            "có cố gắng trong học tập, giao tiếp thân thiện và hòa đồng với bạn bè",
+            "biết tự quản lý đồ dùng học tập và thời gian cá nhân tương đối tốt"
         ],
         "C": [
-            "cần chủ động hơn trong giao tiếp và làm việc nhóm",
-            "cần mạnh dạn trao đổi và tự tin chia sẻ ý kiến",
-            "cần rèn luyện thêm kỹ năng tự học và giải quyết vấn đề",
-            "còn rụt rè khi tham gia các hoạt động tập thể"
+            "cần chủ động và tự giác hơn trong học tập cũng như giao tiếp",
+            "cần mạnh dạn trao đổi và tự tin chia sẻ ý kiến trước lớp",
+            "cần rèn luyện thêm kỹ năng tự học và tập trung hơn trong giờ học",
+            "còn rụt rè khi tham gia các hoạt động nhóm, cần mở lòng hơn với bạn",
+            "cần nâng cao ý thức tự giác chuẩn bị sách vở và đồ dùng học tập",
+            "kỹ năng giải quyết vấn đề còn chậm, cần chủ động nhờ thầy cô hỗ trợ",
+            "cần tập trung lắng nghe hướng dẫn để hoàn thành bài đúng thời gian",
+            "cần tích cực tương tác hơn với bạn bè trong các hoạt động tập thể",
+            "cần rèn luyện thêm thói quen tự giác và tính chủ động khi học tập"
         ]
     }
     nldt_kho = {
         "T": [
-            "năng lực đặc thù môn học rất nổi trội",
-            "tiếp thu rất tốt kiến thức các môn học",
-            "phát huy xuất sắc năng lực bộ môn, giàu tính sáng tạo",
-            "vận dụng linh hoạt kiến thức bộ môn vào thực tiễn"
+            "năng lực đặc thù môn học rất nổi trội, tiếp thu bài nhanh và vận dụng sáng tạo",
+            "khả năng ngôn ngữ phong phú, diễn đạt lưu loát và cảm thụ bài học rất tốt",
+            "tư duy tính toán nhanh nhẹn, suy luận logic và giải quyết bài tập chính xác",
+            "kỹ năng thực hành bộ môn rất thành thạo, phát huy tốt năng khiếu thẩm mĩ và vận động",
+            "thao tác thực hành máy tính và dụng cụ học tập khéo léo, an toàn và chuẩn xác",
+            "tiếp thu bài rất nhanh nhạy, biết liên hệ kiến thức bộ môn vào thực tế đời sống",
+            "phát huy xuất sắc năng lực bộ môn, luôn có những ý tưởng thực hành độc đáo",
+            "thể hiện năng khiếu nổi bật ở các môn học và hoạt động giáo dục",
+            "vận dụng linh hoạt các phương pháp học tập để đạt kết quả xuất sắc",
+            "quan sát tinh tế, tư duy khoa học và giải thích hiện tượng rất tự nhiên, mạch lạc",
+            "sản phẩm thực hành bộ môn chỉn chu, giàu tính thẩm mĩ và sáng tạo",
+            "có tố chất nổi bật về khả năng phân tích và tổng hợp kiến thức chuyên môn"
         ],
         "Đ": [
-            "nắm được kiến thức đặc thù các môn học",
-            "hoàn thành các yêu cầu của từng môn học",
-            "tiếp thu bài đạt chuẩn kiến thức kỹ năng môn học",
-            "kỹ năng thực hành bộ môn đạt yêu cầu"
+            "nắm được kiến thức đặc thù các môn học và hoàn thành bài tập đạt yêu cầu",
+            "diễn đạt câu từ tương đối rõ ràng, biết áp dụng quy tắc vào giải bài tập",
+            "thực hiện được các kỹ năng tính toán và thực hành cơ bản của bộ môn",
+            "có cố gắng trong học tập, hoàn thành các sản phẩm thực hành đúng tiến độ",
+            "thao tác sử dụng dụng cụ học tập và thiết bị cơ bản đúng quy trình",
+            "biết vận dụng kiến thức bài học để giải quyết các bài tập trong sách giáo khoa",
+            "tiếp thu bài đạt chuẩn, có sự tiến bộ trong kỹ năng thực hành môn học",
+            "thực hiện đúng yêu cầu các bài tập và nhiệm vụ thực hành trên lớp",
+            "kỹ năng đọc, viết và tính toán đáp ứng tốt yêu cầu chương trình",
+            "biết liên hệ kiến thức môn học vào một số tình huống quen thuộc",
+            "có ý thức rèn luyện kỹ năng thực hành bộ môn theo hướng dẫn",
+            "hoàn thành các bài tập ứng dụng ở mức độ cơ bản"
         ],
         "C": [
-            "cần nỗ lực hơn để nắm chắc kiến thức các môn học",
-            "tiếp thu bài còn chậm, cần được hỗ trợ thêm",
-            "cần rèn luyện thêm các kỹ năng thực hành môn học",
-            "chưa nắm vững kiến thức trọng tâm bộ môn"
+            "cần nỗ lực hơn để nắm chắc kiến thức và rèn luyện kỹ năng thực hành bộ môn",
+            "khả năng diễn đạt và trình bày bài còn hạn chế, cần rèn luyện thêm mỗi ngày",
+            "thao tác thực hành và giải bài còn chậm, cần được giáo viên hỗ trợ thêm",
+            "cần chú ý nghe giảng và ôn luyện nhiều hơn để theo kịp tiến độ bộ môn",
+            "kỹ năng tính toán hoặc thực hành còn lúng túng, cần chăm chỉ rèn luyện",
+            "chưa nắm vững kiến thức trọng tâm, cần dành thêm thời gian ôn tập",
+            "cần cẩn thận hơn khi làm bài và rèn luyện thêm kỹ năng bộ môn",
+            "mức độ tiếp thu còn chậm, cần tích cực hỏi thầy cô khi chưa hiểu bài"
         ]
     }
     pc_kho = {
         "T": [
-            "chăm chỉ, trách nhiệm và luôn hòa đồng với bạn bè",
-            "biết quan tâm, chia sẻ, trung thực và nhân ái",
-            "kỷ luật tốt, ngoan ngoãn, là tấm gương cho cả lớp",
-            "luôn có ý thức giữ gìn nền nếp và giúp đỡ bạn"
+            "chăm chỉ, trung thực, lễ phép với thầy cô và luôn đoàn kết, yêu thương bạn bè",
+            "ý thức tổ chức kỷ luật rất cao, gương mẫu thực hiện tốt nội quy, giàu lòng nhân ái",
+            "luôn có tinh thần trách nhiệm với công việc chung, tích cực giúp đỡ bạn cùng tiến bộ",
+            "thật thà, khiêm tốn, biết giữ gìn của công và bảo vệ môi trường lớp học sạch đẹp",
+            "kính trọng thầy cô, thân thiện với bạn bè, là tấm gương sáng về nền nếp của lớp",
+            "chuyên cần trong học tập, dũng cảm nhận lỗi và có tinh thần tự giác rất cao",
+            "giàu lòng nhân ái, nhiệt tình tham gia các phong trào thi đua và hoạt động tập thể",
+            "có lòng yêu quê hương, đất nước, luôn tự hào về truyền thống dân tộc",
+            "biết quan tâm, chia sẻ và luôn sẵn sàng hỗ trợ các bạn gặp khó khăn",
+            "trách nhiệm cao trong các buổi trực nhật và giữ gìn nề nếp lớp học",
+            "lời nói và hành động luôn chuẩn mực, được thầy cô và bạn bè quý mến",
+            "luôn nêu cao tinh thần trung thực trong học tập và đời sống hàng ngày"
         ],
         "Đ": [
-            "chăm chỉ và trung thực trong học tập",
-            "có trách nhiệm với nhiệm vụ được giao",
-            "luôn tuân thủ nội quy trường lớp",
-            "biết vâng lời thầy cô và thân thiện với bạn bè"
+            "chăm chỉ đi học chuyên cần, ngoan ngoãn và lễ phép với thầy cô giáo",
+            "trung thực trong học tập, hòa đồng và thân thiện với bạn bè trong lớp",
+            "có ý thức chấp hành tốt nội quy trường lớp và các quy định chung",
+            "có tinh thần trách nhiệm với các nhiệm vụ vệ sinh, trực nhật được phân công",
+            "biết vâng lời thầy cô, biết chia sẻ và giúp đỡ bạn khi gặp khó khăn",
+            "thật thà, ngoan ngoãn, có ý thức giữ gìn sách vở và đồ dùng cá nhân cẩn thận",
+            "thực hiện đầy đủ nhiệm vụ của người học sinh, có thái độ học tập nghiêm túc",
+            "biết chào hỏi lễ phép, tôn trọng người lớn tuổi và thân ái với bạn bè",
+            "có tinh thần tập thể, tham gia đầy đủ các phong trào của lớp và trường",
+            "biết nhận lỗi khi làm sai và có ý thức sửa chữa khuyết điểm",
+            "có ý thức bảo vệ của công và giữ gìn vệ sinh môi trường học tập",
+            "luôn cư xử đúng mực, chan hòa với tất cả các bạn trong lớp"
         ],
         "C": [
-            "cần nâng cao hơn nữa tinh thần tự giác và trách nhiệm",
-            "cần nghiêm túc thực hiện đúng nội quy lớp học",
-            "cần chăm chỉ và tập trung hơn trong giờ học",
-            "cần rèn luyện thêm ý thức kỷ luật cá nhân"
+            "cần nâng cao hơn nữa ý thức kỷ luật, tự giác chấp hành đúng nội quy lớp học",
+            "cần chăm chỉ, tập trung nghe giảng hơn và hạn chế nói chuyện riêng trong giờ học",
+            "cần nghiêm túc hơn trong việc thực hiện các nhiệm vụ trực nhật và bảo vệ của công",
+            "cần hòa đồng, cởi mở hơn với bạn bè và mạnh dạn nhận khuyết điểm để sửa chữa",
+            "cần rèn luyện tính trung thực và tinh thần trách nhiệm trong học tập cũng như sinh hoạt",
+            "cần lễ phép hơn khi giao tiếp với thầy cô và người lớn tuổi",
+            "cần có ý thức giữ gìn sách vở, đồ dùng học tập và vệ sinh chung của lớp",
+            "cần kiên trì, chăm chỉ hơn để hoàn thành tốt các nhiệm vụ được giao"
         ]
     }
     
     khuyen_nlc = {
-        "T": ["Hãy tiếp tục phát huy.", "Kỹ năng rất đáng khen ngợi.", "Luôn giữ vững tinh thần này nhé."],
-        "Đ": ["Cần tiếp tục cố gắng phát huy.", "Hãy chủ động hơn nữa nhé.", "Duy trì tinh thần học tập này nhé."],
-        "C": ["Cần mạnh dạn và cởi mở hơn.", "Chú ý rèn luyện thêm mỗi ngày.", "Cố gắng tự tin hơn nhé."]
+        "T": ["Rất đáng khen ngợi.", "Hãy tiếp tục phát huy năng lực này nhé.", "Luôn giữ vững tinh thần tự giác này.", "Kỹ năng rất xuất sắc.", "Là nhân tố tích cực của lớp."],
+        "Đ": ["Cần tiếp tục cố gắng phát huy.", "Hãy chủ động hơn nữa nhé.", "Duy trì tinh thần học tập này nhé.", "Cố gắng tự tin hơn chút nữa là rất tốt.", "Thầy/Cô ghi nhận sự tiến bộ của em."],
+        "C": ["Cần mạnh dạn và cởi mở hơn.", "Chú ý rèn luyện thêm mỗi ngày.", "Cố gắng tự tin hơn nhé.", "Cần nỗ lực hơn nữa để tiến bộ.", "Hãy tích cực học hỏi từ bạn bè."]
     }
     khuyen_nldt = {
-        "T": ["Kết quả rèn luyện rất xứng đáng.", "Tuyệt vời, tiếp tục phát huy nhé!", "Năng lực rất đáng tự hào."],
-        "Đ": ["Tiếp tục nỗ lực để đạt kết quả cao hơn.", "Cố gắng duy trì phong độ này nhé.", "Hãy chăm chỉ hơn nữa nhé."],
-        "C": ["Cần nỗ lực nhiều hơn để khắc phục.", "Cần chú ý ôn tập thêm.", "Hãy kiên trì rèn luyện nhé."]
+        "T": ["Kết quả rèn luyện rất xứng đáng.", "Tuyệt vời, tiếp tục phát huy nhé!", "Năng lực bộ môn rất đáng tự hào.", "Thầy/Cô rất khen ngợi em.", "Hãy lan tỏa niềm đam mê này đến các bạn."],
+        "Đ": ["Tiếp tục nỗ lực để đạt kết quả cao hơn.", "Cố gắng duy trì phong độ này nhé.", "Hãy chăm chỉ rèn luyện hơn nữa nhé.", "Chỉ cần chú ý hơn một chút là rất tốt.", "Sự cố gắng của em rất đáng khích lệ."],
+        "C": ["Cần nỗ lực nhiều hơn để khắc phục.", "Cần chú ý ôn tập thêm tại nhà.", "Hãy kiên trì rèn luyện mỗi ngày.", "Thầy/Cô tin em sẽ tiến bộ hơn nếu chăm chỉ.", "Cần chủ động trao đổi khi gặp bài khó."]
     }
     khuyen_pc = {
-        "T": ["Là tấm gương sáng cho cả lớp.", "Rất đáng tự hào.", "Thầy/Cô rất khen ngợi em."],
-        "Đ": ["Cần duy trì thái độ tích cực này.", "Ý thức rèn luyện rất tốt.", "Hãy tiếp tục ngoan ngoãn nhé."],
-        "C": ["Cần nghiêm túc tuân thủ nội quy.", "Cần chú ý sửa đổi để tiến bộ hơn.", "Cố gắng rèn luyện thêm nhé."]
+        "T": ["Là tấm gương sáng cho cả lớp noi theo.", "Rất đáng tự hào.", "Thầy/Cô rất khen ngợi em.", "Hãy luôn giữ gìn nét đẹp này nhé.", "Xứng đáng là con ngoan trò giỏi."],
+        "Đ": ["Cần duy trì thái độ tích cực này.", "Ý thức rèn luyện rất tốt.", "Hãy tiếp tục chăm ngoan nhé.", "Biết vâng lời và phát huy hơn nữa nhé.", "Thầy/Cô rất quý mến em."],
+        "C": ["Cần nghiêm túc tuân thủ nội quy trường lớp.", "Cần chú ý sửa đổi để tiến bộ hơn.", "Cố gắng rèn luyện nền nếp mỗi ngày nhé.", "Hãy biết lắng nghe lời khuyên bảo của thầy cô.", "Cần nỗ lực thay đổi để trở thành học sinh ngoan."]
     }
     
     m_nlc_key = "T" if mdd_nlc == "T" else ("C" if mdd_nlc == "C" else "Đ")
     m_nldt_key = "T" if mdd_nldt == "T" else ("C" if mdd_nldt == "C" else "Đ")
     m_pc_key = "T" if mdd_pc == "T" else ("C" if mdd_pc == "C" else "Đ")
     
-    nx_nlc, nx_nldt, nx_pc = "", "", ""
-    if mdd_nlc: nx_nlc = f"{cap_first(random.choice(nlc_kho[m_nlc_key]))}. {random.choice(khuyen_nlc[m_nlc_key])}"
-    if mdd_nldt: nx_nldt = f"{cap_first(random.choice(nldt_kho[m_nldt_key]))}. {random.choice(khuyen_nldt[m_nldt_key])}"
-    if mdd_pc: nx_pc = f"{cap_first(random.choice(pc_kho[m_pc_key]))}. {random.choice(khuyen_pc[m_pc_key])}"
+    if student_idx is not None:
+        idx_nlc = student_idx % len(nlc_kho[m_nlc_key])
+        idx_nldt = (student_idx + 3) % len(nldt_kho[m_nldt_key])
+        idx_pc = (student_idx + 7) % len(pc_kho[m_pc_key])
+        
+        k_idx_nlc = student_idx % len(khuyen_nlc[m_nlc_key])
+        k_idx_nldt = (student_idx + 2) % len(khuyen_nldt[m_nldt_key])
+        k_idx_pc = (student_idx + 4) % len(khuyen_pc[m_pc_key])
+        
+        nx_nlc = f"{cap_first(nlc_kho[m_nlc_key][idx_nlc])}. {khuyen_nlc[m_nlc_key][k_idx_nlc]}"
+        nx_nldt = f"{cap_first(nldt_kho[m_nldt_key][idx_nldt])}. {khuyen_nldt[m_nldt_key][k_idx_nldt]}"
+        nx_pc = f"{cap_first(pc_kho[m_pc_key][idx_pc])}. {khuyen_pc[m_pc_key][k_idx_pc]}"
+    else:
+        nx_nlc = f"{cap_first(random.choice(nlc_kho[m_nlc_key]))}. {random.choice(khuyen_nlc[m_nlc_key])}"
+        nx_nldt = f"{cap_first(random.choice(nldt_kho[m_nldt_key]))}. {random.choice(khuyen_nldt[m_nldt_key])}"
+        nx_pc = f"{cap_first(random.choice(pc_kho[m_pc_key]))}. {random.choice(khuyen_pc[m_pc_key])}"
             
     return nx_nlc, nx_nldt, nx_pc
 
@@ -585,6 +656,12 @@ with st.sidebar:
 # --- KHỞI TẠO STATE ĐỂ LƯU KẾT QUẢ COPY ---
 if "ket_qua_nhan_xet" not in st.session_state:
     st.session_state.ket_qua_nhan_xet = []
+if "ket_qua_nlc" not in st.session_state:
+    st.session_state.ket_qua_nlc = []
+if "ket_qua_nldt" not in st.session_state:
+    st.session_state.ket_qua_nldt = []
+if "ket_qua_pc" not in st.session_state:
+    st.session_state.ket_qua_pc = []
 
 # --- 5. NỘI DUNG CHÍNH ---
 
@@ -702,6 +779,9 @@ if f_hs:
             bar = st.progress(0); status = st.empty()
             
             st.session_state.ket_qua_nhan_xet = []
+            st.session_state.ket_qua_nlc = []
+            st.session_state.ket_qua_nldt = []
+            st.session_state.ket_qua_pc = []
             
             style_dict = {
                 "Ngắn gọn": "súc tích, đi thẳng vào đánh giá năng lực kiến thức, không rườm rà",
@@ -781,6 +861,9 @@ if f_hs:
                         df_raw.iat[int(real_idx), int(pcnl_cols['nx_nldt'])] = ""
                         df_raw.iat[int(real_idx), int(pcnl_cols['nx_pc'])] = ""
                         st.session_state.ket_qua_nhan_xet.append("")
+                        st.session_state.ket_qua_nlc.append("")
+                        st.session_state.ket_qua_nldt.append("")
+                        st.session_state.ket_qua_pc.append("")
                     else:
                         df_view.at[idx, "Nhận xét"] = ""
                         df_raw.iat[int(real_idx), int(c_col)] = ""
@@ -788,11 +871,26 @@ if f_hs:
                 else:
                     if loai_nx == "PC-NL":
                         if pcnl_headers:
-                            all_evals = [str(row.get(h_name, "")).upper() for _, h_name in pcnl_headers]
-                            overall = calc_overall_mdd(all_evals)
-                            mdd_nlc = get_mdd(str(row.get("Mức NLC", ""))) if "Mức NLC" in row and row["Mức NLC"] else overall
-                            mdd_nldt = get_mdd(str(row.get("Mức NLĐT", ""))) if "Mức NLĐT" in row and row["Mức NLĐT"] else overall
-                            mdd_pc = get_mdd(str(row.get("Mức PC", ""))) if "Mức PC" in row and row["Mức PC"] else overall
+                            nlc_vals = []
+                            nldt_vals = []
+                            pc_vals = []
+                            all_evals = []
+                            for _, h_name in pcnl_headers:
+                                val = str(row.get(h_name, "")).upper().strip()
+                                if not val or val in ['NAN', 'NONE']: continue
+                                all_evals.append(val)
+                                h_low = h_name.lower()
+                                if any(w in h_low for w in ["chung", "nlc", "tự phục vụ", "tự quản", "tự học", "hợp tác", "giao tiếp", "giải quyết", "sáng tạo"]):
+                                    nlc_vals.append(val)
+                                elif any(w in h_low for w in ["đặc thù", "nldt", "nlđt", "ngôn ngữ", "tính toán", "thẩm mĩ", "thể chất", "khoa học"]):
+                                    nldt_vals.append(val)
+                                elif any(w in h_low for w in ["phẩm chất", "pc", "yêu nước", "nhân ái", "chăm", "trung thực", "trách nhiệm", "kỷ luật", "kỉ luật", "yêu thương", "tự tin"]):
+                                    pc_vals.append(val)
+                            
+                            overall = calc_overall_mdd(all_evals) if all_evals else "Đ"
+                            mdd_nlc = calc_overall_mdd(nlc_vals) if nlc_vals else (get_mdd(str(row.get("Mức NLC", ""))) if "Mức NLC" in row and row["Mức NLC"] else overall)
+                            mdd_nldt = calc_overall_mdd(nldt_vals) if nldt_vals else (get_mdd(str(row.get("Mức NLĐT", ""))) if "Mức NLĐT" in row and row["Mức NLĐT"] else overall)
+                            mdd_pc = calc_overall_mdd(pc_vals) if pc_vals else (get_mdd(str(row.get("Mức PC", ""))) if "Mức PC" in row and row["Mức PC"] else overall)
                         else:
                             mdd_nlc = get_mdd(m_nlc)
                             mdd_nldt = get_mdd(m_nldt)
@@ -807,9 +905,9 @@ if f_hs:
                                 nx_nldt = parts[1].strip() if len(parts) > 1 else ""
                                 nx_pc = parts[2].strip() if len(parts) > 2 else ""
                             except:
-                                nx_nlc, nx_nldt, nx_pc = sinh_nhan_xet_pcnl_offline(mdd_nlc, mdd_nldt, mdd_pc)
+                                nx_nlc, nx_nldt, nx_pc = sinh_nhan_xet_pcnl_offline(mdd_nlc, mdd_nldt, mdd_pc, student_idx=idx)
                         else:
-                            nx_nlc, nx_nldt, nx_pc = sinh_nhan_xet_pcnl_offline(mdd_nlc, mdd_nldt, mdd_pc)
+                            nx_nlc, nx_nldt, nx_pc = sinh_nhan_xet_pcnl_offline(mdd_nlc, mdd_nldt, mdd_pc, student_idx=idx)
                         
                         df_view.at[idx, "NX Năng lực chung"] = nx_nlc
                         df_view.at[idx, "NX Năng lực đặc thù"] = nx_nldt
@@ -819,6 +917,9 @@ if f_hs:
                         df_raw.iat[int(real_idx), int(pcnl_cols['nx_nldt'])] = nx_nldt
                         df_raw.iat[int(real_idx), int(pcnl_cols['nx_pc'])] = nx_pc
                         st.session_state.ket_qua_nhan_xet.append(f"{nx_nlc} | {nx_nldt} | {nx_pc}")
+                        st.session_state.ket_qua_nlc.append(nx_nlc)
+                        st.session_state.ket_qua_nldt.append(nx_nldt)
+                        st.session_state.ket_qua_pc.append(nx_pc)
                         
                     else:
                         mdd = "H"
@@ -870,7 +971,22 @@ if f_hs:
             
             if st.session_state.ket_qua_nhan_xet:
                 if loai_nx == "PC-NL":
-                    st.warning("🚨 **LƯU Ý VỚI BẢNG PC-NL:** Bảng PC-NL chứa tới 3 cột nhận xét khác nhau. Thầy/Cô vui lòng **Tải file kết quả dự phòng** (nút bên dưới) và mở bằng Excel để sử dụng. Trên file tải về, 3 cột nhận xét đã có TIÊU ĐỀ IN ĐẬM rõ ràng và nằm chuẩn xác ở cuối danh sách!")
+                    st.markdown("### 📋 KẾT QUẢ COPY NHANH THEO CỘT (DÁN VÀO EXCEL / SMAS / CSDL)")
+                    st.info("💡 **HƯỚNG DẪN DÁN:** Chọn Tab cột cần dán bên dưới, click chuột vào khung, ấn **Ctrl+A** rồi **Ctrl+C**. Sau đó trên Excel/SMAS, click chuột 1 lần vào ô đầu tiên của cột đó và ấn **Ctrl+V** để dán hàng loạt!")
+                    tab_nlc, tab_nldt, tab_pc, tab_all = st.tabs([
+                        "1️⃣ Cột Năng lực chung", 
+                        "2️⃣ Cột Năng lực đặc thù", 
+                        "3️⃣ Cột Phẩm chất", 
+                        "📑 Cả 3 cột (Dạng gộp |)"
+                    ])
+                    with tab_nlc:
+                        st.text_area("📋 Nhận xét NĂNG LỰC CHUNG (Ctrl+A rồi Ctrl+C):", value="\n".join(st.session_state.ket_qua_nlc), height=300)
+                    with tab_nldt:
+                        st.text_area("📋 Nhận xét NĂNG LỰC ĐẶC THÙ (Ctrl+A rồi Ctrl+C):", value="\n".join(st.session_state.ket_qua_nldt), height=300)
+                    with tab_pc:
+                        st.text_area("📋 Nhận xét PHẨM CHẤT (Ctrl+A rồi Ctrl+C):", value="\n".join(st.session_state.ket_qua_pc), height=300)
+                    with tab_all:
+                        st.text_area("📋 Dạng gộp [NLC | NLĐT | PC]:", value="\n".join(st.session_state.ket_qua_nhan_xet), height=300)
                 else:
                     st.markdown("### 📋 KẾT QUẢ COPY NHANH (DÁN TRỰC TIẾP VÀO EXCEL)")
                     copy_text = "\n".join(st.session_state.ket_qua_nhan_xet)
